@@ -14,23 +14,6 @@ export default function App() {
     },
   ];
 
-  const cards = [
-    {
-      title: "Archive Constellations",
-      desc: "Browse fanfics by mood, pairing, world, or format.",
-      tags: ["Fics", "Tagged", "Searchable"],
-    },
-    {
-      title: "Private Orbits",
-      desc: "Explore original works, worlds, and long-form projects.",
-      tags: ["Originals", "Series", "Worldbuilding"],
-    },
-    {
-      title: "Signal Log",
-      desc: "A quiet place for updates, notes, and small transmissions.",
-      tags: ["Updates", "Notes", "Entries"],
-    },
-  ];
 
   return (
     <div className="site">
@@ -109,31 +92,6 @@ export default function App() {
             ))}
           </aside>
         </main>
-
-        <section className="archive-section">
-          <div className="archive-header">
-            <div>
-              <div className="eyebrow small">Browse the Archive</div>
-              <h2>Begin with a Constellation</h2>
-            </div>
-            <div className="archive-pill">Search and filters will live here</div>
-          </div>
-
-          <div className="card-grid">
-            {cards.map((card) => (
-              <article key={card.title} className="archive-card">
-                <div className="card-star">✦</div>
-                <h3>{card.title}</h3>
-                <p>{card.desc}</p>
-                <div className="tag-row small-tags">
-                  {card.tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
 
         <section className="guestbook-section">
           <div className="guestbook-header">
