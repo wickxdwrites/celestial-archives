@@ -14,14 +14,18 @@ export default function App() {
     },
   ];
 
-
   return (
     <div className="site">
       <div className="overlay">
         <div className="planet planet-a" />
         <div className="planet planet-b" />
 
-        <svg className="constellation constellation-a" width="200" height="120" viewBox="0 0 200 120">
+        <svg
+          className="constellation constellation-a"
+          width="200"
+          height="120"
+          viewBox="0 0 200 120"
+        >
           <line x1="10" y1="20" x2="80" y2="60" />
           <line x1="80" y1="60" x2="140" y2="30" />
           <line x1="140" y1="30" x2="180" y2="90" />
@@ -95,34 +99,42 @@ export default function App() {
 
         <section className="guestbook-section">
           <div className="guestbook-header">
-            <div className="eyebrow small">Visitor Signals</div>
-            <h2>Leave a Message in the Stars</h2>
-            <p>Share your thoughts, reactions, or feelings after exploring the archive.</p>
+            <div className="eyebrow small">Recent Signals</div>
+            <h2>Voices Across the Archive</h2>
+            <p>Recent reader comments left throughout the archive.</p>
           </div>
-
-          <div className="guestbook-form-row">
-            <input type="text" placeholder="Your name or alias" />
-            <input type="text" placeholder="Related story (optional)" />
-            <button>Send Signal</button>
-          </div>
-
-          <textarea placeholder="Write your message..." rows="4" />
 
           <div className="signal-grid">
             <div className="signal-card">
-              <div className="signal-top">
-                <span>lunarEcho</span>
-                <span>TRON FILE</span>
+              <div className="signal-meta">
+                <span className="signal-user">lunarecho</span>
+                <span className="signal-source">TRON FILE • Chapter 4</span>
               </div>
               <p>this fic actually broke me in the best way possible</p>
             </div>
 
             <div className="signal-card">
-              <div className="signal-top">
-                <span>starfall.exe</span>
-                <span>INTERACTIVE</span>
+              <div className="signal-meta">
+                <span className="signal-user">starfall.exe</span>
+                <span className="signal-source">FALLING STAR • Chapter 2</span>
               </div>
               <p>the interface??? insane. i felt like i was inside the system</p>
+            </div>
+
+            <div className="signal-card">
+              <div className="signal-meta">
+                <span className="signal-user">moonstatic</span>
+                <span className="signal-source">ORBITAL HEART • Chapter 1</span>
+              </div>
+              <p>this was such a gorgeous opening. the tone is so dreamy.</p>
+            </div>
+
+            <div className="signal-card">
+              <div className="signal-meta">
+                <span className="signal-user">ghostsignal</span>
+                <span className="signal-source">TRON FILE • Chapter 6</span>
+              </div>
+              <p>shane’s dialogue here hurt in the best way.</p>
             </div>
           </div>
         </section>
