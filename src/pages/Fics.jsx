@@ -45,7 +45,7 @@ export default function Fics() {
             <span>✦</span>
             <Link to="/fics">Fics</Link>
             <span>✦</span>
-            <a href="#">Originals</a>
+            <Link to="/originals">Originals</Link>
           </nav>
 
           <div className="nav-emblem">

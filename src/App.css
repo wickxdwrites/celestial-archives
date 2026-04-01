@@ -521,4 +521,37 @@ textarea {
   .hero-copy h1 {
     font-size: 52px;
   }
+/* ORIGINALS EMPTY STATE */
+.originals-empty {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.originals-empty-inner {
+  max-width: 500px;
+  text-align: center;
+  border: 1px solid rgba(205, 189, 255, 0.25);
+  background: #131b31;
+  border-radius: 24px;
+  padding: 40px 24px;
+}
+
+.originals-symbol {
+  font-size: 32px;
+  margin-bottom: 16px;
+  color: #cdbdff;
+}
+
+.originals-empty h2 {
+  margin: 0 0 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  color: #f5f1ff;
+}
+
+.originals-empty p {
+  margin-bottom: 20px;
+  color: rgba(216, 209, 239, 0.82);
+}
+
 }
