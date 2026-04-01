@@ -176,7 +176,8 @@ textarea {
 
 .hero-card,
 .guestbook-section,
-.info-card {
+.info-card,
+.fics-shell {
   border: 1px solid rgba(185, 171, 239, 0.25);
   background: rgba(16, 23, 41, 0.88);
   box-shadow: 0 0 50px rgba(90, 110, 220, 0.08);
@@ -254,7 +255,9 @@ textarea {
 .hero-copy p,
 .info-card p,
 .guestbook-header p,
-.signal-card p {
+.signal-card p,
+.fics-subtitle,
+.fic-description-box p {
   color: rgba(216, 209, 239, 0.82);
   line-height: 1.9;
 }
@@ -288,7 +291,8 @@ textarea {
 }
 
 .info-card h2,
-.guestbook-section h2 {
+.guestbook-section h2,
+.fics-title {
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(28px, 3vw, 42px);
@@ -343,6 +347,158 @@ textarea {
   color: rgba(236, 231, 255, 0.9);
   font-size: 16px;
   line-height: 1.7;
+}
+
+/* FICS PAGE */
+.fics-shell {
+  border-radius: 34px;
+  padding: 28px;
+}
+
+.fics-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.fics-title {
+  font-size: clamp(42px, 5vw, 64px);
+}
+
+.fics-subtitle {
+  max-width: 720px;
+  margin-top: 10px;
+}
+
+.fics-search-pill {
+  border: 1px solid rgba(205, 189, 255, 0.25);
+  background: #161e35;
+  color: rgba(236, 231, 255, 0.8);
+  border-radius: 999px;
+  padding: 10px 16px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+
+.fics-controls {
+  margin-bottom: 24px;
+}
+
+.fics-search {
+  width: 100%;
+  background: #121a30;
+  border: 1px solid rgba(185, 171, 239, 0.25);
+  color: #ece7ff;
+  border-radius: 999px;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+}
+
+.fics-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.filter-chip {
+  border: 1px solid rgba(205, 189, 255, 0.3);
+  background: rgba(22, 30, 53, 0.85);
+  color: rgba(236, 231, 255, 0.92);
+  border-radius: 999px;
+  padding: 9px 14px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  cursor: pointer;
+}
+
+.filter-chip.active {
+  border-color: rgba(236, 231, 255, 0.55);
+  background: rgba(42, 52, 88, 0.85);
+}
+
+.fics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.fic-card {
+  border-radius: 20px;
+  border: 1px solid rgba(205, 189, 255, 0.22);
+  background: #131b31;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.fic-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: rgba(157, 183, 255, 0.72);
+}
+
+.fic-fandom {
+  color: #dcd4ff;
+  font-weight: 600;
+}
+
+.fic-meta-right {
+  display: flex;
+  gap: 10px;
+}
+
+.fic-card h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 32px;
+  color: #f5f1ff;
+}
+
+.fic-description-box {
+  background: rgba(22, 30, 53, 0.6);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.fic-description-box p {
+  margin: 0;
+}
+
+.small-tags {
+  margin-top: 0;
+}
+
+.small-tags span {
+  border: 1px solid rgba(142, 180, 255, 0.25);
+  padding: 7px 11px;
+  font-size: 10px;
+}
+
+.fic-actions {
+  margin-top: 6px;
+}
+
+.fic-open {
+  border: 1px solid rgba(142, 180, 255, 0.35);
+  background: #151d34;
+  color: #e9e3ff;
+  border-radius: 999px;
+  padding: 10px 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 12px;
+  cursor: pointer;
 }
 
 @media (max-width: 1000px) {
