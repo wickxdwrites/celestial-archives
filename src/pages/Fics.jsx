@@ -9,52 +9,7 @@ export default function Fics() {
         "A corrupted system narrative of grief, control, and fragmented memory told through interactive terminals and unstable signals.",
       tags: ["Interactive", "Angst", "Sci-Fi"],
       status: "Ongoing",
-      chapter: "Chapter 6",
-    },
-    {
-      title: "FALLING STAR",
-      fandom: "ORIGINAL",
-      description:
-        "A celestial romance threaded through coded dreams, transmissions, and soft collapse.",
-      tags: ["Romance", "Celestial", "Drama"],
-      status: "Complete",
-      chapter: "Chapter 12",
-    },
-    {
-      title: "GLASS ORBIT",
-      fandom: "ORIGINAL",
-      description:
-        "A quiet archive of longing, distance, and worlds that almost touched.",
-      tags: ["Slow Burn", "AU", "Emotional"],
-      status: "Ongoing",
-      chapter: "Chapter 3",
-    },
-    {
-      title: "NULL SIGNAL",
-      fandom: "TRON",
-      description:
-        "A fragmented transmission left behind after a failed system collapse.",
-      tags: ["Dark", "Experimental", "Techno Horror"],
-      status: "Draft",
-      chapter: "Preview",
-    },
-    {
-      title: "SHATTERED CIRCUIT",
-      fandom: "TRON",
-      description:
-        "A post-collapse fic exploring identity, loss, and what remains after the system fails.",
-      tags: ["Drama", "Hurt/Comfort", "Sci-Fi"],
-      status: "Complete",
-      chapter: "Chapter 8",
-    },
-    {
-      title: "MOONLIT STATIC",
-      fandom: "TRON",
-      description:
-        "A softer, character-driven story told through archived logs and glitched late-night conversations.",
-      tags: ["Character Study", "Melancholy", "Interactive"],
-      status: "Ongoing",
-      chapter: "Chapter 2",
+      chapter: "Chapter 1",
     },
   ];
 
@@ -108,9 +63,14 @@ export default function Fics() {
             <div>
               <div className="eyebrow small">Archive Constellations</div>
               <h1 className="fics-title">Fics</h1>
+
+              <div className="tag-row small-tags">
+                <span>1 Active Transmission</span>
+              </div>
+
               <p className="fics-subtitle">
-                Browse by title, mood, pairing, or atmosphere. Each entry can
-                later open into its own custom story page.
+                A curated archive of active transmissions. Each file opens into
+                its own coded experience.
               </p>
             </div>
 
@@ -124,22 +84,16 @@ export default function Fics() {
             />
 
             <div className="fics-filter-row">
-              {[
-                "All",
-                "Interactive",
-                "Sci-Fi",
-                "Angst",
-                "Romance",
-                "Complete",
-                "Ongoing",
-              ].map((tag, i) => (
-                <button
-                  key={tag}
-                  className={`filter-chip${i === 0 ? " active" : ""}`}
-                >
-                  {tag}
-                </button>
-              ))}
+              {["All", "Interactive", "Sci-Fi", "Angst", "Ongoing"].map(
+                (tag, i) => (
+                  <button
+                    key={tag}
+                    className={`filter-chip${i === 0 ? " active" : ""}`}
+                  >
+                    {tag}
+                  </button>
+                )
+              )}
             </div>
           </div>
 
