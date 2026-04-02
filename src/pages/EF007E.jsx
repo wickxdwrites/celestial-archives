@@ -1,20 +1,38 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import EF007EChapters from "../data/EF007E";
+import { saveComment } from "../utils/comments";
 
 export default function TronFile() {
-  const logs = [
-    "BOOT SEQUENCE INITIALIZED",
-    "ARCHIVE NODE FOUND",
-    "USER AUTHENTICATION INCOMPLETE",
-    "MISSING FILE FRAGMENTS DETECTED",
-    "I-X TRACE SIGNATURE: UNSTABLE",
-  ];
+  const [selectedChapterId, setSelectedChapterId] = useState(EF007EChapters[0].id);
+  const [alias, setAlias] = useState("");
+  const [commentText, setCommentText] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
-  const files = [
-    { name: "chat_interface.exe", status: "locked" },
-    { name: "ilya_fragment.log", status: "corrupted" },
-    { name: "shane_report.txt", status: "restricted" },
-    { name: "system_map.dat", status: "partial" },
-  ];
+  const activeChapter =
+    EF007EChapters.find((chapter) => chapter.id === selectedChapterId) ||
+    EF007EChapters[0];
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!alias.trim() || !commentText.trim()) return;
+
+    saveComment({
+      alias: alias.trim(),
+      story: "EF007E",
+      chapter: activeChapter.label,
+      comment: commentText.trim(),
+    });
+
+    setAlias("");
+    setCommentText("");
+    setSubmitted(true);
+
+    setTimeout(() => {
+      setSubmitted(false);
+    }, 2500);
+  };
 
   return (
     <div className="tron-page">
@@ -22,7 +40,7 @@ export default function TronFile() {
 
       <div className="tron-shell">
         <header className="tron-topbar">
-          <div className="tron-brand">TRON FILE</div>
+          <div className="tron-brand">EF007E</div>
 
           <nav className="tron-nav">
             <Link to="/">HOME</Link>
@@ -32,79 +50,142 @@ export default function TronFile() {
             <Link to="/originals">ORIGINALS</Link>
           </nav>
 
-          <div className="tron-status">SYSTEM ONLINE</div>
+          <div className="tron-status">FILE READER ONLINE</div>
         </header>
 
-        <section className="tron-hero">
-          <div className="tron-hero-left">
-            <div className="tron-eyebrow">ARCHIVE ENTRY 001</div>
-            <h1>TRON FILE</h1>
-            <p className="tron-summary">
-              A corrupted system narrative of grief, control, and fragmented
-              memory told through unstable interfaces, hidden files, and traces
-              left behind inside a collapsing digital world.
-            </p>
+        <section className="tron-reader-layout">
+          <aside className="tron-reader-sidebar">
+            <div className="tron-panel-title">FILE INDEX</div>
 
-            <div className="tron-tags">
-              <span>INTERACTIVE</span>
-              <span>SCI-FI</span>
-              <span>ANGST</span>
-              <span>CORRUPTION</span>
-            </div>
+            <div className="tron-story-meta">
+              <div className="tron-meta-row">
+                <span className="tron-meta-label">TITLE</span>
+                <span className="tron-meta-value">EF007E</span>
+              </div>
 
-            <div className="tron-actions">
-              <button className="tron-primary">ACCESS TERMINAL</button>
-              <button className="tron-secondary">OPEN DOSSIER</button>
-            </div>
-          </div>
+              <div className="tron-meta-row">
+                <span className="tron-meta-label">STATUS</span>
+                <span className="tron-meta-value">ONGOING</span>
+              </div>
 
-          <div className="tron-hero-right">
-            <div className="tron-core">
-              <div className="tron-core-inner">
-                <div className="tron-ring tron-ring-1" />
-                <div className="tron-ring tron-ring-2" />
-                <div className="tron-center">I/O</div>
+              <div className="tron-meta-row">
+                <span className="tron-meta-label">CURRENT</span>
+                <span className="tron-meta-value">
+                  {activeChapter.label.replace("Chapter ", "CH. ")}
+                </span>
               </div>
             </div>
-          </div>
-        </section>
 
-        <section className="tron-grid">
-          <div className="tron-panel">
-            <div className="tron-panel-title">SYSTEM LOG</div>
-            <div className="tron-log-list">
-              {logs.map((log) => (
-                <div key={log} className="tron-log-line">
-                  <span className="tron-log-arrow">&gt;</span>
-                  <span>{log}</span>
-                </div>
-              ))}
+            <div className="tron-chapter-select-wrap">
+              <label className="tron-select-label" htmlFor="tron-chapter-select">
+                Select Chapter
+              </label>
+
+              <select
+                id="tron-chapter-select"
+                className="tron-chapter-select"
+                value={selectedChapterId}
+                onChange={(e) => setSelectedChapterId(e.target.value)}
+              >
+                {EF007EChapters.map((chapter) => (
+                  <option key={chapter.id} value={chapter.id}>
+                    {chapter.label}
+                  </option>
+                ))}
+              </select>
             </div>
-          </div>
+          </aside>
 
-          <div className="tron-panel">
-            <div className="tron-panel-title">FILE INDEX</div>
-            <div className="tron-file-list">
-              {files.map((file) => (
-                <div key={file.name} className="tron-file-row">
-                  <span className="tron-file-name">{file.name}</span>
-                  <span className={`tron-file-status status-${file.status}`}>
-                    {file.status}
-                  </span>
-                </div>
+          <main className="tron-reader-main">
+            <section className="tron-reader-header">
+              <div className="tron-eyebrow">ARCHIVE ENTRY 001</div>
+              <h1>{activeChapter.label}</h1>
+              <p className="tron-summary">{activeChapter.summary}</p>
+
+              <div className="tron-tags">
+                <span>TRON</span>
+                <span>SCI-FI</span>
+                <span>ANGST</span>
+                <span>INTERACTIVE POTENTIAL</span>
+              </div>
+            </section>
+
+            <section className="tron-reading-panel">
+              <div className="tron-panel-title">CHAPTER FILE</div>
+
+              {activeChapter.content.map((paragraph, index) => (
+                <p key={index}>{paragraph}</p>
               ))}
-            </div>
-          </div>
 
-          <div className="tron-panel tron-panel-wide">
-            <div className="tron-panel-title">ARCHIVE NOTE</div>
-            <p className="tron-note">
-              This file serves as the entry point for the interactive Tron
-              narrative. Future phases can replace these static panels with your
-              login system, chat terminal, avatar UI, file unlocks, glitch
-              events, and I-X takeover sequences.
-            </p>
-          </div>
+              <div className="tron-callout">
+                <div className="tron-callout-title">SYSTEM NOTE</div>
+                <p>
+                  This space can hold in-universe notes, corrupted inserts,
+                  faux-terminal interruptions, or file fragments later.
+                </p>
+              </div>
+            </section>
+
+            <section className="tron-reader-footer">
+              <button
+                className="tron-secondary"
+                onClick={() => {
+                  const currentIndex = EF007EChapters.findIndex(
+                    (chapter) => chapter.id === selectedChapterId
+                  );
+                  if (currentIndex > 0) {
+                    setSelectedChapterId(EF007EChapters[currentIndex - 1].id);
+                  }
+                }}
+              >
+                PREVIOUS CHAPTER
+              </button>
+
+              <button
+                className="tron-primary"
+                onClick={() => {
+                  const currentIndex = EF007EChapters.findIndex(
+                    (chapter) => chapter.id === selectedChapterId
+                  );
+                  if (currentIndex < EF007EChapters.length - 1) {
+                    setSelectedChapterId(EF007EChapters[currentIndex + 1].id);
+                  }
+                }}
+              >
+                NEXT CHAPTER
+              </button>
+            </section>
+
+            <section className="tron-comment-panel">
+              <div className="tron-panel-title">LEAVE A SIGNAL</div>
+
+              <form className="tron-comment-form" onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  placeholder="Your alias"
+                  value={alias}
+                  onChange={(e) => setAlias(e.target.value)}
+                />
+
+                <textarea
+                  rows="4"
+                  placeholder="Leave your comment here..."
+                  value={commentText}
+                  onChange={(e) => setCommentText(e.target.value)}
+                />
+
+                <button type="submit" className="tron-primary">
+                  SUBMIT SIGNAL
+                </button>
+              </form>
+
+              {submitted && (
+                <div className="tron-comment-success">
+                  Signal recorded. It should now appear on the homepage.
+                </div>
+              )}
+            </section>
+          </main>
         </section>
       </div>
     </div>

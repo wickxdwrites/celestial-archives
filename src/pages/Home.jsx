@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getComments } from "../utils/comments";
 
 export default function Home() {
   const featured = [
@@ -14,28 +16,12 @@ export default function Home() {
     },
   ];
 
-  const signals = [
-    {
-      user: "lunarecho",
-      source: "TRON FILE • Chapter 4",
-      comment: "this fic actually broke me in the best way possible",
-    },
-    {
-      user: "starfall.exe",
-      source: "FALLING STAR • Chapter 2",
-      comment: "the interface??? insane. i felt like i was inside the system",
-    },
-    {
-      user: "moonstatic",
-      source: "ORBITAL HEART • Chapter 1",
-      comment: "this was such a gorgeous opening. the tone is so dreamy.",
-    },
-    {
-      user: "ghostsignal",
-      source: "TRON FILE • Chapter 6",
-      comment: "shane’s dialogue here hurt in the best way.",
-    },
-  ];
+  const [signals, setSignals] = useState([]);
+
+  useEffect(() => {
+    const storedComments = getComments();
+    setSignals(storedComments.slice(0, 4));
+  }, []);
 
   return (
     <div className="site">
@@ -131,15 +117,23 @@ export default function Home() {
           </div>
 
           <div className="signal-grid">
-            {signals.map((signal) => (
-              <div className="signal-card" key={`${signal.user}-${signal.source}`}>
-                <div className="signal-meta">
-                  <span className="signal-user">{signal.user}</span>
-                  <span className="signal-source">{signal.source}</span>
+            {signals.length > 0 ? (
+              signals.map((signal) => (
+                <div className="signal-card" key={signal.id}>
+                  <div className="signal-meta">
+                    <span className="signal-user">{signal.alias}</span>
+                    <span className="signal-source">
+                      {signal.story} • {signal.chapter}
+                    </span>
+                  </div>
+                  <p>{signal.comment}</p>
                 </div>
-                <p>{signal.comment}</p>
+              ))
+            ) : (
+              <div className="signal-empty">
+                No recent signals yet. Comments left on story pages will appear here.
               </div>
-            ))}
+            )}
           </div>
         </section>
       </div>
