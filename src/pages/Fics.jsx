@@ -121,7 +121,9 @@ export default function Fics() {
                 </div>
 
                 <div className="fic-actions">
-                  <button className="fic-open">Open File</button>
+                  <Link to="/fics/tron-file" className="fic-open-link">
+  Open File
+</Link>
                 </div>
               </article>
             ))}

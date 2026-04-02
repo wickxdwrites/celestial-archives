@@ -554,4 +554,334 @@ textarea {
   color: rgba(216, 209, 239, 0.82);
 }
 
+.fic-open-link {
+  display: inline-block;
+  border: 1px solid rgba(142, 180, 255, 0.35);
+  background: #151d34;
+  color: #e9e3ff;
+  border-radius: 999px;
+  padding: 10px 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* TRON PAGE */
+.tron-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(0, 180, 255, 0.12), transparent 25%),
+    linear-gradient(180deg, #02070d 0%, #07111a 100%);
+  color: #bff3ff;
+  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.tron-scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.3) 1px,
+    transparent 1px
+  );
+  background-size: 100% 4px;
+}
+
+.tron-shell {
+  position: relative;
+  max-width: 1450px;
+  margin: 0 auto;
+  padding: 24px 16px 50px;
+}
+
+.tron-topbar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 16px;
+  align-items: center;
+  border: 1px solid rgba(0, 225, 255, 0.28);
+  border-radius: 18px;
+  background: rgba(4, 15, 24, 0.9);
+  box-shadow: 0 0 30px rgba(0, 183, 255, 0.12);
+  padding: 16px 20px;
+  margin-bottom: 30px;
+}
+
+.tron-brand,
+.tron-status,
+.tron-nav {
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+
+.tron-brand {
+  color: #8fefff;
+}
+
+.tron-nav {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.tron-nav a {
+  color: #d2fbff;
+  text-decoration: none;
+}
+
+.tron-status {
+  justify-self: end;
+  color: #67f5c8;
+}
+
+.tron-hero {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 28px;
+  margin-bottom: 28px;
+}
+
+.tron-hero-left,
+.tron-hero-right,
+.tron-panel {
+  border: 1px solid rgba(0, 225, 255, 0.2);
+  background: rgba(4, 15, 24, 0.88);
+  box-shadow: 0 0 35px rgba(0, 183, 255, 0.08);
+  border-radius: 24px;
+}
+
+.tron-hero-left {
+  padding: 28px;
+}
+
+.tron-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #7fe7ff;
+  margin-bottom: 14px;
+}
+
+.tron-hero-left h1 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(44px, 6vw, 82px);
+  line-height: 0.95;
+  color: #d7fbff;
+}
+
+.tron-summary {
+  margin-top: 18px;
+  color: rgba(191, 243, 255, 0.82);
+  line-height: 1.9;
+  max-width: 780px;
+}
+
+.tron-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.tron-tags span {
+  border: 1px solid rgba(0, 225, 255, 0.22);
+  border-radius: 999px;
+  padding: 8px 13px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  background: rgba(7, 24, 38, 0.9);
+}
+
+.tron-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.tron-primary,
+.tron-secondary {
+  border-radius: 999px;
+  padding: 11px 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.tron-primary {
+  border: 1px solid rgba(0, 225, 255, 0.35);
+  background: rgba(0, 170, 255, 0.12);
+  color: #d9fbff;
+}
+
+.tron-secondary {
+  border: 1px solid rgba(191, 243, 255, 0.18);
+  background: rgba(6, 18, 28, 0.95);
+  color: #bff3ff;
+}
+
+.tron-hero-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  min-height: 380px;
+}
+
+.tron-core {
+  width: min(360px, 100%);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 225, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle, rgba(0, 183, 255, 0.12), transparent 60%),
+    rgba(4, 15, 24, 0.88);
+  box-shadow: inset 0 0 35px rgba(0, 183, 255, 0.08);
+}
+
+.tron-core-inner {
+  position: relative;
+  width: 70%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tron-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 225, 255, 0.28);
+}
+
+.tron-ring-1 {
+  inset: 0;
+}
+
+.tron-ring-2 {
+  inset: 18%;
+}
+
+.tron-center {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  border: 1px solid rgba(191, 243, 255, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d7fbff;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 14px;
+  background: rgba(0, 170, 255, 0.08);
+}
+
+.tron-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.tron-panel {
+  padding: 22px;
+}
+
+.tron-panel-wide {
+  grid-column: 1 / -1;
+}
+
+.tron-panel-title {
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #7fe7ff;
+  margin-bottom: 18px;
+}
+
+.tron-log-list,
+.tron-file-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tron-log-line,
+.tron-file-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(0, 225, 255, 0.12);
+  border-radius: 12px;
+  background: rgba(7, 24, 38, 0.68);
+}
+
+.tron-log-line {
+  justify-content: flex-start;
+}
+
+.tron-log-arrow {
+  color: #67f5c8;
+  margin-right: 8px;
+}
+
+.tron-file-name {
+  color: #d7fbff;
+}
+
+.tron-file-status {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 11px;
+}
+
+.status-locked {
+  color: #ffe082;
+}
+
+.status-corrupted {
+  color: #ff8a80;
+}
+
+.status-restricted {
+  color: #8cc8ff;
+}
+
+.status-partial {
+  color: #67f5c8;
+}
+
+.tron-note {
+  margin: 0;
+  color: rgba(191, 243, 255, 0.84);
+  line-height: 1.9;
+}
+
+@media (max-width: 1000px) {
+  .tron-topbar,
+  .tron-hero,
+  .tron-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tron-nav,
+  .tron-status {
+    justify-self: start;
+  }
+}
+
 }
