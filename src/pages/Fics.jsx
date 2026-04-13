@@ -1,135 +1,88 @@
 import { Link } from "react-router-dom";
+import ArchiveLayout from "../components/layout/ArchiveLayout";
+
+const ficEntries = [
+  {
+    id: "ef007e",
+    title: "EF007E",
+    status: "Ongoing",
+    chapters: "Available",
+    summary:
+      "A corrupted terminal narrative threaded through memory loss, system instability, and interactive reader commentary.",
+    path: "/fics/ef007e",
+    isThemed: true,
+    tags: ["Sci-Fi", "Interactive", "Corruption", "Terminal"],
+  },
+  {
+    id: "future-fic",
+    title: "Future Fic Slot",
+    status: "Planned",
+    chapters: "0 Chapters",
+    summary:
+      "Reserved archive space for an upcoming fanwork entry.",
+    path: "/fics",
+    isThemed: false,
+    tags: ["Placeholder"],
+  },
+];
 
 export default function Fics() {
-  const fics = [
-    {
-      title: "TRON FILE",
-      fandom: "TRON",
-      description:
-        "A corrupted system narrative of grief, control, and fragmented memory told through interactive terminals and unstable signals.",
-      tags: ["Interactive", "Angst", "Sci-Fi"],
-      status: "Ongoing",
-      chapter: "Chapter 1",
-    },
-  ];
-
   return (
-    <div className="site">
-      <div className="overlay">
-        <div className="planet planet-a" />
-        <div className="planet planet-b" />
-
-        <svg
-          className="constellation constellation-a"
-          width="200"
-          height="120"
-          viewBox="0 0 200 120"
-        >
-          <line x1="10" y1="20" x2="80" y2="60" />
-          <line x1="80" y1="60" x2="140" y2="30" />
-          <line x1="140" y1="30" x2="180" y2="90" />
-          <circle cx="10" cy="20" r="2" />
-          <circle cx="80" cy="60" r="2" />
-          <circle cx="140" cy="30" r="2" />
-          <circle cx="180" cy="90" r="2" />
-        </svg>
-
-        <div className="symbol symbol-a">☾</div>
-        <div className="symbol symbol-b">✦</div>
-      </div>
-
-      <div className="page">
-        <header className="nav">
-          <nav className="nav-links">
-            <Link to="/">Home</Link>
-            <span>✦</span>
-            <Link to="/fics">Fics</Link>
-            <span>✦</span>
-            <Link to="/originals">Originals</Link>
-          </nav>
-
-          <div className="nav-emblem">
-            <div className="nav-emblem-top">Celestial</div>
-            <div className="nav-emblem-icon">☼</div>
+    <ArchiveLayout
+      themeId="celestial"
+      title="Fics"
+      subtitle="Catalogued fanworks stored inside the archive. Some remain standard entries. Others operate as themed experiences."
+    >
+      <section className="archive-section">
+        <div className="section-heading-row">
+          <div>
+            <p className="section-label">FANWORK INDEX</p>
+            <h2 className="section-title">Available fic entries</h2>
           </div>
+        </div>
 
-          <Link to="/fics" className="nav-button">
-            Enter Archive
-          </Link>
-        </header>
-
-        <section className="fics-shell">
-          <div className="fics-header-row">
-            <div>
-              <div className="eyebrow small">Archive Constellations</div>
-              <h1 className="fics-title">Fics</h1>
-
-              <div className="tag-row small-tags">
-                <span>1 Active Transmission</span>
-              </div>
-
-              <p className="fics-subtitle">
-                A curated archive of active transmissions. Each file opens into
-                its own coded experience.
-              </p>
-            </div>
-
-            <div className="fics-search-pill">Search and filters</div>
-          </div>
-
-          <div className="fics-controls">
-            <input
-              className="fics-search"
-              placeholder="Search by title, tag, fandom, or mood"
-            />
-
-            <div className="fics-filter-row">
-              {["All", "Interactive", "Sci-Fi", "Angst", "Ongoing"].map(
-                (tag, i) => (
-                  <button
-                    key={tag}
-                    className={`filter-chip${i === 0 ? " active" : ""}`}
-                  >
-                    {tag}
-                  </button>
-                )
-              )}
-            </div>
-          </div>
-
-          <div className="fics-grid">
-            {fics.map((fic) => (
-              <article key={fic.title} className="fic-card">
-                <div className="fic-card-top">
-                  <span className="fic-fandom">{fic.fandom}</span>
-                  <div className="fic-meta-right">
-                    <span className="fic-status">{fic.status}</span>
-                    <span className="fic-chapter">{fic.chapter}</span>
-                  </div>
+        <div className="archive-list">
+          {ficEntries.map((fic) => (
+            <article key={fic.id} className="archive-list-card">
+              <div className="archive-list-main">
+                <div className="entry-meta-row">
+                  <span className="entry-type">Fic</span>
+                  <span className="entry-status">{fic.status}</span>
                 </div>
 
-                <h2>{fic.title}</h2>
+                <h3 className="entry-title">{fic.title}</h3>
+                <p className="entry-summary">{fic.summary}</p>
 
-                <div className="fic-description-box">
-                  <p>{fic.description}</p>
-                </div>
-
-                <div className="tag-row small-tags">
+                <div className="tag-row">
                   {fic.tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
+                    <span key={tag} className="archive-tag">
+                      {tag}
+                    </span>
                   ))}
                 </div>
+              </div>
 
-                <div className="fic-actions">
-                  <Link to="/fics/tron-file" className="fic-open-link">
-  Open File
-</Link>
+              <div className="archive-list-side">
+                <div className="side-detail">
+                  <span className="side-label">Chapters</span>
+                  <span className="side-value">{fic.chapters}</span>
                 </div>
-              </article>
-            ))}
-          </div>
-        </section>
-      </div>
-    </div>
+
+                <div className="side-detail">
+                  <span className="side-label">Theme</span>
+                  <span className="side-value">
+                    {fic.isThemed ? "Custom" : "Celestial"}
+                  </span>
+                </div>
+
+                <Link to={fic.path} className="entry-link">
+                  Open Entry
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </ArchiveLayout>
   );
 }

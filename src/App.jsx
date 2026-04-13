@@ -3,6 +3,8 @@ import Home from "./pages/Home";
 import Fics from "./pages/Fics";
 import Originals from "./pages/Originals";
 import TronFile from "./pages/EF007E";
+import "./styles/themes.css";
+
 
 export default function App() {
   return (

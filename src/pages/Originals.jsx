@@ -1,85 +1,70 @@
 import { Link } from "react-router-dom";
+import ArchiveLayout from "../components/layout/ArchiveLayout";
+
+const originalEntries = [
+  {
+    id: "celestial-fragments",
+    title: "Celestial Fragments",
+    status: "Planned",
+    format: "Original Story",
+    summary:
+      "A placeholder collection for original fiction, worldbuilding records, and future archive expansions.",
+    path: "/originals",
+    tags: ["Original", "Sci-Fi", "Archive"],
+  },
+  {
+    id: "future-original",
+    title: "Future Original Slot",
+    status: "Drafting",
+    format: "Concept Entry",
+    summary:
+      "Reserved space for a future original work entry within the Celestial Archive.",
+    path: "/originals",
+    tags: ["Placeholder"],
+  },
+];
 
 export default function Originals() {
   return (
-    <div className="site">
-      <div className="overlay">
-        <div className="planet planet-a" />
-        <div className="planet planet-b" />
-
-        <svg
-          className="constellation constellation-a"
-          width="200"
-          height="120"
-          viewBox="0 0 200 120"
-        >
-          <line x1="10" y1="20" x2="80" y2="60" />
-          <line x1="80" y1="60" x2="140" y2="30" />
-          <line x1="140" y1="30" x2="180" y2="90" />
-          <circle cx="10" cy="20" r="2" />
-          <circle cx="80" cy="60" r="2" />
-          <circle cx="140" cy="30" r="2" />
-          <circle cx="180" cy="90" r="2" />
-        </svg>
-
-        <div className="symbol symbol-a">☾</div>
-        <div className="symbol symbol-b">✦</div>
-      </div>
-
-      <div className="page">
-        <header className="nav">
-          <nav className="nav-links">
-            <Link to="/">Home</Link>
-            <span>✦</span>
-            <Link to="/fics">Fics</Link>
-            <span>✦</span>
-            <Link to="/originals">Originals</Link>
-          </nav>
-
-          <div className="nav-emblem">
-            <div className="nav-emblem-top">Celestial</div>
-            <div className="nav-emblem-icon">☼</div>
+    <ArchiveLayout
+      themeId="celestial"
+      title="Originals"
+      subtitle="Independent works, concepts, fragments, and future records preserved under the Celestial Archive."
+    >
+      <section className="archive-section">
+        <div className="section-heading-row">
+          <div>
+            <p className="section-label">ORIGINAL INDEX</p>
+            <h2 className="section-title">Stored original entries</h2>
           </div>
+        </div>
 
-          <Link to="/fics" className="nav-button">
-            Enter Archive
-          </Link>
-        </header>
-
-        <section className="fics-shell">
-          <div className="fics-header-row">
-            <div>
-              <div className="eyebrow small">Private Constellations</div>
-              <h1 className="fics-title">Originals</h1>
-
-              <p className="fics-subtitle">
-                A private archive of original worlds, long-form works, and coded
-                narratives. Each file exists within its own system.
-              </p>
-            </div>
-          </div>
-
-          {/* EMPTY STATE */}
-          <div className="originals-empty">
-            <div className="originals-empty-inner">
-              <div className="originals-symbol">✦</div>
-
-              <h2>No Active Files</h2>
-
-              <p>
-                This archive is currently dormant. New transmissions will appear
-                here when they are ready to be accessed.
-              </p>
-
-              <div className="tag-row small-tags">
-                <span>Archive Pending</span>
-                <span>Signal Incomplete</span>
-                <span>Transmission Locked</span>
+        <div className="archive-card-grid">
+          {originalEntries.map((entry) => (
+            <article key={entry.id} className="archive-entry-card card-accent-celestial">
+              <div className="entry-meta-row">
+                <span className="entry-type">{entry.format}</span>
+                <span className="entry-status">{entry.status}</span>
               </div>
-            </div>
-          </div>
-        </section>
-      </div>
-    </div>
+
+              <h3 className="entry-title">{entry.title}</h3>
+              <p className="entry-summary">{entry.summary}</p>
+
+              <div className="tag-row">
+                {entry.tags.map((tag) => (
+                  <span key={tag} className="archive-tag">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <Link to={entry.path} className="entry-link">
+                View Entry
+              </Link>
+            </article>
+          ))}
+        </div>
+      </section>
+    </ArchiveLayout>
   );
 }

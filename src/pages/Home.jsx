@@ -1,142 +1,128 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { getComments } from "../utils/comments";
+import ArchiveLayout from "../components/layout/ArchiveLayout";
+import "./Home.css";
+
+const recentSignals = [
+  {
+    title: "EF007E",
+    type: "Featured Transmission",
+    description:
+      "A corrupted signal buried in the archive. Terminal decay, unstable memory, and a story with its own coded interface.",
+    path: "/fics/ef007e",
+  },
+  {
+    title: "Fics Archive",
+    type: "Collection",
+    description:
+      "Browse fanworks catalogued through the archive, including themed reading experiences and standard celestial entries.",
+    path: "/fics",
+  },
+  {
+    title: "Originals Archive",
+    type: "Collection",
+    description:
+      "Explore original stories, unfinished fragments, concepts, and future archive entries stored under the celestial system.",
+    path: "/originals",
+  },
+];
 
 export default function Home() {
-  const featured = [
-    {
-      title: "Featured Transmission",
-      subtitle: "A hand-built interactive experience",
-      text: "Enter a curated archive of stories, signals, and private constellations. Each work opens into its own coded world.",
-    },
-    {
-      title: "Latest Orbit",
-      subtitle: "Newest update",
-      text: "A new file has been added to the archive. Follow the trail through fragments, tags, and hidden interfaces.",
-    },
-  ];
-
-  const [signals, setSignals] = useState([]);
-
-  useEffect(() => {
-    const storedComments = getComments();
-    setSignals(storedComments.slice(0, 4));
-  }, []);
-
   return (
-    <div className="site">
-      <div className="overlay">
-        <div className="planet planet-a" />
-        <div className="planet planet-b" />
-
-        <svg
-          className="constellation constellation-a"
-          width="200"
-          height="120"
-          viewBox="0 0 200 120"
-        >
-          <line x1="10" y1="20" x2="80" y2="60" />
-          <line x1="80" y1="60" x2="140" y2="30" />
-          <line x1="140" y1="30" x2="180" y2="90" />
-          <circle cx="10" cy="20" r="2" />
-          <circle cx="80" cy="60" r="2" />
-          <circle cx="140" cy="30" r="2" />
-          <circle cx="180" cy="90" r="2" />
-        </svg>
-
-        <div className="symbol symbol-a">☾</div>
-        <div className="symbol symbol-b">✦</div>
-      </div>
-
-      <div className="page">
-        <header className="nav">
-          <nav className="nav-links">
-            <Link to="/">Home</Link>
-            <span>✦</span>
-            <Link to="/fics">Fics</Link>
-            <span>✦</span>
-            <Link to="/originals">Originals</Link>
-          </nav>
-
-          <div className="nav-emblem">
-            <div className="nav-emblem-top">Celestial</div>
-            <div className="nav-emblem-icon">☼</div>
-          </div>
-
-          <Link to="/fics" className="nav-button">
-            Enter Archive
-          </Link>
-        </header>
-
-        <main className="hero-layout">
-          <section className="hero-card">
-            <div className="hero-arch-wrap">
-              <div className="hero-arch">
-                <div className="hero-moon">☾</div>
-              </div>
+    <ArchiveLayout
+      themeId="celestial"
+      title="Celestial Archive"
+      subtitle="An evolving digital archive of fanworks, original stories, and unstable transmissions."
+    >
+      <div className="home-page">
+        <section className="home-hero-grid">
+          <div className="home-hero-card">
+            <div className="home-hero-visual">
+              <div className="orbit-ring orbit-ring-outer" />
+              <div className="orbit-ring orbit-ring-inner" />
+              <div className="hero-moon">☾</div>
             </div>
 
-            <div className="hero-copy">
-              <div className="eyebrow">Celestial Archive</div>
-              <h1>
+            <div className="home-hero-copy">
+              <p className="home-eyebrow">CELESTIAL ARCHIVE</p>
+              <h2 className="home-display-title">
                 Stories Filed
                 <br />
-                Among the Stars
-              </h1>
-              <p>
+                Among
+                <br />
+                the Stars
+              </h2>
+              <p className="home-description">
                 A curated library of fanfics, original writing, and immersive
                 coded experiences. Browse by constellation, follow a signal, or
                 step through a doorway into a world built for a single story.
               </p>
 
-              <div className="tag-row">
-                <span>Interactive</span>
-                <span>Celestial</span>
-                <span>Fandom</span>
-                <span>Originals</span>
+              <div className="home-tag-row">
+                <span className="home-tag">INTERACTIVE</span>
+                <span className="home-tag">CELESTIAL</span>
+                <span className="home-tag">FANDOM</span>
+                <span className="home-tag">ORIGINALS</span>
               </div>
             </div>
-          </section>
-
-          <aside className="side-panels">
-            {featured.map((item) => (
-              <section key={item.title} className="info-card">
-                <div className="eyebrow small">{item.subtitle}</div>
-                <h2>{item.title}</h2>
-                <p>{item.text}</p>
-              </section>
-            ))}
-          </aside>
-        </main>
-
-        <section className="guestbook-section">
-          <div className="guestbook-header">
-            <div className="eyebrow small">Recent Signals</div>
-            <h2>Voices Across the Archive</h2>
-            <p>Recent reader comments left throughout the archive.</p>
           </div>
 
-          <div className="signal-grid">
-            {signals.length > 0 ? (
-              signals.map((signal) => (
-                <div className="signal-card" key={signal.id}>
-                  <div className="signal-meta">
-                    <span className="signal-user">{signal.alias}</span>
-                    <span className="signal-source">
-                      {signal.story} • {signal.chapter}
-                    </span>
-                  </div>
-                  <p>{signal.comment}</p>
-                </div>
-              ))
-            ) : (
-              <div className="signal-empty">
-                No recent signals yet. Comments left on story pages will appear here.
+          <div className="home-side-column">
+            <article className="home-info-card">
+              <p className="home-eyebrow">A HAND-BUILT INTERACTIVE EXPERIENCE</p>
+              <h3 className="home-card-title">Featured Transmission</h3>
+              <p className="home-card-copy">
+                Enter a curated archive of stories, signals, and private
+                constellations. Each work opens into its own coded world.
+              </p>
+
+              <Link to="/fics/ef007e" className="home-button">
+                Enter EF007E
+              </Link>
+            </article>
+
+            <article className="home-info-card">
+              <p className="home-eyebrow">NEWEST UPDATE</p>
+              <h3 className="home-card-title">Latest Orbit</h3>
+              <p className="home-card-copy">
+                A new file has been added to the archive. Follow the trail
+                through fragments, tags, and hidden interfaces.
+              </p>
+
+              <div className="home-button-row">
+                <Link to="/fics" className="home-button secondary">
+                  Browse Fics
+                </Link>
+                <Link to="/originals" className="home-button secondary">
+                  Browse Originals
+                </Link>
               </div>
-            )}
+            </article>
+          </div>
+        </section>
+
+        <section className="home-section-card">
+          <div className="home-section-header centered">
+            <p className="home-eyebrow">RECENT SIGNALS</p>
+            <h2 className="home-section-title">Voices Across the Archive</h2>
+            <p className="home-section-copy">
+              Recent featured entries and key paths through the archive.
+            </p>
+          </div>
+
+          <div className="home-signal-grid">
+            {recentSignals.map((signal) => (
+              <article key={signal.title} className="home-signal-card">
+                <p className="home-signal-type">{signal.type}</p>
+                <h3 className="home-signal-title">{signal.title}</h3>
+                <p className="home-signal-copy">{signal.description}</p>
+                <Link to={signal.path} className="home-text-link">
+                  Open Entry
+                </Link>
+              </article>
+            ))}
           </div>
         </section>
       </div>
-    </div>
+    </ArchiveLayout>
   );
 }

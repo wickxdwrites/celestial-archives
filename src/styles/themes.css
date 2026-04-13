@@ -1,0 +1,127 @@
+/* ---------- base layout ---------- */
+
+.archive-layout {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.archive-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background:
+    radial-gradient(circle at top, rgba(255,255,255,0.08), transparent 35%),
+    linear-gradient(to bottom, rgba(255,255,255,0.02), transparent 40%);
+}
+
+.archive-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1100px, 92%);
+  margin: 0 auto;
+  padding: 3rem 0 4rem;
+}
+
+.archive-header,
+.archive-content {
+  border: 1px solid;
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+}
+
+.archive-header {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.archive-content {
+  padding: 1.5rem;
+}
+
+.archive-kicker {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.archive-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+}
+
+.archive-subtitle {
+  margin-top: 0.75rem;
+  max-width: 70ch;
+  line-height: 1.6;
+}
+
+/* ---------- celestial theme ---------- */
+
+.theme-celestial-page {
+  background:
+    radial-gradient(circle at top, rgba(123, 173, 255, 0.18), transparent 30%),
+    linear-gradient(180deg, #07111f 0%, #050913 100%);
+  color: #e7f4ff;
+}
+
+.theme-celestial-panel {
+  background: rgba(10, 18, 34, 0.72);
+  box-shadow: 0 0 30px rgba(90, 160, 255, 0.08);
+}
+
+.theme-celestial-border {
+  border-color: rgba(126, 179, 255, 0.28);
+}
+
+.theme-celestial-title {
+  color: #dff3ff;
+  text-shadow: 0 0 18px rgba(135, 200, 255, 0.18);
+}
+
+.theme-celestial-text {
+  color: #c9def7;
+}
+
+.theme-celestial-button {
+  background: rgba(109, 168, 255, 0.14);
+  color: #e7f4ff;
+  border: 1px solid rgba(126, 179, 255, 0.3);
+}
+
+/* ---------- EF007E theme ---------- */
+
+.theme-ef007e-page {
+  background:
+    radial-gradient(circle at top, rgba(255, 55, 55, 0.14), transparent 28%),
+    linear-gradient(180deg, #090303 0%, #140606 100%);
+  color: #ffd6d6;
+}
+
+.theme-ef007e-panel {
+  background: rgba(20, 6, 6, 0.82);
+  box-shadow: 0 0 26px rgba(255, 0, 0, 0.12);
+}
+
+.theme-ef007e-border {
+  border-color: rgba(255, 74, 74, 0.35);
+}
+
+.theme-ef007e-title {
+  color: #ff9b9b;
+  text-shadow: 0 0 14px rgba(255, 0, 0, 0.25);
+  letter-spacing: 0.05em;
+}
+
+.theme-ef007e-text {
+  color: #f3b3b3;
+}
+
+.theme-ef007e-button {
+  background: rgba(255, 58, 58, 0.12);
+  color: #ffd8d8;
+  border: 1px solid rgba(255, 92, 92, 0.35);
+}

@@ -1,0 +1,13 @@
+import celestialTheme from "./celestial";
+import ef007eTheme from "./ef007e";
+
+const themes = {
+  celestial: celestialTheme,
+  ef007e: ef007eTheme,
+};
+
+export function getTheme(themeId = "celestial") {
+  return themes[themeId] || themes.celestial;
+}
+
+export default themes;
