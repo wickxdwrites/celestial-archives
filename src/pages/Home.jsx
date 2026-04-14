@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import ArchiveLayout from "../components/layout/ArchiveLayout";
+import CelestialMap from "../components/home/CelestialMap";
 import "./Home.css";
 
 const recentSignals = [
@@ -37,9 +38,7 @@ export default function Home() {
         <section className="home-hero-grid">
           <div className="home-hero-card">
             <div className="home-hero-visual">
-              <div className="orbit-ring orbit-ring-outer" />
-              <div className="orbit-ring orbit-ring-inner" />
-              <div className="hero-moon">☾</div>
+              <CelestialMap />
             </div>
 
             <div className="home-hero-copy">
@@ -47,9 +46,7 @@ export default function Home() {
               <h2 className="home-display-title">
                 Stories Filed
                 <br />
-                Among
-                <br />
-                the Stars
+                Among the Stars
               </h2>
               <p className="home-description">
                 A curated library of fanfics, original writing, and immersive
@@ -67,34 +64,33 @@ export default function Home() {
           </div>
 
           <div className="home-side-column">
-            <article className="home-info-card">
-              <p className="home-eyebrow">A HAND-BUILT INTERACTIVE EXPERIENCE</p>
-              <h3 className="home-card-title">Featured Transmission</h3>
-              <p className="home-card-copy">
-                Enter a curated archive of stories, signals, and private
-                constellations. Each work opens into its own coded world.
-              </p>
+            <article className="home-info-card home-info-card--tall">
+              <p className="home-eyebrow">LATEST ORBIT</p>
+              <h3 className="home-card-title">Archive Notes</h3>
 
-              <Link to="/fics/ef007e" className="home-button">
-                Enter EF007E
-              </Link>
-            </article>
+              <div className="home-update-stack">
+                <p className="home-card-copy">
+                  Welcome to the archive. This space is reserved for writing
+                  updates, author notes, project progress, and whatever else is
+                  currently orbiting my mind.
+                </p>
 
-            <article className="home-info-card">
-              <p className="home-eyebrow">NEWEST UPDATE</p>
-              <h3 className="home-card-title">Latest Orbit</h3>
-              <p className="home-card-copy">
-                A new file has been added to the archive. Follow the trail
-                through fragments, tags, and hidden interfaces.
-              </p>
+                <div className="home-update-entry">
+                  <p className="home-update-label">CURRENT SIGNAL</p>
+                  <p className="home-update-text">
+                    EF007E is the current featured work in progress. More archive
+                    entries and custom themed pages will be added over time.
+                  </p>
+                </div>
 
-              <div className="home-button-row">
-                <Link to="/fics" className="home-button secondary">
-                  Browse Fics
-                </Link>
-                <Link to="/originals" className="home-button secondary">
-                  Browse Originals
-                </Link>
+                <div className="home-update-entry">
+                  <p className="home-update-label">AUTHOR NOTE</p>
+                  <p className="home-update-text">
+                    This archive is still under construction, but the goal is to
+                    create a home where each story can either live under the
+                    celestial theme or grow into a world with its own interface.
+                  </p>
+                </div>
               </div>
             </article>
           </div>
