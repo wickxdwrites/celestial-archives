@@ -31,8 +31,6 @@ export default function Home() {
   return (
     <ArchiveLayout
       themeId="celestial"
-      title="Celestial Archive"
-      subtitle="An evolving digital archive of fanworks, original stories, and unstable transmissions."
     >
       <div className="home-page">
         <section className="home-hero-grid">
@@ -42,14 +40,15 @@ export default function Home() {
             </div>
 
             <div className="home-hero-copy">
-              <p className="home-eyebrow">CELESTIAL ARCHIVE</p>
+              <p className="home-eyebrow">WELCOME TO MY</p>
+              <h1 className="home-main-title">Celestial Archive</h1>
               <h2 className="home-display-title">
                 Stories Filed
                 <br />
                 Among the Stars
               </h2>
               <p className="home-description">
-                A curated library of fanfics, original writing, and immersive
+                A personal collection of fanfics, original writing, and immersive
                 coded experiences. Browse by constellation, follow a signal, or
                 step through a doorway into a world built for a single story.
               </p>

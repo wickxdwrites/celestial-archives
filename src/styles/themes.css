@@ -12,10 +12,16 @@
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: 0.35;
+  opacity: 0.4;
   background:
+    radial-gradient(circle at 15% 25%, rgba(180, 200, 255, 0.15) 1px, transparent 1px),
+    radial-gradient(circle at 85% 75%, rgba(160, 180, 255, 0.12) 0.8px, transparent 0.8px),
+    radial-gradient(circle at 45% 10%, rgba(200, 220, 255, 0.18) 1.2px, transparent 1.2px),
+    radial-gradient(circle at 30% 85%, rgba(170, 190, 255, 0.1) 0.6px, transparent 0.6px),
+    radial-gradient(circle at 75% 40%, rgba(190, 210, 255, 0.08) 0.9px, transparent 0.9px),
     radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 35%),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.02), transparent 40%);
+  background-size: 300px 280px, 250px 270px, 180px 200px, 220px 240px, 160px 180px, 100% 100%, 100% 100%;
 }
 
 .archive-shell {
@@ -34,15 +40,22 @@
   position: relative;
   padding: 28px 32px;
   margin-bottom: 24px;
-  border: 1px solid rgba(126, 179, 255, 0.2);
+  border: 1px solid rgba(126, 179, 255, 0.25);
   border-radius: 30px;
   backdrop-filter: blur(10px);
   background:
+    radial-gradient(circle at 19% 27%, rgba(180, 200, 255, 0.4) 0.6px, transparent 0.8px),
+    radial-gradient(circle at 73% 15%, rgba(160, 180, 255, 0.3) 0.4px, transparent 0.6px),
+    radial-gradient(circle at 31% 83%, rgba(200, 220, 255, 0.5) 0.8px, transparent 1px),
+    radial-gradient(circle at 87% 71%, rgba(170, 190, 255, 0.25) 0.5px, transparent 0.7px),
+    radial-gradient(circle at 43% 41%, rgba(190, 210, 255, 0.2) 0.7px, transparent 0.9px),
     linear-gradient(180deg, rgba(10, 20, 44, 0.82), rgba(6, 12, 28, 0.9));
+  background-size: 180px 160px, 140px 120px, 200px 180px, 100px 90px, 160px 140px, 100% 100%;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.03),
-    0 0 20px rgba(120, 160, 255, 0.06),
-    0 0 50px rgba(80, 120, 255, 0.04);
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 0 20px rgba(120, 160, 255, 0.08),
+    0 0 50px rgba(80, 120, 255, 0.06),
+    0 0 100px rgba(140, 180, 255, 0.03);
   overflow: hidden;
 }
 
@@ -51,10 +64,15 @@
   position: absolute;
   inset: 0;
   border-radius: inherit;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(180, 200, 255, 0.06), transparent 40%),
+    radial-gradient(circle at 70% 80%, rgba(160, 180, 255, 0.04), transparent 35%),
+    radial-gradient(circle at 85% 30%, rgba(200, 220, 255, 0.03), transparent 30%);
   pointer-events: none;
   box-shadow:
-    0 0 40px rgba(120, 160, 255, 0.05),
-    0 0 80px rgba(80, 120, 255, 0.03);
+    0 0 40px rgba(120, 160, 255, 0.06),
+    0 0 80px rgba(80, 120, 255, 0.04),
+    inset 0 0 60px rgba(140, 180, 255, 0.02);
 }
 
 .archive-content {
@@ -72,6 +90,17 @@
   text-transform: uppercase;
   color: #83a7ff;
   opacity: 0.9;
+  text-shadow: 0 0 8px rgba(131, 167, 255, 0.3);
+}
+
+.archive-kicker::after {
+  content: '✦';
+  position: absolute;
+  right: -24px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(131, 167, 255, 0.5);
+  font-size: 0.9em;
 }
 
 .archive-header h1,
@@ -85,7 +114,23 @@
   line-height: 0.92;
   letter-spacing: -0.025em;
   color: #f2ecfb;
-  text-shadow: 0 0 18px rgba(180, 200, 255, 0.08);
+  text-shadow: 
+    0 0 18px rgba(180, 200, 255, 0.25),
+    0 0 40px rgba(160, 180, 255, 0.12),
+    0 0 80px rgba(120, 160, 255, 0.06);
+}
+
+.archive-header h1::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: -15px;
+  right: -15px;
+  bottom: -10px;
+  background: radial-gradient(ellipse at center, rgba(180, 200, 255, 0.04), transparent 60%);
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: -1;
 }
 
 .archive-subtitle,
@@ -98,6 +143,23 @@
   font-size: 1.08rem;
   line-height: 1.8;
   color: #d2def7;
+  text-shadow: 0 0 10px rgba(210, 222, 247, 0.1);
+}
+
+.archive-subtitle::before {
+  content: '';
+  position: absolute;
+  left: -12px;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, 
+    transparent 0%, 
+    rgba(131, 167, 255, 0.3) 30%, 
+    rgba(131, 167, 255, 0.4) 50%, 
+    rgba(131, 167, 255, 0.3) 70%, 
+    transparent 100%);
+  border-radius: 1px;
 }
 
 /* ---------- celestial theme ---------- */

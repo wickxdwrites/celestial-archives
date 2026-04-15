@@ -65,7 +65,6 @@
     0 0 18px rgba(120, 160, 255, 0.08),
     0 0 40px rgba(80, 120, 255, 0.06);
   box-sizing: border-box;
-  animation: cardShimmer 12s ease-in-out infinite;
 }
 
 .home-hero-card::after,
@@ -131,36 +130,18 @@
   justify-content: center;
   min-width: 0;
   position: relative;
-  overflow: hidden;
-}
-
-.home-hero-copy::before {
-  content: '';
-  position: absolute;
-  inset: -20px;
-  background:
-    radial-gradient(circle at 23% 17%, rgba(180, 200, 255, 0.4) 1px, transparent 1px),
-    radial-gradient(circle at 71% 83%, rgba(160, 180, 255, 0.3) 0.8px, transparent 0.8px),
-    radial-gradient(circle at 89% 23%, rgba(200, 220, 255, 0.5) 0.6px, transparent 0.6px),
-    radial-gradient(circle at 13% 67%, rgba(170, 190, 255, 0.6) 1.2px, transparent 1.2px),
-    radial-gradient(circle at 47% 91%, rgba(190, 210, 255, 0.2) 0.9px, transparent 0.9px);
-  background-size: 320px 280px, 240px 300px, 180px 220px, 260px 340px, 380px 200px;
-  animation: textParticles 30s linear infinite;
-  pointer-events: none;
-  z-index: -1;
 }
 
 .home-eyebrow {
-  margin: 0 0 12px;
+  margin: 0 0 8px;
   font-family: "Inter", sans-serif;
-  font-size: 0.84rem;
+  font-size: 0.78rem;
   font-weight: 500;
-  letter-spacing: 0.35em;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
   color: #83a7ff;
-  opacity: 0.85;
+  opacity: 0.75;
   position: relative;
-  animation: eyebrowGlow 6s ease-in-out infinite alternate;
 }
 
 .home-eyebrow::after {
@@ -169,61 +150,58 @@
   right: -20px;
   top: 50%;
   transform: translateY(-50%);
-  color: rgba(131, 167, 255, 0.6);
-  animation: eyebrowStar 4s ease-in-out infinite;
+  color: rgba(131, 167, 255, 0.5);
 }
 
-.home-display-title {
-  margin: 0;
+.home-main-title {
+  margin: 0 0 16px;
   font-family: "Cormorant Garamond", serif;
-  font-size: clamp(4rem, 5vw, 6.2rem);
+  font-size: clamp(3.2rem, 4.2vw, 4.8rem);
   font-weight: 600;
-  line-height: 0.9;
+  line-height: 0.95;
   letter-spacing: -0.02em;
   color: #f2ecfb;
   text-shadow: 
-    0 0 18px rgba(180, 200, 255, 0.3),
-    0 0 40px rgba(160, 180, 255, 0.15),
-    0 0 80px rgba(120, 160, 255, 0.08);
-  word-break: keep-all;
-  overflow-wrap: normal;
-  max-width: 8.5ch;
-  animation: titleGlow 8s ease-in-out infinite alternate;
-  position: relative;
+    0 0 18px rgba(180, 200, 255, 0.25),
+    0 0 40px rgba(160, 180, 255, 0.12),
+    0 0 80px rgba(120, 160, 255, 0.06);
 }
 
-.home-display-title::before {
-  content: '';
-  position: absolute;
-  inset: -10px;
-  background: 
-    radial-gradient(circle at 10% 20%, rgba(180, 200, 255, 0.1), transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(160, 180, 255, 0.08), transparent 35%);
-  border-radius: 20px;
-  animation: titleAura 12s ease-in-out infinite;
-  pointer-events: none;
-  z-index: -1;
-}
-
-.home-display-title::after {
+.home-main-title::after {
   content: '✦';
   position: absolute;
-  right: -30px;
-  top: 20%;
+  right: -25px;
+  top: 25%;
   color: rgba(180, 200, 255, 0.4);
-  font-size: 0.3em;
-  animation: titleStar 5s ease-in-out infinite;
+  font-size: 0.25em;
+}
+
+.home-display-title {
+  margin: 0 0 20px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2.8rem, 3.8vw, 4.4rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: #e8f0ff;
+  text-shadow: 
+    0 0 12px rgba(160, 180, 255, 0.2),
+    0 0 30px rgba(140, 160, 255, 0.1);
+  word-break: keep-all;
+  overflow-wrap: normal;
+  max-width: 9ch;
+  position: relative;
+  opacity: 0.95;
 }
 
 .home-description {
   max-width: 42rem;
-  margin: 24px 0 0;
+  margin: 0 0 28px;
   font-family: "Inter", sans-serif;
-  font-size: 1.18rem;
-  line-height: 1.85;
-  color: #d2def7;
+  font-size: 1.12rem;
+  line-height: 1.75;
+  color: #c8d5f2;
   position: relative;
-  animation: textFloat 8s ease-in-out infinite;
 }
 
 .home-description::before {
@@ -236,18 +214,17 @@
   background: linear-gradient(180deg, 
     transparent 0%, 
     rgba(131, 167, 255, 0.4) 20%, 
-    rgba(131, 167, 255, 0.6) 50%, 
+    rgba(131, 167, 255, 0.5) 50%, 
     rgba(131, 167, 255, 0.4) 80%, 
     transparent 100%);
   border-radius: 2px;
-  animation: sideGlow 10s ease-in-out infinite alternate;
 }
 
 .home-tag-row {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 28px;
+  margin-top: 0;
 }
 
 .home-tag {
@@ -1892,27 +1869,12 @@
    ENHANCED ANIMATIONS
    ========================= */
 
-@keyframes cardShimmer {
-  0%, 100% {
-    background-position: 0% 0%, 40% 60%, 80% 20%, 60% 80%, 20% 40%, 0% 0%;
-  }
-  50% {
-    background-position: 100% 100%, 60% 40%, 20% 80%, 40% 20%, 80% 60%, 0% 0%;
-  }
-}
-
 @keyframes titleGlow {
   0%, 100% {
     text-shadow: 
-      0 0 18px rgba(180, 200, 255, 0.3),
-      0 0 40px rgba(160, 180, 255, 0.15),
-      0 0 80px rgba(120, 160, 255, 0.08);
-  }
-  50% {
-    text-shadow: 
-      0 0 24px rgba(200, 220, 255, 0.4),
-      0 0 60px rgba(180, 200, 255, 0.2),
-      0 0 120px rgba(140, 180, 255, 0.12);
+      0 0 18px rgba(180, 200, 255, 0.25),
+      0 0 40px rgba(160, 180, 255, 0.12),
+      0 0 80px rgba(120, 160, 255, 0.06);
   }
 }
 
@@ -2096,81 +2058,11 @@
    TITLE CARD ANIMATIONS
    ========================= */
 
-@keyframes textParticles {
-  0% {
-    background-position: 23% 17%, 71% 83%, 89% 23%, 13% 67%, 47% 91%;
-  }
-  100% {
-    background-position: -297% -263%, -169% -217%, -91% -197%, -247% -273%, -333% -109%;
-  }
-}
-
-@keyframes eyebrowGlow {
-  0% {
-    text-shadow: 0 0 8px rgba(131, 167, 255, 0.3);
-  }
-  100% {
-    text-shadow: 0 0 16px rgba(131, 167, 255, 0.6), 0 0 32px rgba(131, 167, 255, 0.2);
-  }
-}
-
 @keyframes eyebrowStar {
   0%, 100% {
     opacity: 0.4;
-    transform: translateY(-50%) scale(1);
   }
   50% {
-    opacity: 0.8;
-    transform: translateY(-50%) scale(1.1);
-  }
-}
-
-@keyframes textFloat {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-2px);
-  }
-}
-
-@keyframes sideGlow {
-  0% {
-    opacity: 0.4;
-    box-shadow: 0 0 8px rgba(131, 167, 255, 0.2);
-  }
-  100% {
-    opacity: 0.8;
-    box-shadow: 0 0 16px rgba(131, 167, 255, 0.4);
-  }
-}
-
-@keyframes titleAura {
-  0%, 100% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scale(1.02);
-  }
-}
-
-@keyframes titleStar {
-  0%, 100% {
-    opacity: 0.2;
-    transform: scale(1) rotate(0deg);
-  }
-  25% {
-    opacity: 0.6;
-    transform: scale(1.1) rotate(90deg);
-  }
-  50% {
-    opacity: 0.4;
-    transform: scale(0.9) rotate(180deg);
-  }
-  75% {
-    opacity: 0.8;
-    transform: scale(1.2) rotate(270deg);
+    opacity: 0.7;
   }
 }
