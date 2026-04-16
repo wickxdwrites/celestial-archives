@@ -1,0 +1,295 @@
+/* EF007E Theme Specific Styles */
+
+/* Core theme variables */
+:root {
+  --ef007e-primary: #00e1ff;
+  --ef007e-secondary: #67f5c8;
+  --ef007e-accent: #8fefff;
+  --ef007e-text: #bff3ff;
+  --ef007e-bg-primary: rgba(0, 20, 40, 0.95);
+  --ef007e-bg-secondary: rgba(7, 24, 38, 0.9);
+  --ef007e-border: rgba(0, 225, 255, 0.3);
+  --ef007e-critical: #ff6b6b;
+  --ef007e-warning: #ffd93d;
+}
+
+/* Story Content Styling */
+.tron-story-content {
+  font-family: "Georgia", serif;
+  line-height: 1.7;
+  color: rgba(215, 251, 255, 0.95);
+  font-size: 16px;
+}
+
+.tron-story-content p {
+  margin: 0 0 24px;
+  text-align: justify;
+}
+
+.tron-story-content p:first-of-type {
+  margin-bottom: 28px;
+  font-size: 17px;
+}
+
+/* HUD Interface Components */
+
+/* Standard HUD */
+.hud {
+  margin: 28px 0;
+  background: rgba(0, 30, 60, 0.4);
+  border: 1px solid rgba(0, 225, 255, 0.6);
+  border-radius: 6px;
+  box-shadow: 0 0 15px rgba(0, 225, 255, 0.2);
+  overflow: hidden;
+}
+
+.hud-header {
+  padding: 10px 14px;
+  background: rgba(0, 225, 255, 0.15);
+  border-bottom: 1px solid rgba(0, 225, 255, 0.3);
+  font-family: "Courier New", monospace;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #00e1ff;
+  text-transform: uppercase;
+}
+
+.hud-line {
+  margin: 8px 0;
+  border: none;
+  height: 1px;
+  background: rgba(0, 225, 255, 0.4);
+}
+
+.hud-msg {
+  padding: 10px 14px;
+  margin: 0;
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+  color: #bff3ff;
+  line-height: 1.4;
+}
+
+.hud-warn {
+  color: #ffd93d;
+  font-weight: 700;
+}
+
+/* White HUD Variant */
+.hud-white {
+  margin: 28px 0;
+  background: rgba(20, 40, 60, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+  padding: 14px;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+}
+
+.hud-white p {
+  margin: 6px 0;
+  font-family: "Courier New", monospace;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-indent: 0 !important;
+  line-height: 1.4;
+}
+
+.hud-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+}
+
+.hud-value {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.hud-value.critical {
+  color: #ff6b6b;
+  animation: criticalBlink 1.5s infinite;
+}
+
+@keyframes criticalBlink {
+  0%, 60% { opacity: 1; }
+  61%, 100% { opacity: 0.6; }
+}
+
+/* Critical HUD */
+.hud-critical {
+  margin: 28px 0;
+  background: rgba(60, 20, 20, 0.6);
+  border: 1px solid #ff6b6b;
+  border-radius: 6px;
+  padding: 14px;
+  box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+  animation: criticalPulse 3s infinite;
+}
+
+@keyframes criticalPulse {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
+  }
+}
+
+.error-line {
+  margin: 6px 0;
+  font-family: "Courier New", monospace;
+  font-size: 0.8rem;
+  color: #ff6b6b;
+  font-weight: 700;
+  text-indent: 0 !important;
+}
+
+.crash-line {
+  margin: 3px 0;
+  font-family: "Courier New", monospace;
+  font-size: 0.75rem;
+  color: rgba(255, 190, 190, 0.8);
+  padding-left: 12px;
+  text-indent: 0 !important;
+}
+
+.countdown {
+  margin: 10px 0 0;
+  font-family: "Courier New", monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ff6b6b;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  animation: countdownFlash 1s infinite;
+  text-indent: 0 !important;
+}
+
+@keyframes countdownFlash {
+  0%, 50% { 
+    color: #ff6b6b;
+  }
+  51%, 100% { 
+    color: rgba(255, 107, 107, 0.5);
+  }
+}
+
+/* Advanced visual effects */
+.theme-ef007e-page .tron-reader-main {
+  position: relative;
+}
+
+.theme-ef007e-page .tron-reader-main::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    transparent 40%, 
+    rgba(0, 225, 255, 0.1) 50%, 
+    transparent 60%);
+  border-radius: 26px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.theme-ef007e-page .tron-reader-main:hover::after {
+  opacity: 1;
+}
+
+/* Enhanced glow effects for interactive elements */
+.theme-ef007e-page .tron-primary:hover {
+  text-shadow: 0 0 10px rgba(217, 251, 255, 0.8);
+}
+
+.theme-ef007e-page .tron-nav a:hover {
+  text-shadow: 0 0 8px rgba(0, 180, 255, 0.8);
+}
+
+/* Custom scrollbar for tron theme */
+.theme-ef007e-page ::-webkit-scrollbar {
+  width: 8px;
+}
+
+.theme-ef007e-page ::-webkit-scrollbar-track {
+  background: rgba(7, 24, 38, 0.5);
+  border-radius: 4px;
+}
+
+.theme-ef007e-page ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(0, 225, 255, 0.6), rgba(0, 180, 255, 0.4));
+  border-radius: 4px;
+}
+
+.theme-ef007e-page ::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(0, 225, 255, 0.8), rgba(0, 180, 255, 0.6));
+}
+
+/* Terminal cursor effect */
+.tron-terminal-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--ef007e-accent);
+  animation: blink 1s infinite;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Data stream effect */
+@keyframes dataStream {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.3; }
+  90% { opacity: 0.3; }
+  100% { transform: translateY(-100vh) rotate(5deg); opacity: 0; }
+}
+
+.tron-data-stream {
+  position: fixed;
+  top: 100vh;
+  width: 2px;
+  height: 100px;
+  background: linear-gradient(180deg, transparent, var(--ef007e-primary), transparent);
+  animation: dataStream 8s linear infinite;
+  z-index: 1;
+}
+
+.tron-data-stream:nth-child(2) { left: 10%; animation-delay: -2s; }
+.tron-data-stream:nth-child(3) { left: 20%; animation-delay: -4s; }
+.tron-data-stream:nth-child(4) { left: 30%; animation-delay: -6s; }
+.tron-data-stream:nth-child(5) { left: 40%; animation-delay: -1s; }
+.tron-data-stream:nth-child(6) { left: 50%; animation-delay: -3s; }
+.tron-data-stream:nth-child(7) { left: 60%; animation-delay: -5s; }
+.tron-data-stream:nth-child(8) { left: 70%; animation-delay: -7s; }
+.tron-data-stream:nth-child(9) { left: 80%; animation-delay: -1.5s; }
+.tron-data-stream:nth-child(10) { left: 90%; animation-delay: -4.5s; }
+
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+  .theme-ef007e-page .tron-grid-overlay {
+    background-size: 30px 30px;
+  }
+  
+  .tron-data-stream {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-ef007e-page .tron-scanlines {
+    opacity: 0.04;
+  }
+  
+  .theme-ef007e-page .tron-grid-overlay {
+    opacity: 0.01;
+  }
+}

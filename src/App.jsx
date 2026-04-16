@@ -14,7 +14,7 @@ export default function App() {
       <Route path="/fics" element={<Fics />} />
       <Route path="/originals" element={<Originals />} />
       <Route path="/extras" element={<Extras />} />
-      <Route path="/fics/tron-file" element={<TronFile />} />
+      <Route path="/fics/ef007e" element={<TronFile />} />
     </Routes>
   );
 }

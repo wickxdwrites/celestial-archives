@@ -5,34 +5,24 @@ import './Extras.css';
 const extrasData = {
   games: [
     {
+      id: 'ef007e-terminal-chat',
+      title: 'EF007E: Terminal Interface',
+      description: 'Step into the Grid and engage in real-time conversations with the digital consciousnesses from EF007E. Experience the story through interactive dialogue.',
+      status: 'planned',
+      icon: '💬',
+      difficulty: 'Medium',
+      estimatedTime: '15-30 min',
+      tags: ['interactive fiction', 'chat simulation', 'EF007E', 'terminal interface']
+    },
+    {
       id: 'constellation-match',
       title: 'Constellation Matching',
-      description: 'Test your knowledge of star patterns and celestial mythology in this interactive matching game.',
-      status: 'planned',
-      icon: '✨',
-      difficulty: 'Medium',
-      estimatedTime: '10-15 min',
-      tags: ['astronomy', 'mythology', 'memory']
-    },
-    {
-      id: 'space-word-weaver',
-      title: 'Space Word Weaver',
-      description: 'Create cosmic stories by selecting words and watching your tale unfold among the stars.',
+      description: 'Test your knowledge of star patterns and celestial mythology.',
       status: 'concept',
-      icon: '🌌',
+      icon: '✨',
       difficulty: 'Easy',
       estimatedTime: '5-10 min',
-      tags: ['creative writing', 'story building', 'interactive']
-    },
-    {
-      id: 'stellar-navigator',
-      title: 'Stellar Navigator',
-      description: 'Navigate through procedurally generated star systems and discover hidden cosmic treasures.',
-      status: 'concept',
-      icon: '🚀',
-      difficulty: 'Hard', 
-      estimatedTime: '20-30 min',
-      tags: ['exploration', 'strategy', 'adventure']
+      tags: ['astronomy', 'memory']
     }
   ],
   quizzes: [
@@ -40,28 +30,10 @@ const extrasData = {
       id: 'character-archetype',
       title: 'Character Archetype Analysis',
       description: 'Discover which archetypal role you embody in the grand cosmic narrative.',
-      status: 'planned',
+      status: 'concept',
       icon: '🎭',
       questions: 12,
-      tags: ['personality', 'character analysis', 'mythology']
-    },
-    {
-      id: 'writing-style-detector',
-      title: 'Writing Style Detector', 
-      description: 'Analyze text samples to identify your unique authorial voice and writing patterns.',
-      status: 'concept',
-      icon: '📝',
-      questions: 8,
-      tags: ['writing analysis', 'style', 'creativity']
-    },
-    {
-      id: 'cosmic-compatibility',
-      title: 'Cosmic Compatibility Test',
-      description: 'Find out which fictional universe would be your perfect home among the stars.',
-      status: 'planned',
-      icon: '🌟',
-      questions: 15,
-      tags: ['personality', 'fiction', 'universe matching']
+      tags: ['personality', 'character analysis']
     }
   ],
   tools: [
@@ -69,28 +41,10 @@ const extrasData = {
       id: 'name-generator',
       title: 'Celestial Name Generator',
       description: 'Generate mystical names for characters, places, and cosmic entities.',
-      status: 'planned',
-      icon: '🔮',
-      features: ['Character names', 'Planet names', 'Star system names', 'Mystical titles'],
-      tags: ['generator', 'creative writing', 'worldbuilding']
-    },
-    {
-      id: 'plot-constellation',
-      title: 'Plot Constellation Mapper',
-      description: 'Visualize story structures as interconnected star maps with character arcs and plot threads.',
       status: 'concept',
-      icon: '🗺️',
-      features: ['Story structure', 'Character tracking', 'Plot threads', 'Visual mapping'],
-      tags: ['plotting', 'story structure', 'visualization']
-    },
-    {
-      id: 'word-cloud-cosmos',
-      title: 'Word Cloud Cosmos',
-      description: 'Transform your writing into beautiful cosmic word clouds with thematic clustering.',
-      status: 'concept', 
-      icon: '☁️',
-      features: ['Text analysis', 'Visual generation', 'Theme detection', 'Export options'],
-      tags: ['text analysis', 'visualization', 'writing tools']
+      icon: '🔮',
+      features: ['Character names', 'Planet names', 'Star system names'],
+      tags: ['generator', 'creative writing']
     }
   ],
   experiments: [
@@ -98,18 +52,10 @@ const extrasData = {
       id: 'infinite-scroll-story',
       title: 'The Infinite Scroll',
       description: 'An ever-expanding collaborative story that grows with each visitor contribution.',
-      status: 'active',
+      status: 'concept',
       icon: '📜',
-      participants: 23,
+      participants: 0,
       tags: ['collaborative', 'storytelling', 'experimental']
-    },
-    {
-      id: 'emotional-color-synth',
-      title: 'Emotional Color Synthesizer',
-      description: 'Watch colors shift and blend based on the emotional tone of text you input.',
-      status: 'planned',
-      icon: '🎨',
-      tags: ['experimental', 'emotion analysis', 'visual art']
     }
   ]
 };
