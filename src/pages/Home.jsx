@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import ArchiveLayout from "../components/layout/ArchiveLayout";
 import CelestialMap from "../components/home/CelestialMap";
-import archiveUpdates, { formatUpdateDate, getLastUpdateDate } from "../data/archiveUpdates";
+import { formatUpdateDate, getLastUpdateDate, getVisibleUpdates, getArchivedCount } from "../data/archiveUpdates";
 import "./Home.css";
 
 const recentSignals = [
@@ -83,19 +83,30 @@ export default function Home() {
                   my inner thoughts on the archive itself. I will post updates here as I continue to build out the site and add new content.
                 </p>
 
-                {archiveUpdates.map((update) => (
-                  <div key={update.id} className="home-update-entry">
-                    <div className="home-update-header">
-                      <p className="home-update-label">{update.label}</p>
-                      <span className="home-update-timestamp">
-                        {formatUpdateDate(update.date)}
+                <div className="home-updates-container">
+                  {getVisibleUpdates().map((update) => (
+                    <div key={update.id} className="home-update-entry">
+                      <div className="home-update-header">
+                        <p className="home-update-label">{update.label}</p>
+                        <span className="home-update-timestamp">
+                          {formatUpdateDate(update.date)}
+                        </span>
+                      </div>
+                      <p className="home-update-text">
+                        {update.text}
+                      </p>
+                    </div>
+                  ))}
+                  
+                  {getArchivedCount() > 0 && (
+                    <div className="home-archived-notice">
+                      <span className="archived-icon">📁</span>
+                      <span className="archived-text">
+                        {getArchivedCount()} older update{getArchivedCount() !== 1 ? 's' : ''} archived
                       </span>
                     </div>
-                    <p className="home-update-text">
-                      {update.text}
-                    </p>
-                  </div>
-                ))}
+                  )}
+                </div>
               </div>
             </article>
           </div>

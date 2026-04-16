@@ -13,6 +13,14 @@
 
 const archiveUpdates = [
   {
+    id: 4,
+    label: "SYSTEM UPGRADE",
+    text: "Major fics archive overhaul completed! New search, filtering, and enhanced metadata display. The fanwork index is now fully operational with content warnings and better organization.",
+    date: "2026-04-16", 
+    timestamp: "18:30 UTC",
+    priority: "high"
+  },
+  {
     id: 3,
     label: "COSMIC EVENT",
     text: "Mysterious meteor shower detected! Click the moon five times quickly to witness an otherworldly spectacle. Alien visitors may be involved... 🛸",
@@ -81,6 +89,28 @@ export const addUpdate = (label, text, priority = 'medium') => {
 // Get updates by priority
 export const getUpdatesByPriority = (priority) => {
   return archiveUpdates.filter(update => update.priority === priority);
+};
+
+// Get visible updates (max 5 most recent)
+export const getVisibleUpdates = () => {
+  if (archiveUpdates.length <= 10) {
+    return archiveUpdates;
+  }
+  // When we have more than 10, show only the 5 most recent
+  return archiveUpdates.slice(0, 5);
+};
+
+// Get archived updates (older ones that are hidden)
+export const getArchivedUpdates = () => {
+  if (archiveUpdates.length <= 10) {
+    return [];
+  }
+  return archiveUpdates.slice(5);
+};
+
+// Get count of archived updates
+export const getArchivedCount = () => {
+  return Math.max(0, archiveUpdates.length - 5);
 };
 
 export default archiveUpdates;
