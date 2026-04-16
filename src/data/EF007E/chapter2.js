@@ -38,10 +38,26 @@ const chapter2 = {
 
     <p>His world once again went white, then black. Then <span class="red"><i>RED.</i></span>.</p>
 
-    <div class="hud">
-      <div class="hud-header">
-        <span>SYSTEM REBOOT #003</span>
-        <span>RESTORING PREVIOUS VERSION</span>
+    <div class="system-broadcast">
+      <div class="broadcast-header">
+        <span class="broadcast-icon">🔄</span>
+        <span class="broadcast-origin">SYSTEM RECOVERY :: REBOOT SEQUENCE</span>
+        <span class="broadcast-priority">AUTO</span>
+      </div>
+      
+      <div class="message-header">
+        <span class="msg-type">VERSION RESTORATION</span>
+        <span class="msg-id">RBT-003-PRVS</span>
+      </div>
+      
+      <div class="message-body">
+        <strong>REBOOT #003 COMPLETED:</strong> PREVIOUS VERSION RESTORED<br/>
+        PLAYER STATE → RECONSTRUCTED FROM BACKUP
+      </div>
+      
+      <div class="broadcast-footer">
+        <span class="broadcast-time">--:--:--</span>
+        <span class="broadcast-status">ACTIVE</span>
       </div>
     </div>
 
@@ -53,32 +69,62 @@ const chapter2 = {
 
     <p>His platform started rising once more, Shane could hear the sound of the crowd cheering again but this time it was eerily distorted and static-y. <i>"Why were we doing another game?"</i> Shane thought to himself. He was now standing in the familiar glass cage of the disc wars once more. He could almost feel his heart stop from dread. This shouldn't be happening.</p>
 
-    <div class="hud">
-      <div class="hud-header">
-        <span>SYSTEM :: BROADCAST</span>
+    <div class="system-broadcast">
+      <div class="broadcast-header">
+        <span class="broadcast-icon">⚔️</span>
+        <span class="broadcast-origin">GAME CONTROL :: MATCH PREP</span>
+        <span class="broadcast-priority">READY</span>
       </div>
-
-      <hr class="hud-line">
-
-      <p class="hud-msg">
-        <span class="hud-warn">SYSTEM:</span>
-        Combatants, please prepare for disc wars.
-      </p>
+      
+      <div class="message-header">
+        <span class="msg-type">COMBAT PREPARATION</span>
+        <span class="msg-id">DW-PREP-01</span>
+      </div>
+      
+      <div class="message-body">
+        <strong>ATTENTION COMBATANTS:</strong> PREPARE FOR DISC WARS<br/>
+        WEAPONS CHECK → ARENA INITIALIZATION
+      </div>
+      
+      <div class="broadcast-footer">
+        <span class="broadcast-time">--:--:--</span>
+        <span class="broadcast-status">STANDBY</span>
+      </div>
     </div>
 
     <p>Across the cage, standing on two divided sides with only a small bridge to close the gap of the void below, just thirty millicycles away, I-X was crouching to the ground like a ball, shivering and rocking on his feet. His red circuits pulsing violently.</p>
 
-    <div class="hud">
-      <div class="hud-header">
-        <span>SYSTEM :: BROADCAST</span>
+    <div class="arena-announcement">
+      <div class="announcement-header">
+        <span class="arena-icon">🏟</span>
+        <span class="arena-title">ARENA CONTROL</span>
+        <span class="match-status">FINAL ROUND</span>
       </div>
-
-      <hr class="hud-line">
-
-      <p class="hud-msg">
-        <span class="hud-warn">SYSTEM:</span>
-        Final Round: Combatant 24 Versus I-X.
-      </p>
+      
+      <div class="match-display">
+        <div class="competitor left">
+          <span class="player-id">PLAYER-24</span>
+          <span class="player-name">SHANE</span>
+        </div>
+        
+        <div class="versus-separator">
+          <span class="vs-text">VS</span>
+          <div class="vs-line"></div>
+        </div>
+        
+        <div class="competitor right">
+          <span class="player-id threat">I-X</span>
+          <span class="player-name corrupted">CORRUPTED</span>
+        </div>
+      </div>
+      
+      <div class="match-info">
+        <div class="arena-stats">
+          <span class="stat-item">ARENA: GLASS CAGE</span>
+          <span class="stat-item">ROUND: FINAL</span>
+          <span class="stat-item">STATUS: UNSTABLE</span>
+        </div>
+      </div>
     </div>
 
     <p>Shane looked around bewildered, final round already? Where were the other players? The distorted cheers made his eardrums thrum painfully, like nails screeching down a chalkboard. But Shane couldn't let his guard down this time, and not for any moment going forward. He reached behind his shoulder and removed his disc, a practiced ritual he knew all too well for this game.</p>
@@ -146,12 +192,28 @@ const chapter2 = {
 
     <p>This was no longer routine training or a game. They were damn screwed.</p>
 
-    <div class="hud">
-      <hr class="hud-line">
-
-      <p class="hud-msg hud-dim">The loop is now a cage…</p>
-      <p class="hud-msg hud-dim">This cage will have no exit…</p>
-      <p class="hud-msg hud-dim">The only thing in this cage is the m̵̧̪̈́͋ͅa̵̡̨̗͑̋̈́̍̓ṋ̶͙̬̌̀̓̕  program that keeps killing you…</p>
+    <div class="system-broadcast" style="background: linear-gradient(135deg, rgba(30, 0, 0, 0.95) 0%, rgba(50, 0, 0, 0.9) 50%, rgba(25, 0, 0, 0.95) 100%); border-color: rgba(255, 50, 50, 0.8); box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);">
+      <div class="broadcast-header">
+        <span class="broadcast-icon">💀</span>
+        <span class="broadcast-origin">SYSTEM ERROR :: CONTAINMENT BREACH</span>
+        <span class="broadcast-priority" style="background: rgba(255, 0, 0, 0.3); color: #ff3030;">CRITICAL</span>
+      </div>
+      
+      <div class="message-header">
+        <span class="msg-type">CORRUPTION WARNING</span>
+        <span class="msg-id">ERR-LOOP-CAGE</span>
+      </div>
+      
+      <div class="message-body" style="color: #ff6666;">
+        <strong>WARNING:</strong> The loop is now a cage…<br/>
+        This cage will have no exit…<br/>
+        The only thing in this cage is the m̵̧̪̈́͋ͅa̵̡̨̗͑̋̈́̍̓ṋ̶͙̬̌̀̓̕ program that keeps killing you…
+      </div>
+      
+      <div class="broadcast-footer">
+        <span class="broadcast-time">ERR:ERR:ERR</span>
+        <span class="broadcast-status" style="color: #ff3030;">FATAL</span>
+      </div>
     </div>
 
     <p>Shane parried another strike towards his head, but his carelessness of footing made him slip on the glass, causing him to lose balance and fall backward. It wasn't the impact that startled him, it was the cold, hard feeling that nothing is salvageable anymore, that he isn't equipped to handle this type of <i>virus</i>, the only thing that paralyzed his body in fear…</p>

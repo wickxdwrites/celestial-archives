@@ -7,17 +7,28 @@ const chapter1 = {
 
 There was no visible horizon, so sun, only a sinking darkness with shrouds of remnant lights from the grid. Every so often, the lines of white and blue flicker into a dangerous shade of red – the AI takeover that signaled the impending doom of a fall of a once stable grid. The air tasted and smelled like burnt silicon with every ominous pulse, sending waves of dread to the programs that lived within it.
 
-<div class="hud">
-  <div class="hud-header">
-    <span>SYSTEM :: BROADCAST</span>
+<div class="system-broadcast">
+  <div class="broadcast-header">
+    <span class="broadcast-icon">📡</span>
+    <span class="broadcast-origin">GRID CONTROL</span>
+    <span class="broadcast-priority">PRIORITY: HIGH</span>
   </div>
-
-  <hr class="hud-line">
-
-  <p class="hud-msg">
-    <span class="hud-warn">SYSTEM:</span>
-    All combatants, prepare for disc wars.
-  </p>
+  
+  <div class="broadcast-content">
+    <div class="message-header">
+      <span class="msg-type">SYSTEM WIDE NOTIFICATION</span>
+      <span class="msg-id">#GC-7789</span>
+    </div>
+    
+    <div class="message-body">
+      All combatants, prepare for disc wars.
+    </div>
+    
+    <div class="broadcast-footer">
+      <span class="broadcast-time" id="broadcast-time-1">15:41:23</span>
+      <span class="broadcast-status">TRANSMITTED</span>
+    </div>
+  </div>
 </div>
 
 Shane stood tall in his new glass cell, standing high above the crowd cheering all around the arena, his silhouette sharp and refined, a stark difference to the petrified players facing off in their own cells. His boots made a dull metallic thud against the glass floor. Cheers of the crowd grew louder, a deafening chant of disc wars and screams of glee when another player had been derezzed. But Shane was a development of his own caliber. His armor, a sleek matte black composite that barely reflected light, was etched with lines of white circuitry. A program yet to be touched by the AI, remaining pure and one of the few original programs on the grid.
@@ -28,39 +39,104 @@ Adjusting his grip on his identity disc. He gripped it with importance, everythi
 
 His cell was shifting, moving around until it merged all the empty cells into one large battle cage.
 
-<div class="hud">
-  <div class="hud-header">
-    <span>SYSTEM :: BROADCAST</span>
+<div class="arena-announcement">
+  <div class="announcement-header">
+    <span class="arena-icon">🏟</span>
+    <span class="arena-title">ARENA CONTROL</span>
+    <span class="match-status">FINAL ROUND</span>
   </div>
-
-  <hr class="hud-line">
-
-  <p class="hud-msg">
-    <span class="hud-warn">SYSTEM:</span>
-    Final round: Player 24 versus I-X
-  </p>
+  
+  <div class="match-display">
+    <div class="competitor left">
+      <span class="player-id">PLAYER-24</span>
+      <span class="player-name">SHANE</span>
+    </div>
+    
+    <div class="versus-separator">
+      <span class="vs-text">VS</span>
+      <div class="vs-line"></div>
+    </div>
+    
+    <div class="competitor right">
+      <span class="player-id threat">I-X</span>
+      <span class="player-name corrupted">CORRUPTED</span>
+    </div>
+  </div>
+  
+  <div class="match-info">
+    <div class="arena-stats">
+      <span class="stat-item">ARENA: GLASS CAGE</span>
+      <span class="stat-item">WEAPON: IDENTITY DISC</span>
+      <span class="stat-item">STAKES: DEREZ OR VICTORY</span>
+    </div>
+  </div>
 </div>
 
 The playing field had shifted, Shane sauntered over to his expected position facing towards the dark corner opposite to him. He couldn't make out much but the faint glow of red pulsing on the player's suit. Shane ran a quick diagnostic check through the visor of his helmet, the internal hud flickering with multiple new strings.
 
-<div class="hud-white">
-
-  <p>
-    <span class="hud-label">Integrity</span> ::
-    <span class="hud-value">100%</span>
-  </p>
-
-  <p>
-    <span class="hud-label">Target</span> ::
-    <span class="hud-value">I-X</span>
-  </p>
-
-  <hr class="hud-line">
-
-  <p>
-    <span class="hud-label">Directive</span> ::
-    <span class="hud-value critical">Eliminate</span>
-  </p>
+<div class="diagnostic-hud">
+  <div class="hud-scan-line"></div>
+  
+  <div class="diag-header">
+    <span class="diag-title">COMBAT DIAGNOSTICS</span>
+    <span class="diag-timestamp" id="hud-timestamp">15:42:07</span>
+  </div>
+  
+  <div class="status-grid">
+    <div class="status-item primary">
+      <span class="status-icon">●</span>
+      <span class="status-name">INTEGRITY</span>
+      <span class="status-value good">100%</span>
+    </div>
+    
+    <div class="status-item">
+      <span class="status-icon">◉</span>
+      <span class="status-name">TARGET LOCK</span>
+      <span class="status-value warning">I-X</span>
+    </div>
+    
+    <div class="status-item">
+      <span class="status-icon">⚡</span>
+      <span class="status-name">POWER CORE</span>
+      <span class="status-value good">OPTIMAL</span>
+    </div>
+    
+    <div class="status-item">
+      <span class="status-icon">🛡</span>
+      <span class="status-name">DEFENSE GRID</span>
+      <span class="status-value good">ACTIVE</span>
+    </div>
+  </div>
+  
+  <div class="tactical-info">
+    <div class="threat-level">
+      <span class="threat-label">THREAT ASSESSMENT</span>
+      <div class="threat-bar">
+        <div class="threat-fill critical" style="width: 95%"></div>
+      </div>
+      <span class="threat-value">EXTREME</span>
+    </div>
+  </div>
+  
+  <div class="mission-directive">
+    <span class="directive-label">MISSION DIRECTIVE</span>
+    <span class="directive-command">ELIMINATE TARGET</span>
+  </div>
+  
+  <script>
+    (function() {
+      const timestamp = document.getElementById('hud-timestamp');
+      if (timestamp) {
+        setInterval(() => {
+          const now = new Date();
+          const hours = now.getHours().toString().padStart(2, '0');
+          const minutes = now.getMinutes().toString().padStart(2, '0');
+          const seconds = now.getSeconds().toString().padStart(2, '0');
+          timestamp.textContent = \`\${hours}:\${minutes}:\${seconds}\`;
+        }, 1000);
+      }
+    })();
+  </script>
 </div>
 
 "You do not belong." Shane said, his voice resonating across the room. The crowd booed at his taunt. Not like it would mean anything to him, they were all slowly being corrupted anyways. Shane didn't move, he couldn't see I-X move either. But Shane didn't need to see him, he could smell him – the smell of overheating coolant and the faint sound of his erratic whirring. Almost too sharp to even perceive through the deafening roar of the crowd.
@@ -99,50 +175,125 @@ But with luck, he manages to catch himself by clinging to the edge, preventing h
 
 Shane blocked the first disc, narrowly missing his cheek, but the second one sliced right through him.
 
-<div class="hud">
-  <div class="hud-header">
-    <span>SYSTEM :: BROADCAST</span>
+<div class="system-broadcast">
+  <div class="broadcast-header">
+    <span class="broadcast-icon">💀</span>
+    <span class="broadcast-origin">ARENA CONTROL :: VITAL STATUS</span>
+    <span class="broadcast-priority">CRITICAL</span>
   </div>
-
-  <hr class="hud-line">
-
-  <p class="hud-msg">
-    <span class="hud-warn">SYSTEM:</span>
-    Player 24: Derezzed - Impending Reset
-  </p>
+  
+  <div class="message-header">
+    <span class="msg-type">COMBATANT STATUS UPDATE</span>
+    <span class="msg-id">VST-24-DERZ</span>
+  </div>
+  
+  <div class="message-body">
+    <strong>PLAYER-24 [SHANE]:</strong> INTEGRITY FAILURE DETECTED<br/>
+    STATUS: DEREZZED → RESET PROTOCOL INITIATED
+  </div>
+  
+  <div class="broadcast-footer">
+    <span class="broadcast-time">15:47:23</span>
+    <span class="broadcast-status">CONFIRMED</span>
+  </div>
 </div>
 
 The crowd cheered like lunatics, drowning out the sound of his own defeated scream of pain. The impact not only hurt but he could feel his vision dissipate without another second to process it. His code failed to prevent the execution and the last thing he saw before he shattered into a pile of voxels was I-X standing tall before him. But not in a stance one may believe that it belonged to a victor, no… his body went rigid, almost as if, in fear. Like he was guilty.
 
 I-X let out a restrained sound – not the usual growl or screeching, but a series of clicking and whirring, like a morse code. But it was too late for Shane to even process that.
 
-<div class="hud">
-  <div class="hud-header">
-    <span>SYSTEM :: BROADCAST</span>
+<div class="system-broadcast">
+  <div class="broadcast-header">
+    <span class="broadcast-icon">🏆</span>
+    <span class="broadcast-origin">ARENA CONTROL :: MATCH RESULTS</span>
+    <span class="broadcast-priority">FINAL</span>
   </div>
-
-  <hr class="hud-line">
-
-  <p class="hud-msg">
-    <span class="hud-warn">SYSTEM:</span>
-    Player 24: Derezzed - Impending Reset
-  </p>
+  
+  <div class="message-header">
+    <span class="msg-type">VICTORY DECLARATION</span>
+    <span class="msg-id">MTR-IX-WIN</span>
+  </div>
+  
+  <div class="message-body">
+    <strong>MATCH CONCLUDED:</strong> COMPETITOR I-X VICTORIOUS<br/>
+    OPPONENT ELIMINATED → ARENA SECURED
+  </div>
+  
+  <div class="broadcast-footer">
+    <span class="broadcast-time">15:47:31</span>
+    <span class="broadcast-status">ARCHIVED</span>
+  </div>
 </div>
 
 <div class="hud-critical">
-
-  <p class="error-line">ERR-IX-113 :: DATA CORRUPTION DETECTED</p>
-
-  <hr class="hud-line">
-
-  <p class="crash-line">StackOverflowError</p>
-  <p class="crash-line">UnhandledPromiseRejection</p>
-  <p class="crash-line">Segmentation fault (core dumped)</p>
-
-  <hr class="hud-line">
-
-  <p class="countdown">REBOOT STARTING IN 3</p>
-
+  <div class="error-header">
+    <span class="error-icon">⚠</span>
+    <span class="error-title">CRITICAL SYSTEM FAILURE</span>
+    <span class="error-code">ERR-IX-113</span>
+  </div>
+  
+  <div class="error-message">DATA CORRUPTION DETECTED</div>
+  
+  <div class="system-status">
+    <div class="status-line"><span class="label">SYSTEM:</span><span class="value error">UNSTABLE</span></div>
+    <div class="status-line"><span class="label">INTEGRITY:</span><span class="value critical">0%</span></div>
+    <div class="status-line"><span class="label">MEMORY:</span><span class="value warning">FRAGMENTED</span></div>
+  </div>
+  
+  <div class="stack-trace">
+    <div class="trace-header">STACK TRACE:</div>
+    <div class="trace-line">→ StackOverflowError at grid.core.combat()</div>
+    <div class="trace-line">→ UnhandledPromiseRejection in disc.battle.exe</div>
+    <div class="trace-line">→ Segmentation fault (core dumped)</div>
+  </div>
+  
+  <div class="emergency-action">
+    <div class="countdown-wrapper">
+      <span class="action-label">EMERGENCY REBOOT</span>
+      <span class="countdown-timer" id="reboot-countdown">00:03</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="reboot-progress"></div>
+    </div>
+  </div>
+  
+  <script>
+    (function() {
+      const countdownEl = document.getElementById('reboot-countdown');
+      const progressEl = document.getElementById('reboot-progress');
+      if (!countdownEl || !progressEl) return;
+      
+      let timeLeft = 3;
+      
+      const updateDisplay = () => {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        countdownEl.textContent = \`\${minutes.toString().padStart(2, '0')}:\${seconds.toString().padStart(2, '0')}\`;
+        
+        const progressPercent = ((3 - timeLeft) / 3) * 100;
+        progressEl.style.width = \`\${progressPercent}%\`;
+        
+        if (timeLeft <= 0) {
+          countdownEl.textContent = '00:00';
+          countdownEl.style.color = '#ff0000';
+          countdownEl.style.animation = 'critical-flash 0.1s infinite';
+          progressEl.style.width = '100%';
+          progressEl.style.background = 'linear-gradient(90deg, #ff0000, #ffffff, #ff0000)';
+        }
+      };
+      
+      const countdown = setInterval(() => {
+        timeLeft--;
+        updateDisplay();
+        
+        if (timeLeft < 0) {
+          clearInterval(countdown);
+        }
+      }, 1000);
+      
+      updateDisplay();
+    })();
+  </script>
 </div>
 
 A loud gasp was ripped from Shane's throat as he woke up in the center of the suiting chamber, violently forced back into a new loop. Loud chanting echoed above him, reverberating within the empty chamber. His identity disc back on him, and before him was a simple table with one singular baton. Then a cold sweat broke out on him, the one game he never could win. Light cycle battle. The dread settled over him like a secondary armor, weak and penetrable.

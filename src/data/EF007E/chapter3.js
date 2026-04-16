@@ -4,26 +4,62 @@ const chapter3 = {
   summary:
     "A missing function leaves a deeper absence in the Grid than the system is willing to acknowledge.",
   content: `
-    <div class="hud">
-      <div class="hud-header">
-        <span>SYSTEM REBOOT:</span>
-        <span>LOADING VERSION 14</span>
+    <div class="system-broadcast">
+      <div class="broadcast-header">
+        <span class="broadcast-icon">🔄</span>
+        <span class="broadcast-origin">SYSTEM RECOVERY :: REBOOT SEQUENCE</span>
+        <span class="broadcast-priority">AUTO</span>
+      </div>
+      
+      <div class="message-header">
+        <span class="msg-type">VERSION LOADING</span>
+        <span class="msg-id">RBT-014-LOAD</span>
+      </div>
+      
+      <div class="message-body">
+        <strong>REBOOT INITIATED:</strong> LOADING VERSION 14<br/>
+        SYSTEM STATE → RECONSTRUCTING ENVIRONMENT
+      </div>
+      
+      <div class="broadcast-footer">
+        <span class="broadcast-time">--:--:--</span>
+        <span class="broadcast-status">LOADING</span>
       </div>
     </div>
 
     <p>As expected, Shane was back in the arena again. This time, there was no crowd or even the howl of the void below, it was completely silent. He stood inside the glass cage again. The intercom crackled ominously.</p>
 
-    <div class="hud">
-      <div class="hud-header">
-        <span>SYSTEM :: BROADCAST</span>
+    <div class="arena-announcement">
+      <div class="announcement-header">
+        <span class="arena-icon">🏟</span>
+        <span class="arena-title">ARENA CONTROL</span>
+        <span class="match-status" style="background: rgba(0, 0, 0, 0.5); color: #999;">SILENT ROUND</span>
       </div>
-
-      <hr class="hud-line">
-
-      <p class="hud-msg">
-        <span class="hud-warn">SYSTEM:</span>
-        Final Round: I-X versus Combatant 24
-      </p>
+      
+      <div class="match-display">
+        <div class="competitor left">
+          <span class="player-id threat">I-X</span>
+          <span class="player-name corrupted">CORRUPTED</span>
+        </div>
+        
+        <div class="versus-separator">
+          <span class="vs-text">VS</span>
+          <div class="vs-line"></div>
+        </div>
+        
+        <div class="competitor right">
+          <span class="player-id">PLAYER-24</span>
+          <span class="player-name">SHANE</span>
+        </div>
+      </div>
+      
+      <div class="match-info">
+        <div class="arena-stats">
+          <span class="stat-item">ARENA: VOID CAGE</span>
+          <span class="stat-item">CROWD: ABSENT</span>
+          <span class="stat-item">STATUS: CRITICAL</span>
+        </div>
+      </div>
     </div>
 
     <p>The skyline was now pitch black, no fog, no mist, but there was an eerie glow of red somewhere in the distance. Shane looked down at the floor beneath his feet. The cracks on the glass were now deeper and more prominent, it was disintegrating slowly. He feared that if he made one move, everything could crumble, sending him back down into the void once more.</p>

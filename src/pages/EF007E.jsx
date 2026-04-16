@@ -594,23 +594,604 @@ export default function TronFile() {
                 .tron-story-content .hud {
                   background: linear-gradient(135deg, rgba(0, 20, 40, 0.9) 0%, rgba(0, 30, 60, 0.8) 100%);
                   border: 1px solid rgba(0, 225, 255, 0.4);
-                  padding: 8px 12px;
-                  margin: 10px 0;
+                  padding: 8px 12px 6px 12px;
+                  margin: 8px 0 4px 0;
                   font-family: "Orbitron", monospace;
-                  font-size: 10px;
-                  box-shadow: 0 0 12px rgba(0, 225, 255, 0.15), inset 0 1px 0 rgba(0, 255, 200, 0.08);
+                  font-size: 11px;
+                  box-shadow: 0 0 10px rgba(0, 225, 255, 0.15), inset 0 1px 0 rgba(0, 255, 200, 0.08);
                   border-radius: 3px;
                 }
                 
                 .tron-story-content .hud-red {
-                  background: linear-gradient(135deg, rgba(40, 0, 0, 0.9) 0%, rgba(60, 10, 10, 0.8) 100%);
-                  border: 1px solid rgba(255, 80, 80, 0.6);
-                  box-shadow: 0 0 12px rgba(255, 80, 80, 0.2), inset 0 1px 0 rgba(255, 100, 100, 0.15);
-                  padding: 8px 12px;
-                  margin: 10px 0;
+                  background: linear-gradient(135deg, rgba(60, 0, 0, 0.95) 0%, rgba(80, 15, 15, 0.9) 50%, rgba(40, 5, 5, 0.95) 100%);
+                  border: 2px solid rgba(255, 60, 60, 0.8);
+                  box-shadow: 0 0 20px rgba(255, 60, 60, 0.4), inset 0 2px 0 rgba(255, 120, 120, 0.2), inset 0 -2px 0 rgba(120, 0, 0, 0.3);
+                  padding: 12px 16px;
+                  margin: 12px 0;
                   font-family: "Orbitron", monospace;
+                  font-size: 11px;
+                  border-radius: 4px;
+                  position: relative;
+                  text-align: center;
+                }
+                
+                .tron-story-content .hud-critical {
+                  background: 
+                    linear-gradient(135deg, rgba(60, 0, 0, 0.95) 0%, rgba(80, 15, 15, 0.9) 50%, rgba(40, 5, 5, 0.95) 100%),
+                    repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255, 0, 0, 0.05) 2px, rgba(255, 0, 0, 0.05) 4px);
+                  border: 2px solid rgba(255, 60, 60, 0.8);
+                  box-shadow: 
+                    0 0 25px rgba(255, 60, 60, 0.5),
+                    inset 0 2px 0 rgba(255, 120, 120, 0.15),
+                    inset 0 -2px 0 rgba(120, 0, 0, 0.4),
+                    0 0 50px rgba(255, 0, 0, 0.2);
+                  padding: 20px;
+                  margin: 16px 0;
+                  font-family: "Orbitron", monospace;
+                  font-size: 13px;
+                  border-radius: 0;
+                  position: relative;
+                  animation: error-flicker 0.15s infinite linear;
+                  overflow: hidden;
+                }
+                
+                .tron-story-content .error-header {
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  margin-bottom: 12px;
+                  padding-bottom: 8px;
+                  border-bottom: 1px solid rgba(255, 60, 60, 0.4);
+                }
+                
+                .tron-story-content .error-icon {
+                  font-size: 18px;
+                  color: #ff3030;
+                  animation: critical-pulse 1s infinite;
+                }
+                
+                .tron-story-content .error-title {
+                  font-weight: 800;
+                  font-size: 14px;
+                  color: #ffffff;
+                  letter-spacing: 0.1em;
+                  text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+                }
+                
+                .tron-story-content .error-code {
+                  font-family: "JetBrains Mono", monospace;
                   font-size: 10px;
+                  color: #ff9999;
+                  background: rgba(0, 0, 0, 0.3);
+                  padding: 2px 6px;
+                  border: 1px solid rgba(255, 60, 60, 0.3);
+                }
+                
+                .tron-story-content .error-message {
+                  text-align: center;
+                  font-size: 16px;
+                  font-weight: 700;
+                  color: #ffffff;
+                  margin: 12px 0;
+                  text-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+                  animation: glitch-text 0.3s infinite;
+                }
+                
+                .tron-story-content .system-status {
+                  margin: 16px 0;
+                  padding: 8px 0;
+                  border-top: 1px solid rgba(255, 60, 60, 0.3);
+                  border-bottom: 1px solid rgba(255, 60, 60, 0.3);
+                }
+                
+                .tron-story-content .status-line {
+                  display: flex;
+                  justify-content: space-between;
+                  margin: 4px 0;
+                  font-size: 11px;
+                }
+                
+                .tron-story-content .status-line .label {
+                  color: #bbbbbb;
+                  font-weight: 400;
+                }
+                
+                .tron-story-content .status-line .value {
+                  font-weight: 700;
+                  font-family: "JetBrains Mono", monospace;
+                }
+                
+                .tron-story-content .status-line .value.error {
+                  color: #ff4444;
+                  text-shadow: 0 0 6px rgba(255, 68, 68, 0.8);
+                }
+                
+                .tron-story-content .status-line .value.critical {
+                  color: #ff0000;
+                  text-shadow: 0 0 8px rgba(255, 0, 0, 1);
+                  animation: critical-pulse 0.8s infinite;
+                }
+                
+                .tron-story-content .status-line .value.warning {
+                  color: #ffaa00;
+                  text-shadow: 0 0 6px rgba(255, 170, 0, 0.8);
+                }
+                
+                .tron-story-content .stack-trace {
+                  margin: 16px 0;
+                }
+                
+                .tron-story-content .trace-header {
+                  font-size: 10px;
+                  color: #ff9999;
+                  margin-bottom: 6px;
+                  font-weight: 600;
+                  letter-spacing: 0.1em;
+                }
+                
+                .tron-story-content .trace-line {
+                  font-family: "JetBrains Mono", monospace;
+                  font-size: 10px;
+                  color: #ffaaaa;
+                  margin: 2px 0;
+                  opacity: 0.9;
+                  animation: data-corruption 3s infinite;
+                }
+                
+                .tron-story-content .emergency-action {
+                  margin-top: 16px;
+                  padding-top: 12px;
+                  border-top: 1px solid rgba(255, 60, 60, 0.4);
+                }
+                
+                .tron-story-content .countdown-wrapper {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-bottom: 8px;
+                }
+                
+                .tron-story-content .action-label {
+                  font-size: 12px;
+                  font-weight: 700;
+                  color: #ff6666;
+                  letter-spacing: 0.1em;
+                }
+                
+                .tron-story-content .countdown-timer {
+                  font-family: "JetBrains Mono", monospace;
+                  font-size: 16px;
+                  font-weight: 900;
+                  color: #ff0000;
+                  text-shadow: 0 0 12px rgba(255, 0, 0, 1);
+                  animation: critical-pulse 0.5s infinite;
+                }
+                
+                .tron-story-content .progress-bar {
+                  width: 100%;
+                  height: 4px;
+                  background: rgba(0, 0, 0, 0.5);
+                  border: 1px solid rgba(255, 60, 60, 0.3);
+                  position: relative;
+                  overflow: hidden;
+                }
+                
+                .tron-story-content .progress-fill {
+                  height: 100%;
+                  background: linear-gradient(90deg, #ff0000, #ff4444, #ff0000);
+                  width: 0%;
+                  transition: width 1s ease-out;
+                  animation: progress-glow 1.5s ease-in-out infinite;
+                }
+                
+                @keyframes progress-glow {
+                  0%, 100% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+                  50% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.8); }
+                }
+                
+                @keyframes critical-flash {
+                  0%, 50% { opacity: 1; }
+                  25%, 75% { opacity: 0.3; }
+                }
+                
+                /* Enhanced Diagnostic HUD */
+                .tron-story-content .diagnostic-hud {
+                  background: linear-gradient(135deg, rgba(0, 40, 60, 0.95) 0%, rgba(0, 60, 90, 0.9) 50%, rgba(0, 30, 50, 0.95) 100%);
+                  border: 2px solid rgba(0, 200, 255, 0.6);
+                  border-radius: 8px;
+                  padding: 16px;
+                  margin: 16px 0;
+                  font-family: "Orbitron", monospace;
+                  position: relative;
+                  overflow: hidden;
+                  box-shadow: 0 0 20px rgba(0, 200, 255, 0.3), inset 0 2px 0 rgba(0, 255, 255, 0.1);
+                }
+                
+                .tron-story-content .hud-scan-line {
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  height: 2px;
+                  background: linear-gradient(90deg, transparent, #00ccff, transparent);
+                  animation: scan-sweep 3s linear infinite;
+                }
+                
+                .tron-story-content .diag-header {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-bottom: 12px;
+                  padding-bottom: 8px;
+                  border-bottom: 1px solid rgba(0, 200, 255, 0.3);
+                }
+                
+                .tron-story-content .diag-title {
+                  color: #00ccff;
+                  font-size: 12px;
+                  font-weight: 700;
+                  letter-spacing: 0.1em;
+                }
+                
+                .tron-story-content .diag-timestamp {
+                  color: #66ddff;
+                  font-size: 10px;
+                  font-family: "JetBrains Mono", monospace;
+                  background: rgba(0, 0, 0, 0.3);
+                  padding: 2px 6px;
+                  border: 1px solid rgba(0, 200, 255, 0.3);
+                }
+                
+                .tron-story-content .status-grid {
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 8px;
+                  margin: 12px 0;
+                }
+                
+                .tron-story-content .status-item {
+                  display: flex;
+                  align-items: center;
+                  gap: 6px;
+                  padding: 6px 8px;
+                  background: rgba(0, 0, 0, 0.2);
+                  border: 1px solid rgba(0, 200, 255, 0.2);
                   border-radius: 3px;
+                  font-size: 9px;
+                }
+                
+                .tron-story-content .status-item.primary {
+                  grid-column: span 2;
+                  border-color: rgba(0, 255, 0, 0.4);
+                  background: rgba(0, 40, 0, 0.2);
+                }
+                
+                .tron-story-content .status-icon {
+                  font-size: 8px;
+                  width: 12px;
+                  text-align: center;
+                }
+                
+                .tron-story-content .status-name {
+                  color: #88ddff;
+                  font-weight: 500;
+                  flex: 1;
+                }
+                
+                .tron-story-content .status-value {
+                  font-weight: 700;
+                  font-family: "JetBrains Mono", monospace;
+                }
+                
+                .tron-story-content .status-value.good {
+                  color: #00ff88;
+                  text-shadow: 0 0 4px rgba(0, 255, 136, 0.6);
+                }
+                
+                .tron-story-content .status-value.warning {
+                  color: #ffaa00;
+                  text-shadow: 0 0 4px rgba(255, 170, 0, 0.6);
+                }
+                
+                .tron-story-content .tactical-info {
+                  margin: 12px 0;
+                  padding: 8px 0;
+                  border-top: 1px solid rgba(0, 200, 255, 0.2);
+                }
+                
+                .tron-story-content .threat-level {
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  font-size: 9px;
+                }
+                
+                .tron-story-content .threat-label {
+                  color: #ff6666;
+                  font-weight: 600;
+                  letter-spacing: 0.05em;
+                }
+                
+                .tron-story-content .threat-bar {
+                  flex: 1;
+                  height: 6px;
+                  background: rgba(0, 0, 0, 0.5);
+                  border: 1px solid rgba(255, 100, 100, 0.3);
+                  position: relative;
+                  overflow: hidden;
+                }
+                
+                .tron-story-content .threat-fill {
+                  height: 100%;
+                  background: linear-gradient(90deg, #ff4444, #ff0000);
+                  transition: width 0.5s ease-out;
+                  animation: threat-pulse 2s ease-in-out infinite;
+                }
+                
+                .tron-story-content .threat-value {
+                  color: #ff3030;
+                  font-weight: 800;
+                  text-shadow: 0 0 6px rgba(255, 48, 48, 0.8);
+                }
+                
+                .tron-story-content .mission-directive {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  padding: 8px 12px;
+                  background: linear-gradient(90deg, rgba(255, 0, 0, 0.1), rgba(255, 0, 0, 0.05));
+                  border: 1px solid rgba(255, 60, 60, 0.4);
+                  border-radius: 3px;
+                  margin-top: 12px;
+                }
+                
+                .tron-story-content .directive-label {
+                  color: #ff9999;
+                  font-size: 10px;
+                  font-weight: 600;
+                }
+                
+                .tron-story-content .directive-command {
+                  color: #ff3030;
+                  font-size: 11px;
+                  font-weight: 800;
+                  text-shadow: 0 0 6px rgba(255, 48, 48, 0.8);
+                  animation: directive-pulse 1.5s ease-in-out infinite;
+                }
+                
+                /* System Broadcast Styling */
+                .tron-story-content .system-broadcast {
+                  background: linear-gradient(135deg, rgba(0, 30, 50, 0.95) 0%, rgba(0, 50, 80, 0.9) 50%, rgba(0, 25, 45, 0.95) 100%);
+                  border: 2px solid rgba(0, 150, 255, 0.6);
+                  border-radius: 6px;
+                  padding: 14px;
+                  margin: 12px 0;
+                  font-family: "Orbitron", monospace;
+                  box-shadow: 0 0 15px rgba(0, 150, 255, 0.25);
+                }
+                
+                .tron-story-content .broadcast-header {
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  margin-bottom: 10px;
+                  padding-bottom: 6px;
+                  border-bottom: 1px solid rgba(0, 150, 255, 0.3);
+                }
+                
+                .tron-story-content .broadcast-icon {
+                  font-size: 12px;
+                  color: #0088ff;
+                }
+                
+                .tron-story-content .broadcast-origin {
+                  color: #00aaff;
+                  font-size: 10px;
+                  font-weight: 700;
+                  letter-spacing: 0.1em;
+                }
+                
+                .tron-story-content .broadcast-priority {
+                  margin-left: auto;
+                  background: rgba(255, 150, 0, 0.2);
+                  color: #ffaa00;
+                  font-size: 8px;
+                  padding: 2px 6px;
+                  border: 1px solid rgba(255, 150, 0, 0.4);
+                  border-radius: 2px;
+                }
+                
+                .tron-story-content .message-header {
+                  display: flex;
+                  justify-content: space-between;
+                  margin-bottom: 8px;
+                  font-size: 9px;
+                }
+                
+                .tron-story-content .msg-type {
+                  color: #66bbff;
+                  font-weight: 600;
+                }
+                
+                .tron-story-content .msg-id {
+                  color: #88ccff;
+                  font-family: "JetBrains Mono", monospace;
+                }
+                
+                .tron-story-content .message-body {
+                  color: #ffffff;
+                  font-size: 12px;
+                  font-weight: 500;
+                  line-height: 1.4;
+                  margin: 8px 0;
+                  text-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+                }
+                
+                .tron-story-content .broadcast-footer {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-top: 8px;
+                  padding-top: 6px;
+                  border-top: 1px solid rgba(0, 150, 255, 0.2);
+                  font-size: 8px;
+                }
+                
+                .tron-story-content .broadcast-time {
+                  color: #99ddff;
+                  font-family: "JetBrains Mono", monospace;
+                }
+                
+                .tron-story-content .broadcast-status {
+                  color: #00ff88;
+                  font-weight: 600;
+                }
+                
+                /* Arena Announcement Styling */
+                .tron-story-content .arena-announcement {
+                  background: linear-gradient(135deg, rgba(50, 20, 0, 0.95) 0%, rgba(80, 40, 0, 0.9) 50%, rgba(40, 15, 0, 0.95) 100%);
+                  border: 2px solid rgba(255, 150, 0, 0.8);
+                  border-radius: 8px;
+                  padding: 16px;
+                  margin: 16px 0;
+                  font-family: "Orbitron", monospace;
+                  box-shadow: 0 0 20px rgba(255, 150, 0, 0.3);
+                }
+                
+                .tron-story-content .announcement-header {
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                  margin-bottom: 12px;
+                  padding-bottom: 8px;
+                  border-bottom: 1px solid rgba(255, 150, 0, 0.4);
+                }
+                
+                .tron-story-content .arena-icon {
+                  font-size: 14px;
+                  color: #ffaa00;
+                }
+                
+                .tron-story-content .arena-title {
+                  color: #ffcc00;
+                  font-size: 12px;
+                  font-weight: 800;
+                  letter-spacing: 0.1em;
+                }
+                
+                .tron-story-content .match-status {
+                  margin-left: auto;
+                  background: rgba(255, 0, 0, 0.2);
+                  color: #ff6666;
+                  font-size: 9px;
+                  padding: 3px 8px;
+                  border: 1px solid rgba(255, 0, 0, 0.4);
+                  border-radius: 3px;
+                  font-weight: 700;
+                }
+                
+                .tron-story-content .match-display {
+                  display: flex;
+                  align-items: center;
+                  justify-content: space-between;
+                  margin: 12px 0;
+                  padding: 12px 0;
+                }
+                
+                .tron-story-content .competitor {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: 4px;
+                }
+                
+                .tron-story-content .player-id {
+                  font-size: 10px;
+                  font-weight: 600;
+                  color: #ffaa00;
+                  font-family: "JetBrains Mono", monospace;
+                }
+                
+                .tron-story-content .player-id.threat {
+                  color: #ff3030;
+                  text-shadow: 0 0 6px rgba(255, 48, 48, 0.8);
+                  animation: threat-glow 1.5s ease-in-out infinite;
+                }
+                
+                .tron-story-content .player-name {
+                  font-size: 12px;
+                  font-weight: 700;
+                  color: #ffffff;
+                  text-shadow: 0 0 4px rgba(255, 255, 255, 0.6);
+                }
+                
+                .tron-story-content .player-name.corrupted {
+                  color: #ff6666;
+                  text-shadow: 0 0 6px rgba(255, 102, 102, 0.8);
+                  animation: corruption-flicker 0.3s infinite;
+                }
+                
+                .tron-story-content .versus-separator {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  gap: 4px;
+                }
+                
+                .tron-story-content .vs-text {
+                  font-size: 14px;
+                  font-weight: 900;
+                  color: #ffdd00;
+                  text-shadow: 0 0 8px rgba(255, 221, 0, 0.8);
+                }
+                
+                .tron-story-content .vs-line {
+                  width: 40px;
+                  height: 2px;
+                  background: linear-gradient(90deg, transparent, #ffaa00, transparent);
+                }
+                
+                .tron-story-content .match-info {
+                  margin-top: 12px;
+                  padding-top: 8px;
+                  border-top: 1px solid rgba(255, 150, 0, 0.3);
+                }
+                
+                .tron-story-content .arena-stats {
+                  display: flex;
+                  justify-content: space-between;
+                  font-size: 8px;
+                  color: #ffcc88;
+                }
+                
+                .tron-story-content .stat-item {
+                  font-family: "JetBrains Mono", monospace;
+                  font-weight: 500;
+                }
+                
+                .tron-story-content .hud-critical::before {
+                  content: '';
+                  position: absolute;
+                  top: 0;
+                  left: 0;
+                  right: 0;
+                  bottom: 0;
+                  background: 
+                    repeating-linear-gradient(
+                      0deg,
+                      transparent 0px,
+                      rgba(255, 0, 0, 0.03) 1px,
+                      transparent 2px,
+                      rgba(255, 0, 0, 0.02) 3px
+                    );
+                  pointer-events: none;
+                  opacity: 0.7;
+                  animation: static-lines 0.1s infinite linear;
+                }
+                
+                @keyframes static-lines {
+                  0% { transform: translateY(0px); }
+                  100% { transform: translateY(4px); }
                 }
                 
                 .tron-story-content .hud-white {
@@ -635,33 +1216,34 @@ export default function TronFile() {
                   font-weight: 600;
                   letter-spacing: 0.08em;
                   text-transform: uppercase;
-                  margin-bottom: 6px;
-                  font-size: 9px;
+                  margin-bottom: 4px;
+                  font-size: 10px;
                   display: flex;
                   justify-content: space-between;
                   flex-wrap: wrap;
-                  gap: 6px;
+                  gap: 4px;
                 }
                 
                 .tron-story-content .hud-line {
                   border: none;
                   height: 1px;
                   background: linear-gradient(90deg, transparent 0%, rgba(0, 225, 255, 0.6) 50%, transparent 100%);
-                  margin: 6px 0;
+                  margin: 4px 0;
                 }
                 
                 .tron-story-content .hud-msg {
                   color: #bff3ff;
                   font-size: 11px;
-                  letter-spacing: 0.05em;
-                  line-height: 1.4;
-                  margin: 6px 0;
+                  letter-spacing: 0.04em;
+                  line-height: 1.3;
+                  margin: 4px 0;
                 }
                 
                 .tron-story-content .hud-warn {
                   color: #ffaa00;
-                  font-weight: 700;
-                  text-shadow: 0 0 6px rgba(255, 170, 0, 0.6);
+                  font-weight: 600;
+                  font-size: 11px;
+                  text-shadow: 0 0 4px rgba(255, 170, 0, 0.6);
                 }
                 
                 .tron-story-content .hud-label {
@@ -685,6 +1267,163 @@ export default function TronFile() {
                   color: #ff3030;
                   text-shadow: 0 0 8px rgba(255, 48, 48, 0.8);
                   font-weight: 700;
+                }
+                
+                .tron-story-content .error-line {
+                  color: #ffffff;
+                  font-weight: 700;
+                  font-size: 16px;
+                  text-shadow: 
+                    0 0 8px rgba(255, 255, 255, 0.9),
+                    0 0 15px rgba(255, 60, 60, 0.6);
+                  letter-spacing: 0.1em;
+                  margin: 8px 0;
+                  text-align: center;
+                  animation: glitch-text 0.3s infinite;
+                  position: relative;
+                }
+                
+                .tron-story-content .crash-line {
+                  color: #ff8888;
+                  font-weight: 400;
+                  font-size: 12px;
+                  opacity: 0.85;
+                  margin: 3px 0;
+                  font-family: "JetBrains Mono", "Consolas", monospace;
+                  text-align: center;
+                  animation: data-corruption 2s infinite;
+                  filter: blur(0.2px);
+                }
+                
+                .tron-story-content .reboot-warning {
+                  color: #ff9999;
+                  font-weight: 800;
+                  font-size: 12px;
+                  text-shadow: 0 0 8px rgba(255, 153, 153, 0.9);
+                  letter-spacing: 0.1em;
+                  margin-top: 8px;
+                  animation: pulse-error 1.5s infinite;
+                  text-align: center;
+                }
+                
+                .tron-story-content .countdown {
+                  color: #ff3030;
+                  font-weight: 900;
+                  font-size: 15px;
+                  text-shadow: 
+                    0 0 10px rgba(255, 48, 48, 1),
+                    0 0 20px rgba(255, 0, 0, 0.8);
+                  letter-spacing: 0.15em;
+                  margin-top: 10px;
+                  animation: critical-pulse 0.8s infinite;
+                  text-align: center;
+                  text-transform: uppercase;
+                }
+                
+                @keyframes pulse-error {
+                  0%, 100% { opacity: 1; transform: scale(1); }
+                  50% { opacity: 0.7; transform: scale(1.02); }
+                }
+                
+                @keyframes error-flicker {
+                  0%, 94%, 100% { opacity: 1; }
+                  95%, 97% { opacity: 0.95; }
+                  96% { opacity: 0.92; transform: translate(1px, 0); }
+                  98% { opacity: 0.97; transform: translate(-1px, 0); }
+                }
+                
+                @keyframes glitch-text {
+                  0%, 90%, 100% { 
+                    transform: translate(0, 0);
+                    filter: hue-rotate(0deg);
+                  }
+                  91% { 
+                    transform: translate(-1px, 0);
+                    filter: hue-rotate(5deg);
+                  }
+                  92% { 
+                    transform: translate(1px, 0);
+                    filter: hue-rotate(-5deg);
+                  }
+                  93% { 
+                    transform: translate(0, -1px);
+                    filter: hue-rotate(3deg);
+                  }
+                  94% { 
+                    transform: translate(0, 1px);
+                    filter: hue-rotate(-3deg);
+                  }
+                }
+                
+                @keyframes data-corruption {
+                  0%, 85%, 100% { 
+                    transform: translateX(0);
+                    opacity: 0.85;
+                  }
+                  86% { 
+                    transform: translateX(-2px);
+                    opacity: 0.7;
+                  }
+                  87% { 
+                    transform: translateX(2px);
+                    opacity: 0.9;
+                  }
+                  88% { 
+                    transform: translateX(-1px);
+                    opacity: 0.6;
+                  }
+                }
+                
+                @keyframes critical-pulse {
+                  0%, 50%, 100% { 
+                    transform: scale(1);
+                    text-shadow: 
+                      0 0 10px rgba(255, 48, 48, 1),
+                      0 0 20px rgba(255, 0, 0, 0.8);
+                  }
+                  25% { 
+                    transform: scale(1.05);
+                    text-shadow: 
+                      0 0 15px rgba(255, 48, 48, 1),
+                      0 0 25px rgba(255, 0, 0, 0.9),
+                      0 0 30px rgba(255, 0, 0, 0.5);
+                  }
+                  75% { 
+                    transform: scale(0.98);
+                    text-shadow: 
+                      0 0 8px rgba(255, 48, 48, 1),
+                      0 0 18px rgba(255, 0, 0, 0.7);
+                  }
+                }
+                
+                @keyframes countdown-blink {
+                  0%, 50% { opacity: 1; }
+                  51%, 100% { opacity: 0.3; }
+                }
+                
+                @keyframes scan-sweep {
+                  0% { transform: translateX(-100%); }
+                  100% { transform: translateX(100%); }
+                }
+                
+                @keyframes threat-pulse {
+                  0%, 100% { opacity: 0.8; }
+                  50% { opacity: 1; }
+                }
+                
+                @keyframes directive-pulse {
+                  0%, 100% { text-shadow: 0 0 6px rgba(255, 48, 48, 0.8); }
+                  50% { text-shadow: 0 0 12px rgba(255, 48, 48, 1), 0 0 18px rgba(255, 0, 0, 0.6); }
+                }
+                
+                @keyframes threat-glow {
+                  0%, 100% { text-shadow: 0 0 6px rgba(255, 48, 48, 0.8); }
+                  50% { text-shadow: 0 0 10px rgba(255, 48, 48, 1), 0 0 15px rgba(255, 0, 0, 0.8); }
+                }
+                
+                @keyframes corruption-flicker {
+                  0%, 90%, 100% { opacity: 1; }
+                  95% { opacity: 0.7; }
                 }
                 
                 .tron-story-content .glitchy {
