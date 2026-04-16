@@ -61,6 +61,11 @@ export default function CelestialMap() {
   const [isActive, setIsActive] = useState(false);
   const [selectedDestination, setSelectedDestination] = useState(null);
   const [travelingTo, setTravelingTo] = useState(null);
+  
+  // Easter egg state
+  const [moonClicks, setMoonClicks] = useState(0);
+  const [showMeteorShower, setShowMeteorShower] = useState(false);
+  const [clickTimeout, setClickTimeout] = useState(null);
 
   const handleMove = (e) => {
     if (travelingTo) return;
@@ -96,6 +101,43 @@ export default function CelestialMap() {
     setTimeout(() => {
       navigate(selectedDestination.to);
     }, TRAVEL_DURATION);
+  };
+
+  // Easter egg functionality
+  const handleMoonClick = (e) => {
+    e.stopPropagation(); // Prevent triggering other click handlers
+    
+    // Clear existing timeout
+    if (clickTimeout) {
+      clearTimeout(clickTimeout);
+    }
+    
+    const newClickCount = moonClicks + 1;
+    setMoonClicks(newClickCount);
+    
+    // Set timeout to reset clicks after 3 seconds of inactivity
+    const newTimeout = setTimeout(() => {
+      setMoonClicks(0);
+    }, 3000);
+    setClickTimeout(newTimeout);
+    
+    // Trigger easter egg on 5th click
+    if (newClickCount >= 5) {
+      setShowMeteorShower(true);
+      setMoonClicks(0);
+      if (clickTimeout) {
+        clearTimeout(clickTimeout);
+      }
+      
+      // Stop the meteor shower after 8 seconds
+      setTimeout(() => {
+        setShowMeteorShower(false);
+      }, 8000);
+    }
+  };
+
+  const closeEasterEgg = () => {
+    setShowMeteorShower(false);
   };
 
   const offsetX = travelingTo ? 0 : ((pointer.x - 50) / 50) * 10;
@@ -158,9 +200,22 @@ export default function CelestialMap() {
           transform: `translate(${offsetX * -0.7}px, ${offsetY * -0.7}px)`,
         }}
       >
-        <div className="map-moon" aria-hidden="true">
+        <div 
+          className={`map-moon ${moonClicks > 0 ? 'map-moon--clicked' : ''}`} 
+          onClick={handleMoonClick}
+          style={{ cursor: 'pointer' }}
+          aria-label={`Moon (clicked ${moonClicks}/5 times)`}
+          title="Something mysterious about this moon..."
+        >
           <span className="map-moon-disc" />
           <span className="map-moon-cutout" />
+          {moonClicks > 0 && (
+            <span className="map-moon-click-indicator">
+              {Array.from({ length: moonClicks }, (_, i) => (
+                <span key={i} className="moon-click-dot">✦</span>
+              ))}
+            </span>
+          )}
         </div>
 
         {destinations.map((item) => {
@@ -253,6 +308,57 @@ export default function CelestialMap() {
     </>
   )}
 </aside>
+
+      {/* Meteor Shower Easter Egg */}
+      {showMeteorShower && (
+        <>
+          {/* Shooting Stars */}
+          {Array.from({ length: 12 }, (_, i) => (
+            <div key={`meteor-group-${i}`} className={`meteor-group meteor-group-${i + 1}`}>
+              {/* Main meteor */}
+              <div
+                className={`shooting-meteor shooting-meteor-${i + 1}`}
+                style={{
+                  '--delay': `${i * 0.3}s`,
+                  '--duration': `${2 + Math.random() * 2}s`
+                }}
+              />
+              {/* Trail particles */}
+              {Array.from({ length: 8 }, (_, j) => (
+                <div
+                  key={`trail-${j}`}
+                  className={`meteor-trail-particle trail-particle-${j + 1}`}
+                  style={{
+                    '--delay': `${i * 0.3 + j * 0.05}s`,
+                    '--duration': `${2 + Math.random() * 2}s`
+                  }}
+                />
+              ))}
+            </div>
+          ))}
+          
+          {/* Alien Ship */}
+          <div className="alien-ship">
+            <div className="ship-body">
+              <div className="ship-dome" />
+              <div className="ship-lights">
+                <span className="ship-light ship-light--1" />
+                <span className="ship-light ship-light--2" />
+                <span className="ship-light ship-light--3" />
+              </div>
+              <div className="ship-beam" />
+            </div>
+            <div className="ship-trail" />
+          </div>
+          
+          {/* Extra cosmic effects */}
+          <div className="cosmic-particle-field">
+            {Array.from({ length: 20 }, (_, i) => (
+              <div key={`particle-${i}`} className={`cosmic-particle cosmic-particle-${i + 1}`} />
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

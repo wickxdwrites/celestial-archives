@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import ArchiveLayout from "../components/layout/ArchiveLayout";
 import CelestialMap from "../components/home/CelestialMap";
+import archiveUpdates, { formatUpdateDate, getLastUpdateDate } from "../data/archiveUpdates";
 import "./Home.css";
 
 const recentSignals = [
@@ -40,56 +41,61 @@ export default function Home() {
             </div>
 
             <div className="home-hero-copy">
-              <p className="home-eyebrow">WELCOME TO MY</p>
-              <h1 className="home-main-title">Celestial Archive</h1>
+              <p className="home-eyebrow">WELCOME TO</p>
+              <h1 className="home-main-title">Wickxd's Archive</h1>
               <h2 className="home-display-title">
-                Stories Filed
+                My Stories Filed
                 <br />
                 Among the Stars
               </h2>
               <p className="home-description">
-                A personal collection of fanfics, original writing, and immersive
-                coded experiences. Browse by constellation, follow a signal, or
-                step through a doorway into a world built for a single story.
+                Click on one of the the stars to the left to browse published fics or original stories, or explore the rest of the archive to find bonus content, updates, 
+                and future entries in the works.
               </p>
 
               <div className="home-tag-row">
-                <span className="home-tag">INTERACTIVE</span>
-                <span className="home-tag">CELESTIAL</span>
-                <span className="home-tag">FANDOM</span>
-                <span className="home-tag">ORIGINALS</span>
+                <span className="home-tag">FANFICS</span>
+                <span className="home-tag">ORIGINAL WORKS</span>
+                <span className="home-tag">GAMES</span>
+                <span className="home-tag">EXTRAS</span>
               </div>
             </div>
           </div>
 
           <div className="home-side-column">
             <article className="home-info-card home-info-card--tall">
-              <p className="home-eyebrow">LATEST ORBIT</p>
-              <h3 className="home-card-title">Archive Notes</h3>
+              <div className="home-archive-header">
+                <p className="home-eyebrow">LATEST ORBIT</p>
+                <h3 className="home-card-title">Archive Notes</h3>
+                {getLastUpdateDate() && (
+                  <div className="home-last-updated">
+                    <span className="home-last-updated-label">LAST UPDATED</span>
+                    <span className="home-last-updated-date">
+                      {formatUpdateDate(getLastUpdateDate().date)} • {getLastUpdateDate().timestamp}
+                    </span>
+                  </div>
+                )}
+              </div>
 
               <div className="home-update-stack">
                 <p className="home-card-copy">
-                  Welcome to the archive. This space is reserved for writing
-                  updates, author notes, project progress, and whatever else is
-                  currently orbiting my mind.
+                  Welcome to the archive. This is the place where you will see my works in progress or
+                  my inner thoughts on the archive itself. I will post updates here as I continue to build out the site and add new content.
                 </p>
 
-                <div className="home-update-entry">
-                  <p className="home-update-label">CURRENT SIGNAL</p>
-                  <p className="home-update-text">
-                    EF007E is the current featured work in progress. More archive
-                    entries and custom themed pages will be added over time.
-                  </p>
-                </div>
-
-                <div className="home-update-entry">
-                  <p className="home-update-label">AUTHOR NOTE</p>
-                  <p className="home-update-text">
-                    This archive is still under construction, but the goal is to
-                    create a home where each story can either live under the
-                    celestial theme or grow into a world with its own interface.
-                  </p>
-                </div>
+                {archiveUpdates.map((update) => (
+                  <div key={update.id} className="home-update-entry">
+                    <div className="home-update-header">
+                      <p className="home-update-label">{update.label}</p>
+                      <span className="home-update-timestamp">
+                        {formatUpdateDate(update.date)}
+                      </span>
+                    </div>
+                    <p className="home-update-text">
+                      {update.text}
+                    </p>
+                  </div>
+                ))}
               </div>
             </article>
           </div>
