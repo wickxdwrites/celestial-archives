@@ -1,4 +1,4 @@
-/* EF007E Theme Specific Styles */
+﻿/* EF007E Theme Specific Styles */
 
 /* Core theme variables */
 :root {
@@ -255,41 +255,4 @@
 
 .tron-data-stream {
   position: fixed;
-  top: 100vh;
-  width: 2px;
-  height: 100px;
-  background: linear-gradient(180deg, transparent, var(--ef007e-primary), transparent);
-  animation: dataStream 8s linear infinite;
-  z-index: 1;
-}
-
-.tron-data-stream:nth-child(2) { left: 10%; animation-delay: -2s; }
-.tron-data-stream:nth-child(3) { left: 20%; animation-delay: -4s; }
-.tron-data-stream:nth-child(4) { left: 30%; animation-delay: -6s; }
-.tron-data-stream:nth-child(5) { left: 40%; animation-delay: -1s; }
-.tron-data-stream:nth-child(6) { left: 50%; animation-delay: -3s; }
-.tron-data-stream:nth-child(7) { left: 60%; animation-delay: -5s; }
-.tron-data-stream:nth-child(8) { left: 70%; animation-delay: -7s; }
-.tron-data-stream:nth-child(9) { left: 80%; animation-delay: -1.5s; }
-.tron-data-stream:nth-child(10) { left: 90%; animation-delay: -4.5s; }
-
-/* Responsive adjustments */
-@media (max-width: 1000px) {
-  .theme-ef007e-page .tron-grid-overlay {
-    background-size: 30px 30px;
-  }
-  
-  .tron-data-stream {
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .theme-ef007e-page .tron-scanlines {
-    opacity: 0.04;
-  }
-  
-  .theme-ef007e-page .tron-grid-overlay {
-    opacity: 0.01;
-  }
 }

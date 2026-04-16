@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   color: #ece7ff;
   background: #0a0f1d;
   font-family: Georgia, "Times New Roman", serif;
@@ -525,7 +525,8 @@ textarea {
   .fics-grid {
     grid-template-columns: 1fr;
   }
-}}
+
+
 /* ORIGINALS EMPTY STATE */
 .originals-empty {
   display: flex;
@@ -1119,7 +1120,7 @@ textarea {
 }
 
 .tron-panel-title::before {
-  content: '▌';
+  content: 'â–Œ';
   position: absolute;
   left: 0;
   top: 0;
@@ -1406,7 +1407,7 @@ textarea {
 }
 
 .tron-chapter-nav h4::before {
-  content: '▶';
+  content: 'â–¶';
   position: absolute;
   left: 0;
   top: 0;
@@ -1569,7 +1570,7 @@ textarea {
 }
 
 .tron-chapter-content h3::before {
-  content: '▶';
+  content: 'â–¶';
   position: absolute;
   left: 0;
   top: 2px;
@@ -1847,6 +1848,141 @@ textarea {
     transform: translate(0);
     opacity: 1;
   }
+}
+
+/* HUD Interface Components */
+.hud {
+  background: 
+    linear-gradient(135deg, 
+      rgba(0, 20, 40, 0.9) 0%,
+      rgba(0, 30, 60, 0.8) 100%);
+  border: 1px solid rgba(0, 225, 255, 0.4);
+  border-radius: 0;
+  padding: 16px 20px;
+  margin: 20px 0;
+  font-family: "Orbitron", monospace;
+  font-size: 11px;
+  box-shadow: 
+    0 0 20px rgba(0, 225, 255, 0.2),
+    inset 0 1px 0 rgba(0, 255, 200, 0.1);
+}
+
+.hud-red {
+  background: 
+    linear-gradient(135deg, 
+      rgba(40, 0, 0, 0.9) 0%,
+      rgba(60, 10, 10, 0.8) 100%);
+  border: 1px solid rgba(255, 80, 80, 0.6);
+  border-radius: 0;
+  padding: 16px 20px;
+  margin: 20px 0;
+  font-family: "Orbitron", monospace;
+  font-size: 11px;
+  box-shadow: 
+    0 0 20px rgba(255, 80, 80, 0.3),
+    inset 0 1px 0 rgba(255, 100, 100, 0.2);
+}
+
+.hud-white {
+  background: 
+    linear-gradient(135deg, 
+      rgba(40, 40, 50, 0.9) 0%,
+      rgba(50, 50, 60, 0.8) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 0;
+  padding: 16px 20px;
+  margin: 20px 0;
+  font-family: "Orbitron", monospace;
+  font-size: 11px;
+  box-shadow: 
+    0 0 20px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.hud-compact {
+  background: 
+    linear-gradient(135deg, 
+      rgba(0, 20, 40, 0.95) 0%,
+      rgba(0, 30, 60, 0.9) 100%);
+  border: 1px solid rgba(0, 225, 255, 0.3);
+  border-radius: 0;
+  padding: 12px 16px;
+  margin: 16px 0;
+  font-family: "Orbitron", monospace;
+}
+
+.glitchy {
+  animation: hud-glitch 0.1s infinite linear alternate-reverse;
+}
+
+@keyframes hud-glitch {
+  0% {
+    clip: rect(42px, 9999px, 44px, 0);
+    transform: skew(0.5deg);
+  }
+  5% {
+    clip: rect(12px, 9999px, 59px, 0);
+    transform: skew(0.1deg);
+  }
+  10% {
+    clip: rect(85px, 9999px, 27px, 0);
+    transform: skew(0.7deg);
+  }
+  15% {
+    clip: rect(16px, 9999px, 50px, 0);
+    transform: skew(0.2deg);
+  }
+  20% {
+    clip: rect(95px, 9999px, 15px, 0);
+    transform: skew(0.4deg);
+  }
+  100% {
+    clip: rect(0px, 9999px, 0px, 0);
+    transform: skew(0deg);
+  }
+}
+
+.hud-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: #00e1ff;
+  font-size: 10px;
+}
+
+.hud-line {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    rgba(0, 225, 255, 0.6) 50%,
+    transparent 100%);
+  margin: 12px 0;
+}
+
+.hud-msg {
+  margin: 8px 0;
+  color: #bff3ff;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
+
+.hud-warn {
+  color: #ffaa00;
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(255, 170, 0, 0.6);
+}
+
+.critical {
+  color: #ff3030;
+  text-shadow: 0 0 10px rgba(255, 48, 48, 0.8);
+  font-weight: 700;
 }
 
 .tron-reading-panel {
