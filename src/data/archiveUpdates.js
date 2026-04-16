@@ -13,6 +13,22 @@
 
 const archiveUpdates = [
   {
+    id: 6,
+    label: "INTERACTIVE LAUNCH",
+    text: "Celestial Extras hub is now operational! Discover games, quizzes, creative tools, and experimental features. The interactive dimension of the archives awaits exploration.",
+    date: "2026-04-16", 
+    timestamp: "20:15 UTC",
+    priority: "high"
+  },
+  {
+    id: 5,
+    label: "ARCHIVE EXPANSION",
+    text: "Original works archive has been completely rebuilt! Advanced navigation with progress tracking, genre filtering, content maturity controls, and enhanced metadata display. The creative vault is now fully accessible.",
+    date: "2026-04-16", 
+    timestamp: "19:45 UTC",
+    priority: "high"
+  },
+  {
     id: 4,
     label: "SYSTEM UPGRADE",
     text: "Major fics archive overhaul completed! New search, filtering, and enhanced metadata display. The fanwork index is now fully operational with content warnings and better organization.",

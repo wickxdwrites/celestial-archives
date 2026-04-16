@@ -26,6 +26,13 @@ const recentSignals = [
       "Explore original stories, unfinished fragments, concepts, and future archive entries stored under the celestial system.",
     path: "/originals",
   },
+  {
+    title: "Celestial Extras",
+    type: "Interactive Hub",
+    description:
+      "Games, quizzes, creative tools, and experimental experiences that expand the boundaries of digital storytelling.",
+    path: "/extras",
+  },
 ];
 
 export default function Home() {
