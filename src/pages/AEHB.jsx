@@ -289,6 +289,14 @@ export default function AEHB() {
           </main>
         </div>
       </div>
+
+      {/* Bottom burning ember trail */}
+      <div className="aehb-bottom-embers">
+        {[...Array(24)].map((_, i) => (
+          <span key={i} className={`aehb-bottom-ember aehb-bottom-ember-${i}`} />
+        ))}
+        <div className="aehb-ember-glow-bar" />
+      </div>
     </div>
   )
 }
