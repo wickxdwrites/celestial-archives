@@ -1,0 +1,420 @@
+.aehb-reader-page {
+  min-height: 100vh;
+  position: relative;
+  color: #f3e4cf;
+  background:
+    radial-gradient(circle at top, rgba(255, 215, 159, 0.12), transparent 24%),
+    linear-gradient(180deg, #20140e 0%, #140d09 45%, #0f0907 100%);
+}
+
+.aehb-reader-page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.45;
+  background:
+    radial-gradient(circle at 12% 20%, rgba(255, 219, 173, 0.12) 1px, transparent 1px),
+    radial-gradient(circle at 86% 16%, rgba(179, 118, 73, 0.12) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(255, 234, 197, 0.03), transparent 20%);
+  background-size: 240px 240px, 280px 280px, 100% 100%;
+}
+
+.aehb-reader-page::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 240, 214, 0.01) 0,
+    rgba(255, 240, 214, 0.01) 1px,
+    transparent 1px,
+    transparent 48px
+  );
+  opacity: 0.2;
+}
+
+.aehb-shell {
+  position: relative;
+  z-index: 1;
+  width: min(1500px, calc(100vw - 48px));
+  margin: 0 auto;
+  padding: 24px 0 40px;
+}
+
+.aehb-topbar,
+.aehb-sidebar,
+.aehb-main,
+.aehb-reading-panel,
+.aehb-comment-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(184, 137, 89, 0.34);
+  background:
+    linear-gradient(180deg, rgba(81, 48, 26, 0.15), rgba(81, 48, 26, 0.03)),
+    linear-gradient(180deg, rgba(247, 230, 198, 0.96), rgba(230, 206, 166, 0.97));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 248, 233, 0.7),
+    0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.aehb-topbar::before,
+.aehb-sidebar::before,
+.aehb-main::before,
+.aehb-reading-panel::before,
+.aehb-comment-panel::before {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(112, 76, 43, 0.16);
+  pointer-events: none;
+}
+
+.aehb-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  min-height: 76px;
+  padding: 16px 24px;
+  margin-bottom: 24px;
+}
+
+.aehb-brand {
+  color: #58301b;
+  font-family: "Cinzel", serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.aehb-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.aehb-nav-link {
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(102, 65, 37, 0.2);
+  background: rgba(120, 82, 49, 0.08);
+  color: #5f341d;
+  text-decoration: none;
+  font-family: "Cinzel", serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.aehb-status {
+  color: #76502f;
+  font-family: "Cinzel", serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.aehb-status-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: #a25c35;
+  box-shadow: 0 0 12px rgba(162, 92, 53, 0.55);
+}
+
+.aehb-reader-layout {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.aehb-sidebar {
+  width: 280px;
+  min-width: 280px;
+  padding: 18px;
+}
+
+.aehb-panel-title,
+.aehb-eyebrow,
+.aehb-select-label,
+.aehb-field-label {
+  color: #855333;
+  font-family: "Cinzel", serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.aehb-panel-title {
+  display: block;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(110, 74, 43, 0.22);
+}
+
+.aehb-story-meta {
+  margin-bottom: 18px;
+}
+
+.aehb-meta-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(120, 83, 49, 0.12);
+}
+
+.aehb-meta-label {
+  color: #926343;
+  font-family: "Cinzel", serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+}
+
+.aehb-meta-value {
+  color: #3f2517;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.aehb-chapter-select-wrap {
+  margin-bottom: 18px;
+}
+
+.aehb-select-label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.aehb-chapter-select,
+.aehb-input,
+.aehb-textarea {
+  width: 100%;
+  border: 1px solid rgba(120, 83, 49, 0.25);
+  background: rgba(255, 248, 235, 0.68);
+  color: #3e2214;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1rem;
+  padding: 0.8rem 0.9rem;
+  outline: none;
+}
+
+.aehb-chapter-select {
+  font-size: 0.95rem;
+}
+
+.aehb-chapter-nav-title {
+  margin: 0 0 12px;
+  color: #855333;
+  font-family: "Cinzel", serif;
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aehb-nav-button {
+  display: block;
+  width: 100%;
+  margin: 6px 0;
+  padding: 0.85rem 0.9rem;
+  border: 1px solid rgba(120, 83, 49, 0.18);
+  background: rgba(118, 77, 42, 0.08);
+  color: #4a2a18;
+  font-family: "Cinzel", serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.aehb-nav-button.active {
+  background: linear-gradient(180deg, #7d4b2a, #5d341e);
+  color: #f7ebd4;
+  border-color: rgba(109, 62, 32, 0.5);
+}
+
+.aehb-main {
+  flex: 1;
+  min-width: 0;
+  padding: 22px;
+}
+
+.aehb-story-title {
+  margin: 0 0 8px;
+  color: #452517;
+  font-family: "Cinzel", serif;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1.1;
+}
+
+.aehb-story-subtitle {
+  margin: 0 0 14px;
+  color: #6b4327;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.18rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.aehb-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.aehb-tag {
+  padding: 0.35rem 0.65rem;
+  border: 1px solid rgba(120, 83, 49, 0.18);
+  background: rgba(118, 77, 42, 0.08);
+  color: #724529;
+  font-family: "Cinzel", serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aehb-reading-panel,
+.aehb-comment-panel {
+  padding: 18px;
+  margin-top: 16px;
+}
+
+.aehb-story-content {
+  color: #392115;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.22rem;
+  line-height: 1.95;
+}
+
+.aehb-story-content p {
+  margin: 0 0 1rem;
+}
+
+.aehb-story-content p:first-child::first-letter {
+  float: left;
+  margin: 0.08em 0.12em 0 0;
+  color: #8e4b2a;
+  font-family: "Cinzel", serif;
+  font-size: 4rem;
+  line-height: 0.9;
+}
+
+.aehb-field-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.aehb-textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.aehb-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 14px;
+  padding: 0.9rem 1.4rem;
+  border: 1px solid rgba(109, 62, 32, 0.45);
+  background: linear-gradient(180deg, #7d4b2a, #5d341e);
+  color: #f6ebd8;
+  font-family: "Cinzel", serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.aehb-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.aehb-submitted {
+  margin-top: 12px;
+  color: #7f4d2d;
+  font-family: "Cinzel", serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aehb-time-skip {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 2.5rem 0 2rem;
+}
+
+.aehb-time-skip::before,
+.aehb-time-skip::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(133, 83, 51, 0.45), transparent);
+}
+
+.aehb-time-skip span {
+  color: #855333;
+  font-family: "Cinzel", serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (max-width: 1024px) {
+  .aehb-reader-layout {
+    flex-direction: column;
+  }
+
+  .aehb-sidebar {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+@media (max-width: 720px) {
+  .aehb-shell {
+    width: min(100%, calc(100vw - 24px));
+    padding-top: 14px;
+  }
+
+  .aehb-topbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 16px;
+  }
+
+  .aehb-brand,
+  .aehb-status {
+    text-align: center;
+  }
+
+  .aehb-main,
+  .aehb-sidebar,
+  .aehb-reading-panel,
+  .aehb-comment-panel {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .aehb-story-content {
+    font-size: 1.1rem;
+  }
+}

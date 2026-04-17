@@ -23,22 +23,22 @@ const ficEntries = [
     featuredTag: "Interactive Fiction"
   },
   {
-    id: "future-fic",
-    title: "Future Fic Slot",
-    status: "Planned",
+    id: "aehb",
+    title: "Ashes to Earth and a Heart to Burn",
+    status: "Ongoing",
     chapters: 0,
     totalChapters: "?",
-    wordCount: "0",
-    lastUpdated: null,
+    wordCount: "Drafting",
+    lastUpdated: "2026-04-16",
     summary:
-      "Reserved archive space for an upcoming fanwork entry. This slot awaits the next story to be catalogued in the celestial archives.",
-    path: "/fics",
-    isThemed: false,
-    fandom: "TBD",
-    rating: "NR",
-    warnings: [],
-    tags: ["Placeholder"],
-    featuredTag: "Coming Soon"
+      "Porsche is a revered mage, a master of healing and combat, yet all he truly wants is affection and to have his life and achievements seen. Set in a fantasy world shaped by violence, devotion, and ruin, the story follows what burns when recognition comes too late.",
+    path: "/fics/aehb",
+    isThemed: true,
+    fandom: "KinnPorsche",
+    rating: "M",
+    warnings: ["Graphic Violence", "Gore", "Angst"],
+    tags: ["Fantasy AU", "Mage Porsche", "Healing Magic", "Combat", "Yearning", "Dark Fantasy"],
+    featuredTag: "Fantasy Tragedy"
   },
 ];
 

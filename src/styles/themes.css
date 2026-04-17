@@ -217,6 +217,35 @@
   color: #f3b3b3;
 }
 
+/* ---------- AEHB theme ---------- */
+
+.theme-aehb-page {
+  background:
+    radial-gradient(circle at 50% -5%, rgba(255, 211, 150, 0.16), transparent 24%),
+    radial-gradient(circle at 10% 20%, rgba(112, 67, 40, 0.18), transparent 28%),
+    radial-gradient(circle at 90% 18%, rgba(88, 47, 27, 0.18), transparent 32%),
+    linear-gradient(180deg, #23160f 0%, #1a110c 55%, #120b08 100%);
+  color: #f3dfcf;
+}
+
+.theme-aehb-panel {
+  background: rgba(71, 45, 27, 0.84);
+  box-shadow: 0 0 28px rgba(255, 196, 120, 0.08);
+}
+
+.theme-aehb-border {
+  border-color: rgba(181, 137, 91, 0.3);
+}
+
+.theme-aehb-title {
+  color: #f5dcc7;
+  text-shadow: 0 0 18px rgba(255, 198, 131, 0.16);
+}
+
+.theme-aehb-text {
+  color: #edd5c2;
+}
+
 /* ---------- responsive ---------- */
 
 @media (max-width: 900px) {

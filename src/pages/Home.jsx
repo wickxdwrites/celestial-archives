@@ -6,6 +6,13 @@ import "./Home.css";
 
 const recentSignals = [
   {
+    title: "Ashes to Earth and a Heart to Burn",
+    type: "New Fic Entry",
+    description:
+      "A fantasy KinnPorsche story centered on Porsche as a revered healing mage whose hunger for love and recognition collides with violence, gore, and slow-burning ache.",
+    path: "/fics/aehb",
+  },
+  {
     title: "EF007E",
     type: "Featured Transmission",
     description:

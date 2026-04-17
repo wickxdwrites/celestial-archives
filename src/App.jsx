@@ -4,6 +4,7 @@ import Fics from "./pages/Fics";
 import Originals from "./pages/Originals";
 import Extras from "./pages/Extras";
 import TronFile from "./pages/EF007E";
+import AEHB from "./pages/AEHB";
 import "./styles/themes.css";
 
 
@@ -15,6 +16,7 @@ export default function App() {
       <Route path="/originals" element={<Originals />} />
       <Route path="/extras" element={<Extras />} />
       <Route path="/fics/ef007e" element={<TronFile />} />
+      <Route path="/fics/aehb" element={<AEHB />} />
     </Routes>
   );
 }
