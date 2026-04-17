@@ -26,9 +26,9 @@ const ficEntries = [
     id: "aehb",
     title: "Ashes to Earth and a Heart to Burn",
     status: "Ongoing",
-    chapters: 0,
+    chapters: 11,
     totalChapters: "?",
-    wordCount: "Drafting",
+    wordCount: "~23K",
     lastUpdated: "2026-04-16",
     summary:
       "Porsche is a revered mage, a master of healing and combat, yet all he truly wants is affection and to have his life and achievements seen. Set in a fantasy world shaped by violence, devotion, and ruin, the story follows what burns when recognition comes too late.",

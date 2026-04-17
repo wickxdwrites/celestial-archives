@@ -8,7 +8,7 @@ const aehbMeta = {
   rating: "M",
   status: "ongoing",
   lastUpdated: "2026-04-16",
-  chapters: 0,
+  chapters: 11,
   totalChapters: "?",
   summary:
     "Porsche is a revered mage, equally feared for his combat skill and sought after for his healing gifts, but what he wants most has nothing to do with power. In a fantasy world sharpened by violence, grief, and devotion, he aches to be loved and remembered for the life he has built.",
