@@ -1,420 +1,1503 @@
+/* =============================================
+   AEHB — Game of Thrones Reader Theme
+   Iron & Fire. Stone & Blood. Gold & Shadow.
+   ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cinzel:wght@400;600;800&display=swap');
+
+/* Page base */
 .aehb-reader-page {
   min-height: 100vh;
-  position: relative;
-  color: #f3e4cf;
   background:
-    radial-gradient(circle at top, rgba(255, 215, 159, 0.12), transparent 24%),
-    linear-gradient(180deg, #20140e 0%, #140d09 45%, #0f0907 100%);
+    radial-gradient(ellipse at 30% 10%, rgba(160, 60, 20, 0.22) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 90%, rgba(120, 40, 10, 0.18) 0%, transparent 45%),
+    linear-gradient(160deg, #1a1410 0%, #201810 30%, #1c1208 60%, #181410 100%);
+  color: #d4c4a8;
+  font-family: 'IM Fell English', Georgia, "Times New Roman", serif;
+  -webkit-font-smoothing: antialiased;
 }
 
-.aehb-reader-page::before {
-  content: "";
+/* Stone wall texture overlay */
+.aehb-parchment-texture {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: 0.45;
-  background:
-    radial-gradient(circle at 12% 20%, rgba(255, 219, 173, 0.12) 1px, transparent 1px),
-    radial-gradient(circle at 86% 16%, rgba(179, 118, 73, 0.12) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(255, 234, 197, 0.03), transparent 20%);
-  background-size: 240px 240px, 280px 280px, 100% 100%;
+  z-index: 0;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 30px,
+      rgba(255,220,160,0.025) 30px,
+      rgba(255,220,160,0.025) 31px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 60px,
+      rgba(255,200,120,0.015) 60px,
+      rgba(255,200,120,0.015) 61px
+    );
 }
 
-.aehb-reader-page::after {
-  content: "";
+/* Dragon fire torchlight glow */
+.aehb-candlelight-glow {
   position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    90deg,
-    rgba(255, 240, 214, 0.01) 0,
-    rgba(255, 240, 214, 0.01) 1px,
-    transparent 1px,
-    transparent 48px
+  top: 0;
+  right: 0;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 70% 20%,
+    rgba(210, 80, 20, 0.28) 0%,
+    rgba(240, 120, 20, 0.16) 30%,
+    transparent 65%
   );
-  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
+  animation: aehb-fireflicker 5s ease-in-out infinite;
 }
 
-.aehb-shell {
+.aehb-candlelight-glow::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  left: -150px;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(190, 70, 10, 0.20) 0%,
+    transparent 60%
+  );
+  animation: aehb-fireflicker 7s ease-in-out infinite reverse;
+}
+
+/* ── Rising ember sparks ── */
+.aehb-banner-ember-wrap {
+  position: relative;
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: visible;
+}
+
+/* Hanging rod */
+.aehb-banner-rod {
+  width: calc(100% + 24px);
+  height: 8px;
+  background:
+    linear-gradient(180deg,
+      #5a4a30 0%,
+      #8c7348 25%,
+      #b89a58 45%,
+      #c9a227 50%,
+      #b89a58 55%,
+      #8c7348 75%,
+      #5a4a30 100%
+    );
+  border-radius: 4px;
+  position: relative;
+  z-index: 5;
+  box-shadow:
+    0 3px 6px rgba(0,0,0,0.6),
+    inset 0 1px 1px rgba(255,220,140,0.3);
+}
+
+/* Rod end caps */
+.aehb-banner-rod::before,
+.aehb-banner-rod::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  width: 12px;
+  height: 14px;
+  border-radius: 3px;
+  background:
+    linear-gradient(180deg,
+      #7a6538 0%,
+      #c9a227 40%,
+      #e2c44a 50%,
+      #c9a227 60%,
+      #7a6538 100%
+    );
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.5),
+    inset 0 1px 1px rgba(255,230,160,0.4);
+}
+
+.aehb-banner-rod::before {
+  left: -6px;
+}
+
+.aehb-banner-rod::after {
+  right: -6px;
+}
+
+.aehb-ember {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #ff8c00;
+  box-shadow:
+    0 0 4px 1px rgba(255,140,0,0.9),
+    0 0 8px 2px rgba(255,80,0,0.5);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  animation: aehb-ember-rise linear infinite;
+}
+
+@keyframes aehb-ember-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) translateX(0) scale(1);
+  }
+  8% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-200px) translateX(var(--drift)) scale(0.2);
+  }
+}
+
+/* Embers along the bottom ragged edge */
+.aehb-ember-0  { bottom: -42px; left: 15%; --drift: -14px; animation-duration: 3.0s; animation-delay: 0.0s; width: 2px; height: 2px; }
+.aehb-ember-1  { bottom: -38px; left: 40%; --drift:  10px; animation-duration: 3.8s; animation-delay: 0.6s; width: 3px; height: 3px; }
+.aehb-ember-2  { bottom: -44px; left: 60%; --drift: -8px;  animation-duration: 3.3s; animation-delay: 1.4s; width: 2px; height: 2px; }
+.aehb-ember-3  { bottom: -36px; left: 80%; --drift:  16px; animation-duration: 4.2s; animation-delay: 0.2s; width: 4px; height: 4px; background: #ffad33; }
+.aehb-ember-4  { bottom: -40px; left: 30%; --drift: -18px; animation-duration: 3.5s; animation-delay: 2.1s; width: 2px; height: 2px; }
+.aehb-ember-5  { bottom: -46px; left: 50%; --drift:  6px;  animation-duration: 4.0s; animation-delay: 0.9s; width: 3px; height: 3px; background: #ffc040; }
+
+/* Embers along left charred edge */
+.aehb-ember-6  { bottom: 25%; left: -4px; --drift: -20px; animation-duration: 4.4s; animation-delay: 1.0s; width: 2px; height: 2px; }
+.aehb-ember-7  { bottom: 50%; left: -3px; --drift: -16px; animation-duration: 3.6s; animation-delay: 2.4s; width: 3px; height: 3px; background: #ff6a00; }
+.aehb-ember-8  { bottom: 70%; left: -5px; --drift: -12px; animation-duration: 3.9s; animation-delay: 0.3s; width: 2px; height: 2px; }
+
+/* Embers along right charred edge */
+.aehb-ember-9  { bottom: 20%; right: -4px; left: auto; --drift: 20px; animation-duration: 4.1s; animation-delay: 1.6s; width: 2px; height: 2px; }
+.aehb-ember-10 { bottom: 45%; right: -3px; left: auto; --drift: 18px; animation-duration: 3.4s; animation-delay: 0.5s; width: 3px; height: 3px; }
+.aehb-ember-11 { bottom: 65%; right: -5px; left: auto; --drift: 14px; animation-duration: 4.6s; animation-delay: 2.8s; width: 2px; height: 2px; background: #ffad33; }
+
+/* More bottom embers for density at the burnt tip */
+.aehb-ember-12 { bottom: -48px; left: 45%; --drift: -5px;  animation-duration: 3.2s; animation-delay: 1.8s; width: 3px; height: 3px; background: #ff6a00; }
+.aehb-ember-13 { bottom: -35px; left: 20%; --drift:  12px; animation-duration: 4.5s; animation-delay: 0.8s; width: 2px; height: 2px; }
+.aehb-ember-14 { bottom: -50px; left: 55%; --drift: -10px; animation-duration: 3.7s; animation-delay: 3.0s; width: 2px; height: 2px; }
+.aehb-ember-15 { bottom: -40px; left: 70%; --drift:  8px;  animation-duration: 3.1s; animation-delay: 1.2s; width: 4px; height: 4px; background: #ffc040; }
+.aehb-ember-16 { bottom: -44px; left: 35%; --drift: -16px; animation-duration: 4.3s; animation-delay: 2.5s; width: 2px; height: 2px; }
+.aehb-ember-17 { bottom: -38px; left: 85%; --drift:  14px; animation-duration: 3.4s; animation-delay: 0.4s; width: 3px; height: 3px; }
+
+/* ── Spine banner wind wave ── */
+
+@keyframes aehb-fireflicker {
+  0%, 100% { opacity: 0.7; transform: scale(1); }
+  33%       { opacity: 1;   transform: scale(1.06); }
+  66%       { opacity: 0.8; transform: scale(0.97); }
+}
+
+.aehb-ink-stains { display: none; }
+
+/* ── Two-panel grid (sidebar removed) ── */
+.aehb-manuscript-wrapper {
   position: relative;
   z-index: 1;
-  width: min(1500px, calc(100vw - 48px));
-  margin: 0 auto;
-  padding: 24px 0 40px;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 0;
+  min-height: 100vh;
 }
 
-.aehb-topbar,
-.aehb-sidebar,
-.aehb-main,
-.aehb-reading-panel,
-.aehb-comment-panel {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(184, 137, 89, 0.34);
+/* =============================================
+   LEFT PANEL — House Sigil & Chapter Selection
+   ============================================= */
+.aehb-book-spine {
   background:
-    linear-gradient(180deg, rgba(81, 48, 26, 0.15), rgba(81, 48, 26, 0.03)),
-    linear-gradient(180deg, rgba(247, 230, 198, 0.96), rgba(230, 206, 166, 0.97));
-  box-shadow:
-    inset 0 1px 0 rgba(255, 248, 233, 0.7),
-    0 10px 24px rgba(0, 0, 0, 0.2);
+    linear-gradient(180deg, #16100a 0%, #1e1610 50%, #16100a 100%);
+  border-right: 1px solid rgba(160, 30, 0, 0.5);
+  box-shadow: inset -6px 0 20px rgba(0,0,0,0.5), 4px 0 15px rgba(0,0,0,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 12px;
+  gap: 12px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: visible;
 }
 
-.aehb-topbar::before,
-.aehb-sidebar::before,
-.aehb-main::before,
-.aehb-reading-panel::before,
-.aehb-comment-panel::before {
-  content: "";
+.aehb-book-spine::-webkit-scrollbar { width: 3px; }
+.aehb-book-spine::-webkit-scrollbar-thumb { background: rgba(139, 0, 0, 0.5); border-radius: 2px; }
+
+/* Sigil / House wordmark */
+.aehb-spine-title {
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  color: #f0d87a;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  white-space: nowrap;
+  text-shadow:
+    0 0 10px rgba(180, 40, 10, 0.8),
+    0 0 20px rgba(201, 162, 39, 0.4);
+
+  position: relative;
+  align-self: center;
+  padding: 36px 18px 44px;
+
+  /* Crimson base with charred / scorched edges */
+  background-color: #6b0000;
+  background-image:
+    /* Burn-through holes — dark centers with ember rims */
+    radial-gradient(ellipse 14px 18px at 72% 22%, rgba(0,0,0,0.95) 30%, rgba(30,5,0,0.9) 50%, rgba(255,80,0,0.2) 60%, transparent 70%),
+    radial-gradient(ellipse 10px 14px at 25% 38%, rgba(0,0,0,0.9) 28%, rgba(25,4,0,0.85) 48%, rgba(255,60,0,0.18) 58%, transparent 68%),
+    radial-gradient(ellipse 8px 10px at 80% 55%, rgba(0,0,0,0.85) 30%, rgba(20,3,0,0.8) 50%, rgba(255,70,0,0.15) 62%, transparent 72%),
+    /* Scorch marks — elongated streaks */
+    radial-gradient(ellipse 6px 22px at 15% 18%, rgba(10,2,0,0.7) 20%, rgba(255,60,0,0.08) 60%, transparent 70%),
+    radial-gradient(ellipse 5px 16px at 60% 45%, rgba(8,2,0,0.6) 20%, rgba(255,50,0,0.06) 55%, transparent 68%),
+    /* Burnt patches along edges */
+    radial-gradient(ellipse at 0% 15%, rgba(15,5,0,0.8) 0%, transparent 55%),
+    radial-gradient(ellipse at 100% 45%, rgba(10,3,0,0.7) 0%, transparent 50%),
+    radial-gradient(ellipse at 0% 75%, rgba(12,4,0,0.75) 0%, transparent 48%),
+    radial-gradient(ellipse at 100% 90%, rgba(15,5,0,0.85) 0%, transparent 52%),
+    /* Ember glow behind the char */
+    radial-gradient(ellipse at 0% 18%, rgba(255,80,0,0.15) 0%, transparent 40%),
+    radial-gradient(ellipse at 100% 48%, rgba(255,60,0,0.12) 0%, transparent 35%),
+    radial-gradient(ellipse at 0% 78%, rgba(255,90,0,0.12) 0%, transparent 38%),
+    /* Base vignette */
+    linear-gradient(90deg,
+      rgba(0,0,0,0.4) 0%,
+      transparent 25%,
+      transparent 75%,
+      rgba(0,0,0,0.4) 100%
+    );
+
+  border-left: 3px solid #c9a227;
+  border-right: 3px solid #c9a227;
+  border-top: 3px solid #c9a227;
+
+  /* Burnt, destroyed edges — asymmetric fire damage */
+  clip-path: polygon(
+    /* Top edge — mostly intact but nibbled on right */
+    0% 0%, 70% 0%, 72% 2%, 75% 0%, 78% 3%, 82% 0%,
+    85% 1%, 88% 0%, 100% 0%,
+    /* Right edge — bite taken out near top */
+    100% 15%, 96% 18%, 94% 22%, 96% 26%, 100% 28%,
+    /* Right edge — another notch mid-section */
+    100% 48%, 97% 50%, 95% 54%, 97% 57%, 100% 58%,
+    /* Right into bottom destruction */
+    100% 78%,
+    98% 80%, 100% 83%, 97% 86%,
+    95% 84%, 92% 88%, 88% 85%,
+    85% 90%, 80% 82%, 78% 87%,
+    75% 92%, 70% 86%, 68% 94%,
+    65% 88%, 60% 96%, 55% 90%,
+    52% 100%, 48% 95%,
+    45% 98%, 40% 88%, 38% 93%,
+    35% 85%, 30% 91%, 28% 84%,
+    25% 78%, 22% 82%, 18% 76%,
+    15% 80%, 12% 75%, 8% 79%,
+    5% 82%, 3% 78%, 0% 80%,
+    /* Left edge — notch near middle */
+    0% 62%, 4% 59%, 6% 55%, 4% 52%, 0% 50%,
+    /* Left edge — small bite near top */
+    0% 30%, 3% 27%, 5% 24%, 3% 21%, 0% 19%
+  );
+
+  box-shadow:
+    inset 3px 0 12px rgba(0,0,0,0.5),
+    inset -3px 0 12px rgba(0,0,0,0.5),
+    /* Ember edge glow */
+    inset 2px 0 6px rgba(255,80,0,0.15),
+    inset -2px 0 6px rgba(255,80,0,0.15),
+    0 8px 24px rgba(0,0,0,0.7);
+
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.8));
+  animation: aehb-banner-ember 4s ease-in-out infinite;
+}
+
+@keyframes aehb-banner-ember {
+  0%, 100% {
+    box-shadow:
+      inset 3px 0 12px rgba(0,0,0,0.5),
+      inset -3px 0 12px rgba(0,0,0,0.5),
+      inset 2px 0 6px rgba(255,80,0,0.12),
+      inset -2px 0 6px rgba(255,80,0,0.12),
+      0 8px 24px rgba(0,0,0,0.7),
+      0 0 10px 2px rgba(255,80,0,0.15);
+    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.8)) brightness(1.0);
+  }
+  50% {
+    box-shadow:
+      inset 3px 0 12px rgba(0,0,0,0.5),
+      inset -3px 0 12px rgba(0,0,0,0.5),
+      inset 2px 0 10px rgba(255,60,0,0.25),
+      inset -2px 0 10px rgba(255,60,0,0.25),
+      0 8px 24px rgba(0,0,0,0.7),
+      0 0 18px 4px rgba(255,60,0,0.3),
+      0 0 36px 6px rgba(255,100,0,0.12);
+    filter: drop-shadow(0 4px 16px rgba(0,0,0,0.8)) brightness(1.05);
+  }
+}
+
+/* Charred edge glow — faint orange along destroyed bottom */
+.aehb-spine-title::before {
+  content: '';
   position: absolute;
-  inset: 10px;
-  border: 1px solid rgba(112, 76, 43, 0.16);
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35%;
+  background: linear-gradient(to top,
+    rgba(255,80,0,0.18) 0%,
+    rgba(255,60,0,0.08) 30%,
+    transparent 100%
+  );
   pointer-events: none;
 }
 
-.aehb-topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-  min-height: 76px;
-  padding: 16px 24px;
-  margin-bottom: 24px;
+/* No ::after needed */
+.aehb-spine-title::after {
+  display: none;
 }
 
-.aehb-brand {
-  color: #58301b;
-  font-family: "Cinzel", serif;
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
+.aehb-spine-ornament {
+  font-size: 1.5rem;
+  color: #8b0000;
+  text-shadow:
+    0 0 10px rgba(180, 40, 10, 0.9),
+    0 0 20px rgba(220, 80, 10, 0.5);
+  animation: aehb-flame-pulse 3s ease-in-out infinite;
+}
+
+@keyframes aehb-flame-pulse {
+  0%, 100% {
+    text-shadow: 0 0 8px rgba(180, 40, 10, 0.8), 0 0 16px rgba(220, 80, 10, 0.4);
+    color: #8b0000;
+  }
+  50% {
+    text-shadow: 0 0 16px rgba(220, 80, 10, 1), 0 0 30px rgba(255, 120, 20, 0.6);
+    color: #cc2200;
+  }
+}
+
+/* Divider */
+.aehb-book-spine::before {
+  content: '— ✦ —';
+  color: rgba(139, 0, 0, 0.6);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+}
+
+/* Chapter selection — House sigil tabs */
+.aehb-bookmark-tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.aehb-bookmark-tab {
+  width: 52px;
+  height: 52px;
+  border-radius: 4px;
+  border: 1px solid rgba(139, 0, 0, 0.4);
+  background:
+    linear-gradient(145deg, #2a1e14, #1e150e);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  box-shadow:
+    inset 0 1px 0 rgba(201, 162, 39, 0.08),
+    0 2px 8px rgba(0,0,0,0.7);
+  position: relative;
+}
+
+/* Iron corner details */
+.aehb-bookmark-tab::before,
+.aehb-bookmark-tab::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-color: rgba(139, 0, 0, 0.4);
+  border-style: solid;
+}
+.aehb-bookmark-tab::before {
+  top: 2px; left: 2px;
+  border-width: 1px 0 0 1px;
+}
+.aehb-bookmark-tab::after {
+  bottom: 2px; right: 2px;
+  border-width: 0 1px 1px 0;
+}
+
+.aehb-bookmark-tab:hover {
+  border-color: rgba(139, 0, 0, 0.8);
+  background: linear-gradient(145deg, #3a200e, #281408);
+  box-shadow:
+    inset 0 1px 0 rgba(201, 162, 39, 0.15),
+    0 2px 12px rgba(0,0,0,0.8),
+    0 0 10px rgba(139, 0, 0, 0.3);
+}
+
+.aehb-bookmark-tab.active {
+  border-color: #8b0000;
+  background:
+    linear-gradient(145deg, #4a1010, #300a0a);
+  box-shadow:
+    inset 0 1px 0 rgba(201, 162, 39, 0.2),
+    0 0 16px rgba(139, 0, 0, 0.6),
+    0 0 30px rgba(180, 40, 10, 0.3);
+}
+
+.aehb-bookmark-text {
+  color: rgba(201, 162, 39, 0.7);
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.aehb-bookmark-tab.active .aehb-bookmark-text {
+  color: #c9a227;
+  text-shadow: 0 0 8px rgba(201, 162, 39, 0.6);
+}
+
+/* =============================================
+   CENTER PANEL — The Scroll
+   ============================================= */
+.aehb-manuscript-page {
+  background:
+    linear-gradient(180deg, #1a140e 0%, #16110c 100%);
+  border-left: 1px solid rgba(120, 30, 10, 0.35);
+  border-right: 1px solid rgba(120, 30, 10, 0.35);
+  position: relative;
+  overflow-y: auto;
+}
+
+.aehb-manuscript-page::before {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 750px;
+  height: 750px;
+  background: url('/celestial-archives/phoenix.png') center / contain no-repeat;
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: 0;
+  margin-left: 100px;
+}
+
+/* Stone frame inset */
+.aehb-page-border {
+  position: absolute;
+  inset: 16px;
+  border: 1px solid rgba(139, 0, 0, 0.15);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.aehb-page-border::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(201, 162, 39, 0.06);
+}
+
+/* Header — House Banner */
+.aehb-manuscript-header {
+  padding: 44px 56px 28px;
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, transparent, #8b0000 15%, #c9a227 50%, #8b0000 85%, transparent) 1;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(160, 50, 10, 0.10) 0%, transparent 100%);
+}
+
+.aehb-heraldic-border {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.aehb-coat-of-arms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.aehb-shield {
+  font-size: 1.8rem;
+  color: #8b0000;
+  text-shadow: 0 0 10px rgba(139, 0, 0, 0.7);
+}
+
+.aehb-crown {
+  font-size: 1.1rem;
+  color: #c9a227;
+  text-shadow: 0 0 8px rgba(201, 162, 39, 0.5);
+}
+
+.aehb-manuscript-title {
+  text-align: center;
+  flex: 1;
+}
+
+.aehb-tome-title {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #e2b93a;
+  margin: 0 0 8px 0;
+  letter-spacing: 4px;
+  line-height: 1.2;
+  text-shadow:
+    0 0 10px rgba(201, 162, 39, 0.9),
+    0 0 30px rgba(180, 40, 10, 0.7),
+    0 0 60px rgba(180, 40, 10, 0.35),
+    0 3px 6px rgba(0, 0, 0, 0.95);
+  animation: aehb-title-glow 4s ease-in-out infinite;
+}
+
+@keyframes aehb-title-glow {
+  0%, 100% {
+    text-shadow:
+      0 0 10px rgba(201, 162, 39, 0.9),
+      0 0 30px rgba(180, 40, 10, 0.7),
+      0 0 60px rgba(180, 40, 10, 0.35),
+      0 3px 6px rgba(0, 0, 0, 0.95);
+  }
+  50% {
+    text-shadow:
+      0 0 16px rgba(230, 185, 50, 1),
+      0 0 45px rgba(220, 80, 10, 0.85),
+      0 0 80px rgba(220, 80, 10, 0.4),
+      0 3px 6px rgba(0, 0, 0, 0.95);
+  }
+}
+
+.aehb-subtitle-scroll {
+  font-family: 'IM Fell English', Georgia, serif;
+  font-size: 1rem;
+  font-style: italic;
+  color: rgba(210, 165, 90, 0.85);
+  letter-spacing: 4px;
   text-transform: uppercase;
 }
 
-.aehb-nav {
+.aehb-crest-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  transform: rotate(-12deg);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.7));
+  opacity: 0.92;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.aehb-crest-img:hover {
+  opacity: 1;
+  transform: rotate(-10deg) scale(1.05);
+}
+
+.aehb-seal-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  transform: rotate(12deg);
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.7));
+  opacity: 0.92;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.aehb-seal-img:hover {
+  opacity: 1;
+  transform: rotate(10deg) scale(1.05);
+}
+
+/* Navigation */
+.aehb-scroll-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.aehb-scroll-left,
+.aehb-scroll-right {
+  color: rgba(139, 0, 0, 0.6);
+}
+
+.aehb-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.aehb-scroll-link {
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  color: rgba(220, 185, 100, 0.9);
+  text-decoration: none;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: color 0.2s, text-shadow 0.2s;
+  padding: 3px 0;
+  border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+}
+
+.aehb-scroll-link:hover {
+  color: #f0d060;
+  border-bottom-color: rgba(201, 162, 39, 0.7);
+  text-shadow: 0 0 14px rgba(201, 162, 39, 0.6);
+}
+
+.aehb-nav-dot {
+  color: rgba(180, 100, 50, 0.7);
+  font-size: 0.6rem;
+}
+
+/* Main content area */
+.aehb-manuscript-content {
+  padding: 44px 56px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Chapter header */
+.aehb-chapter-header {
+  text-align: center;
+  margin-bottom: 44px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid rgba(139, 0, 0, 0.25);
+  position: relative;
+}
+
+/* Flame divider */
+.aehb-chapter-header::after {
+  content: '⚔';
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a140e;
+  padding: 0 12px;
+  color: rgba(210, 140, 60, 0.8);
+  font-size: 1rem;
+}
+
+.aehb-chapter-number {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  color: rgba(210, 140, 60, 0.85);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.aehb-chapter-title {
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 1.65rem;
+  font-weight: 600;
+  color: #c9a227;
+  margin: 0 0 16px 0;
+  text-shadow: 0 0 20px rgba(139, 0, 0, 0.4);
+  letter-spacing: 1px;
+}
+
+.aehb-chapter-summary {
+  font-size: 0.92rem;
+  color: rgba(185, 165, 125, 0.75);
+  font-style: italic;
+  max-width: 500px;
+  margin: 0 auto 20px;
+  line-height: 1.7;
+}
+
+.aehb-heraldic-banners {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   justify-content: center;
+  margin-top: 12px;
 }
 
-.aehb-nav-link {
-  padding: 0.75rem 1rem;
-  border: 1px solid rgba(102, 65, 37, 0.2);
-  background: rgba(120, 82, 49, 0.08);
-  color: #5f341d;
-  text-decoration: none;
-  font-family: "Cinzel", serif;
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+.aehb-banner {
+  background: rgba(139, 0, 0, 0.12);
+  border: 1px solid rgba(139, 0, 0, 0.4);
+  border-radius: 2px;
+  padding: 3px 12px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  color: rgba(201, 162, 39, 0.75);
+  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
-.aehb-status {
-  color: #76502f;
-  font-family: "Cinzel", serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.aehb-status-dot {
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  margin-right: 8px;
-  border-radius: 50%;
-  background: #a25c35;
-  box-shadow: 0 0 12px rgba(162, 92, 53, 0.55);
-}
-
-.aehb-reader-layout {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-}
-
-.aehb-sidebar {
-  width: 280px;
-  min-width: 280px;
-  padding: 18px;
-}
-
-.aehb-panel-title,
-.aehb-eyebrow,
-.aehb-select-label,
-.aehb-field-label {
-  color: #855333;
-  font-family: "Cinzel", serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.aehb-panel-title {
-  display: block;
-  margin-bottom: 14px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid rgba(110, 74, 43, 0.22);
-}
-
-.aehb-story-meta {
-  margin-bottom: 18px;
-}
-
-.aehb-meta-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(120, 83, 49, 0.12);
-}
-
-.aehb-meta-label {
-  color: #926343;
-  font-family: "Cinzel", serif;
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-}
-
-.aehb-meta-value {
-  color: #3f2517;
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
+/* ── Chapter dropdown selector ── */
 .aehb-chapter-select-wrap {
-  margin-bottom: 18px;
-}
-
-.aehb-select-label {
-  display: block;
-  margin-bottom: 8px;
-}
-
-.aehb-chapter-select,
-.aehb-input,
-.aehb-textarea {
-  width: 100%;
-  border: 1px solid rgba(120, 83, 49, 0.25);
-  background: rgba(255, 248, 235, 0.68);
-  color: #3e2214;
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1rem;
-  padding: 0.8rem 0.9rem;
-  outline: none;
+  margin: 16px auto 8px;
+  text-align: center;
 }
 
 .aehb-chapter-select {
-  font-size: 0.95rem;
-}
-
-.aehb-chapter-nav-title {
-  margin: 0 0 12px;
-  color: #855333;
-  font-family: "Cinzel", serif;
-  font-size: 0.88rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.aehb-nav-button {
-  display: block;
-  width: 100%;
-  margin: 6px 0;
-  padding: 0.85rem 0.9rem;
-  border: 1px solid rgba(120, 83, 49, 0.18);
-  background: rgba(118, 77, 42, 0.08);
-  color: #4a2a18;
-  font-family: "Cinzel", serif;
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-align: left;
-  text-transform: uppercase;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 0.82rem;
+  letter-spacing: 1px;
+  color: #d8c8aa;
+  background: rgba(22,16,10,0.9);
+  border: 1px solid rgba(201,162,39,0.35);
+  border-radius: 2px;
+  padding: 6px 28px 6px 12px;
   cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23c9a227'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  outline: none;
+  transition: border-color 0.2s;
 }
 
-.aehb-nav-button.active {
-  background: linear-gradient(180deg, #7d4b2a, #5d341e);
-  color: #f7ebd4;
-  border-color: rgba(109, 62, 32, 0.5);
+.aehb-chapter-select:hover,
+.aehb-chapter-select:focus {
+  border-color: #c9a227;
+  box-shadow: 0 0 8px rgba(201,162,39,0.2);
 }
 
-.aehb-main {
+.aehb-chapter-select option {
+  background: #1a1410;
+  color: #d8c8aa;
+}
+
+/* ── Prev / Next chapter navigation ── */
+.aehb-chapter-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 16px;
+  margin: 2.5em 0 1.5em;
+  padding-top: 1.5em;
+  border-top: 1px solid rgba(201,162,39,0.15);
+}
+
+.aehb-chapter-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 48%;
+  padding: 12px 16px;
+  background: rgba(22,16,10,0.8);
+  border: 1px solid rgba(201,162,39,0.25);
+  border-radius: 3px;
+  color: #d8c8aa;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-family: 'Cinzel', Georgia, serif;
+}
+
+.aehb-chapter-nav-btn:hover {
+  border-color: #c9a227;
+  background: rgba(139,0,0,0.15);
+  box-shadow: 0 0 12px rgba(201,162,39,0.15);
+}
+
+.aehb-nav-prev {
+  text-align: left;
+}
+
+.aehb-nav-next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.aehb-nav-arrow {
+  color: #c9a227;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.aehb-nav-label {
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  line-height: 1.4;
+}
+
+/* Story text */
+.aehb-story-manuscript {
+  display: flex;
+  gap: 16px;
+}
+
+.aehb-marginalia-left,
+.aehb-marginalia-right {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  padding-top: 8px;
+  color: rgba(139, 0, 0, 0.2);
+  font-size: 0.9rem;
+  user-select: none;
+  flex-shrink: 0;
+  width: 18px;
+  text-align: center;
+}
+
+.aehb-text-column {
   flex: 1;
   min-width: 0;
-  padding: 22px;
-}
-
-.aehb-story-title {
-  margin: 0 0 8px;
-  color: #452517;
-  font-family: "Cinzel", serif;
-  font-size: clamp(2rem, 3vw, 2.8rem);
-  line-height: 1.1;
-}
-
-.aehb-story-subtitle {
-  margin: 0 0 14px;
-  color: #6b4327;
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.18rem;
-  font-style: italic;
-  line-height: 1.6;
-}
-
-.aehb-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 6px;
-}
-
-.aehb-tag {
-  padding: 0.35rem 0.65rem;
-  border: 1px solid rgba(120, 83, 49, 0.18);
-  background: rgba(118, 77, 42, 0.08);
-  color: #724529;
-  font-family: "Cinzel", serif;
-  font-size: 0.65rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.aehb-reading-panel,
-.aehb-comment-panel {
-  padding: 18px;
-  margin-top: 16px;
 }
 
 .aehb-story-content {
-  color: #392115;
-  font-family: "Cormorant Garamond", serif;
-  font-size: 1.22rem;
-  line-height: 1.95;
+  font-size: 1.05rem;
+  line-height: 2;
+  color: #d8c8aa;
 }
 
-.aehb-story-content p {
-  margin: 0 0 1rem;
+.aehb-manuscript-paragraph {
+  margin: 0 0 1.4em 0;
+  text-indent: 2.5em;
 }
 
-.aehb-story-content p:first-child::first-letter {
-  float: left;
-  margin: 0.08em 0.12em 0 0;
-  color: #8e4b2a;
-  font-family: "Cinzel", serif;
+/* Illuminated first letter */
+.aehb-manuscript-paragraph:first-child {
+  text-indent: 0;
+}
+
+.aehb-manuscript-paragraph:first-child::first-letter {
+  font-family: 'Cinzel', serif;
   font-size: 4rem;
-  line-height: 0.9;
+  font-weight: 800;
+  float: left;
+  line-height: 0.75;
+  margin-right: 10px;
+  margin-top: 8px;
+  color: #8b0000;
+  text-shadow:
+    0 0 20px rgba(139, 0, 0, 0.8),
+    0 0 40px rgba(220, 80, 10, 0.4),
+    2px 2px 0 rgba(0,0,0,0.8);
 }
 
-.aehb-field-grid {
-  display: grid;
-  gap: 14px;
-}
-
-.aehb-textarea {
-  min-height: 150px;
-  resize: vertical;
-}
-
-.aehb-submit {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 14px;
-  padding: 0.9rem 1.4rem;
-  border: 1px solid rgba(109, 62, 32, 0.45);
-  background: linear-gradient(180deg, #7d4b2a, #5d341e);
-  color: #f6ebd8;
-  font-family: "Cinzel", serif;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  cursor: pointer;
-}
-
-.aehb-submit:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-
-.aehb-submitted {
-  margin-top: 12px;
-  color: #7f4d2d;
-  font-family: "Cinzel", serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
+/* ── Timeline break dividers ── */
 .aehb-time-skip {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin: 2.5rem 0 2rem;
+  margin: 2.5em 0;
+  white-space: nowrap;
 }
 
 .aehb-time-skip::before,
 .aehb-time-skip::after {
-  content: "";
+  content: '';
   flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(133, 83, 51, 0.45), transparent);
+  height: 2px;
+  background:
+    linear-gradient(90deg,
+      transparent 0%,
+      rgba(201,162,39,0.15) 10%,
+      rgba(201,162,39,0.5) 50%,
+      rgba(201,162,39,0.15) 90%,
+      transparent 100%
+    );
+  box-shadow: 0 0 6px rgba(255,80,0,0.2);
 }
 
 .aehb-time-skip span {
-  color: #855333;
-  font-family: "Cinzel", serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  white-space: nowrap;
+  color: #c9a227;
+  text-shadow:
+    0 0 8px rgba(201,162,39,0.5),
+    0 0 16px rgba(255,80,0,0.2);
+  padding: 4px 8px;
+  border: 1px solid rgba(201,162,39,0.25);
+  background: rgba(22,16,10,0.8);
 }
 
-@media (max-width: 1024px) {
-  .aehb-reader-layout {
-    flex-direction: column;
-  }
+/* ── Chapter warnings box ── */
+.aehb-chapter-warnings {
+  background: rgba(139,0,0,0.1);
+  border: 1px solid rgba(139,0,0,0.35);
+  border-left: 3px solid #8b0000;
+  border-radius: 2px;
+  padding: 12px 18px;
+  margin-bottom: 1.8em;
+  font-family: 'IM Fell English', Georgia, serif;
+  font-size: 0.9rem;
+  color: rgba(216,200,170,0.8);
+}
 
-  .aehb-sidebar {
-    width: 100%;
-    min-width: unset;
+.aehb-chapter-warnings strong {
+  font-family: 'Cinzel', Georgia, serif;
+  color: #c9a227;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.aehb-chapter-warnings ul {
+  margin: 6px 0 0 8px;
+  padding-left: 16px;
+  list-style: none;
+}
+
+.aehb-chapter-warnings li::before {
+  content: '† ';
+  color: rgba(139,0,0,0.7);
+}
+
+/* =============================================
+   RAVEN'S POST — bottom of fic
+   ============================================= */
+.aehb-guestbook {
+  margin-top: 60px;
+  padding-top: 40px;
+  border-top: 2px solid transparent;
+  border-image: linear-gradient(90deg, transparent, #8b0000 15%, #c9a227 50%, #8b0000 85%, transparent) 1;
+}
+
+.aehb-guestbook-header {
+  text-align: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent, rgba(139,0,0,0.6), transparent) 1;
+  margin-bottom: 28px;
+}
+
+.aehb-raven-post-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.aehb-guestbook-title {
+  font-family: 'Cinzel', Georgia, serif;
+  color: #c9a227;
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(139, 0, 0, 0.5);
+}
+
+.aehb-quill-icon {
+  margin-right: 8px;
+  color: rgba(210, 160, 70, 0.9);
+}
+
+.aehb-ornamental-line {
+  color: rgba(201, 162, 39, 0.55);
+  font-size: 0.75rem;
+  letter-spacing: 6px;
+}
+
+/* Form */
+.aehb-chronicle-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.aehb-form-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.aehb-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.aehb-scroll-label {
+  font-family: 'Cinzel', serif;
+  color: rgba(210, 160, 70, 0.85);
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.aehb-parchment-input,
+.aehb-parchment-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(10, 6, 3, 0.6);
+  border: 1px solid rgba(139, 0, 0, 0.35);
+  border-radius: 2px;
+  padding: 8px 10px;
+  color: #c9b99a;
+  font-size: 0.88rem;
+  font-family: 'IM Fell English', Georgia, serif;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.aehb-parchment-input:focus,
+.aehb-parchment-textarea:focus {
+  outline: none;
+  border-color: rgba(139, 0, 0, 0.7);
+  box-shadow: 0 0 10px rgba(139, 0, 0, 0.2);
+}
+
+.aehb-parchment-input::placeholder,
+.aehb-parchment-textarea::placeholder {
+  color: rgba(185, 165, 125, 0.3);
+  font-style: italic;
+}
+
+.aehb-parchment-textarea {
+  min-height: 75px;
+  resize: vertical;
+}
+
+.aehb-seal-icon-btn {
+  margin-right: 6px;
+}
+
+.aehb-seal-button {
+  width: 100%;
+  background: linear-gradient(135deg, #5a0000, #8b0000);
+  border: 1px solid rgba(139, 0, 0, 0.7);
+  border-radius: 2px;
+  padding: 10px;
+  color: #c9a227;
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.aehb-seal-button:hover {
+  background: linear-gradient(135deg, #8b0000, #aa1010);
+  box-shadow: 0 0 16px rgba(139, 0, 0, 0.5);
+  color: #e8c84a;
+}
+
+/* Chronicles display */
+.aehb-chronicles-display {
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.aehb-chronicles-header {
+  font-family: 'Cinzel', serif;
+  color: rgba(201, 162, 39, 0.7);
+  font-size: 0.78rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0 0 12px 0;
+}
+
+.aehb-tome-icon {
+  margin-right: 6px;
+  color: rgba(201, 162, 39, 0.8);
+}
+
+.aehb-chronicle-entry {
+  border: 1px solid rgba(139, 0, 0, 0.2);
+  border-left: 2px solid rgba(160, 30, 0, 0.6);
+  border-radius: 1px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  background: rgba(20, 10, 5, 0.35);
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.aehb-chronicle-entry:hover {
+  border-color: rgba(160, 30, 0, 0.6);
+  background: rgba(35, 15, 8, 0.5);
+}
+
+.aehb-chronicle-seal {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 5px;
+}
+
+.aehb-seal-icon {
+  font-size: 0.85em;
+}
+
+.aehb-chronicler-name {
+  font-family: 'Cinzel', serif;
+  color: rgba(201, 162, 39, 0.8);
+  font-size: 0.82rem;
+  letter-spacing: 0.5px;
+}
+
+.aehb-chronicle-text {
+  color: rgba(185, 165, 125, 0.8);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin: 4px 0;
+}
+
+.aehb-chronicle-date {
+  color: rgba(185, 145, 90, 0.65);
+  font-size: 0.7rem;
+  font-style: italic;
+}
+
+.aehb-mystical-ornaments { display: none; }
+
+/* ── Sealed letter / envelope ── */
+.aehb-envelope {
+  margin: 2em auto 1em;
+  max-width: 420px;
+  list-style: none;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.aehb-envelope summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  list-style: none;
+  outline: none;
+}
+.aehb-envelope summary::-webkit-details-marker { display: none; }
+
+.aehb-envelope-body {
+  position: relative;
+  width: 100%;
+  min-height: 100px;
+  background:
+    linear-gradient(135deg, #3a2a1a 0%, #2e1e10 40%, #3a2818 100%);
+  border: 2px solid rgba(139,0,0,0.5);
+  border-radius: 3px;
+  box-shadow:
+    0 4px 20px rgba(0,0,0,0.6),
+    inset 0 0 30px rgba(0,0,0,0.3);
+  padding: 0;
+  overflow: visible;
+  transition: box-shadow 0.3s;
+}
+
+/* Envelope flap — the triangular top */
+.aehb-envelope-flap {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  overflow: visible;
+  transition: transform 0.5s ease;
+  transform-origin: top center;
+}
+.aehb-envelope-flap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-left: 210px solid transparent;
+  border-right: 210px solid transparent;
+  border-top: 60px solid #4a3422;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+
+/* Wax seal on envelope */
+.aehb-envelope-seal {
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 72px;
+  height: 72px;
+  background: url('/wax-seal.png') center / contain no-repeat;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.6));
+  transition: filter 0.3s, transform 0.3s;
+}
+
+.aehb-envelope summary:hover .aehb-envelope-seal {
+  filter: drop-shadow(0 2px 10px rgba(139,0,0,0.7)) drop-shadow(0 0 16px rgba(201,162,39,0.3));
+  transform: translateX(-50%) scale(1.08);
+}
+
+/* Envelope bottom half texture */
+.aehb-envelope-front {
+  padding: 30px 20px 18px;
+  text-align: center;
+  font-family: 'IM Fell English', Georgia, serif;
+  font-style: italic;
+  font-size: 0.8rem;
+  color: rgba(185,165,125,0.5);
+  letter-spacing: 0.5px;
+}
+
+/* Prompt text */
+.aehb-envelope-prompt {
+  display: block;
+  margin-top: 10px;
+  font-family: 'Cinzel', serif;
+  font-style: normal;
+  font-size: 0.68rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(201,162,39,0.45);
+  transition: color 0.3s;
+}
+.aehb-envelope summary:hover .aehb-envelope-prompt {
+  color: rgba(201,162,39,0.75);
+}
+
+/* ── When envelope is opened ── */
+.aehb-envelope[open] summary .aehb-envelope-flap {
+  transform: rotateX(180deg);
+}
+.aehb-envelope[open] summary .aehb-envelope-seal {
+  opacity: 0.3;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.4)) grayscale(0.4);
+  transform: translateX(-50%) scale(0.8);
+}
+
+/* The letter that slides out above the envelope */
+.aehb-letter-content {
+  position: relative;
+  max-width: 400px;
+  margin: 0 auto -10px;
+  padding: 28px 30px 24px;
+  background:
+    linear-gradient(170deg, #e8dcc8 0%, #d4c4a0 30%, #c8b890 100%);
+  border: 1px solid rgba(139,100,50,0.3);
+  border-radius: 2px;
+  box-shadow:
+    0 6px 24px rgba(0,0,0,0.5),
+    inset 0 0 40px rgba(120,90,50,0.15);
+  color: #2c1e0e;
+  font-family: 'IM Fell English', Georgia, serif;
+  font-size: 0.95rem;
+  line-height: 1.9;
+  animation: aehb-letter-emerge 0.5s ease-out;
+}
+
+@keyframes aehb-letter-emerge {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0 0 0 0);
   }
 }
 
-@media (max-width: 720px) {
-  .aehb-shell {
-    width: min(100%, calc(100vw - 24px));
-    padding-top: 14px;
+.aehb-letter-content p {
+  margin: 0;
+  text-indent: 0;
+  color: #2c1e0e;
+}
+
+.aehb-letter-content em {
+  color: #2c1e0e;
+}
+
+/* Signature line */
+.aehb-letter-signature {
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(100,70,30,0.25);
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  color: #5a3a1a;
+  text-align: right;
+}
+
+/* Aged paper edge lines */
+.aehb-letter-content::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(100,70,30,0.2), transparent);
+}
+
+/* ── Royal envelope variant (King's letters) ── */
+.aehb-envelope-royal .aehb-envelope-body {
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 18px,
+      rgba(201,162,39,0.03) 18px,
+      rgba(201,162,39,0.03) 19px
+    ),
+    linear-gradient(135deg, #2a1a2e 0%, #1e0e22 40%, #2a1830 100%);
+  border: 2px solid rgba(201,162,39,0.4);
+  box-shadow:
+    0 4px 20px rgba(0,0,0,0.6),
+    inset 0 0 30px rgba(0,0,0,0.3),
+    0 0 15px rgba(100,50,120,0.15);
+}
+
+.aehb-envelope-royal .aehb-envelope-flap::before {
+  border-top-color: #3a2240;
+}
+
+/* Gold filigree border on royal envelope */
+.aehb-envelope-royal .aehb-envelope-body::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(201,162,39,0.15);
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Gold corner ornaments */
+.aehb-envelope-royal .aehb-envelope-body::after {
+  content: '❧';
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  font-size: 0.9rem;
+  color: rgba(201,162,39,0.2);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.aehb-envelope-royal .aehb-envelope-seal {
+  background: url('/king-seal.png') center / contain no-repeat;
+  width: 105px;
+  height: 105px;
+  bottom: -56px;
+}
+
+.aehb-envelope-royal .aehb-envelope-front {
+  color: rgba(201,162,39,0.45);
+  font-style: italic;
+  padding: 36px 20px 18px;
+}
+
+.aehb-envelope-royal .aehb-envelope-prompt {
+  color: rgba(201,162,39,0.35);
+}
+.aehb-envelope-royal summary:hover .aehb-envelope-prompt {
+  color: rgba(201,162,39,0.8);
+}
+
+.aehb-envelope-royal summary:hover .aehb-envelope-seal {
+  filter: drop-shadow(0 2px 10px rgba(100,50,120,0.6)) drop-shadow(0 0 20px rgba(201,162,39,0.4));
+  transform: translateX(-50%) scale(1.08);
+}
+
+.aehb-envelope-royal .aehb-letter-content {
+  background:
+    linear-gradient(170deg, #f0e8d4 0%, #e4d8b8 30%, #d8c8a0 100%);
+  border: 1px solid rgba(160,120,50,0.3);
+  box-shadow:
+    0 6px 24px rgba(0,0,0,0.5),
+    inset 0 0 40px rgba(120,90,50,0.1);
+}
+
+/* Royal letter header flourish */
+.aehb-letter-royal-heading {
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(100,50,20,0.5);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(100,70,30,0.2);
+}
+
+.aehb-letter-royal-heading::before,
+.aehb-letter-royal-heading::after {
+  content: ' ✦ ';
+  color: rgba(160,120,40,0.4);
+}
+
+.aehb-letter-signature-royal {
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(100,70,30,0.25);
+  font-family: 'Cinzel', serif;
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  color: #4a2a3a;
+  text-align: right;
+  font-style: italic;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 1100px) {
+  .aehb-manuscript-wrapper {
+    grid-template-columns: 170px 1fr 220px;
+  }
+  .aehb-manuscript-content,
+  .aehb-manuscript-header { padding-left: 32px; padding-right: 32px; }
+}
+
+@media (max-width: 860px) {
+  .aehb-manuscript-wrapper {
+    grid-template-columns: 1fr;
   }
 
-  .aehb-topbar {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 16px;
+  .aehb-book-spine {
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: auto;
+    position: static;
+    padding: 16px 20px;
+    border-right: none;
+    border-bottom: 1px solid rgba(139, 0, 0, 0.5);
   }
 
-  .aehb-brand,
-  .aehb-status {
-    text-align: center;
+  .aehb-spine-title { writing-mode: horizontal-tb; }
+
+  .aehb-bookmark-tabs { flex-direction: row; flex-wrap: wrap; width: auto; }
+
+  .aehb-mystical-sidebar {
+    position: static;
+    height: auto;
+    border-left: none;
+    border-top: 1px solid rgba(139, 0, 0, 0.5);
   }
 
-  .aehb-main,
-  .aehb-sidebar,
-  .aehb-reading-panel,
-  .aehb-comment-panel {
-    padding-left: 14px;
-    padding-right: 14px;
-  }
-
-  .aehb-story-content {
-    font-size: 1.1rem;
-  }
+  .aehb-manuscript-content,
+  .aehb-manuscript-header { padding: 24px 20px; }
 }
