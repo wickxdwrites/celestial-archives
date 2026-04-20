@@ -23,6 +23,17 @@ export default function MatchGame() {
   const config = LEVELS[currentLevel];
   const secretUnlocked = completedLevels.size >= 10;
 
+  const bgLayer = (
+    <div className="mg-bg-layer">
+      <div className="mg-bg-orb" />
+      <div className="mg-bg-orb" />
+      <div className="mg-bg-orb" />
+      <div className="mg-bg-orb" />
+      <div className="mg-bg-orb" />
+      <div className="mg-bg-stars" />
+    </div>
+  );
+
   // ===== TIMER =====
   useEffect(() => {
     if (timerActive && timeLeft > 0) {
@@ -125,15 +136,22 @@ export default function MatchGame() {
   if (screen === 'menu') {
     return (
       <div className="match-game">
+        {bgLayer}
         <Link to="/extras" className="mg-back-link">&lt; RETURN TO EXTRAS</Link>
         <div className="mg-menu">
-          <div className="mg-title">Serenity Match</div>
-          <div className="mg-subtitle">Match the cards. Reveal the image.</div>
+          <div className="mg-title-group">
+            <div className="mg-logo-icon">🪷</div>
+            <div className="mg-title">Serenity Match</div>
+            <div className="mg-subtitle">Match the cards. Reveal the image.</div>
+            <div className="mg-divider"><span>✦</span></div>
+          </div>
           <div className="mg-level-grid">
             {LEVELS.map((lvl, i) => {
               const isCompleted = completedLevels.has(i);
               const isSecret = lvl.secret;
               const isLocked = isSecret && !secretUnlocked;
+              const previewEmojis = ['💆', '🧴', '🕯️', '🌿', '💎', '🧘', '🌸', '♨️', '🫧', '🪷', '✨'];
+              const diffLabel = i <= 2 ? 'Easy' : i <= 5 ? 'Medium' : i <= 8 ? 'Hard' : 'Expert';
               return (
                 <button
                   key={i}
@@ -141,10 +159,17 @@ export default function MatchGame() {
                   onClick={() => !isLocked && startLevel(i)}
                   disabled={isLocked}
                 >
+                  <div className="mg-level-emoji">{isLocked ? '🔒' : isCompleted ? '✅' : previewEmojis[i]}</div>
                   <div className="mg-level-num">{isSecret ? '?' : lvl.level}</div>
                   <div className="mg-level-info">
-                    {isLocked ? '🔒' : isCompleted ? '✓' : `${lvl.pairs * 2} cards`}
+                    {isLocked ? 'Locked' : isCompleted ? 'Complete' : `${lvl.pairs * 2} cards`}
                   </div>
+                  {!isLocked && !isCompleted && (
+                    <div className={`mg-level-diff mg-diff-${diffLabel.toLowerCase()}`}>{diffLabel}</div>
+                  )}
+                  {lvl.timeLimit > 0 && !isLocked && !isCompleted && (
+                    <div className="mg-level-timer">⏱ {lvl.timeLimit}s</div>
+                  )}
                 </button>
               );
             })}
@@ -164,6 +189,7 @@ export default function MatchGame() {
     const isSecret = config?.secret;
     return (
       <div className="match-game">
+        {bgLayer}
         <div className="mg-complete">
           <div className="mg-complete-title">
             {isSecret ? '✨ Secret Level Complete! ✨' : `Level ${config.level} Complete!`}
@@ -205,6 +231,7 @@ export default function MatchGame() {
   if (screen === 'gameComplete') {
     return (
       <div className="match-game">
+        {bgLayer}
         <div className="mg-complete">
           <div className="mg-complete-title">
             {secretUnlocked ? '🎉 All Levels Complete!' : '🎉 Congratulations!'}
@@ -229,6 +256,7 @@ export default function MatchGame() {
 
   return (
     <div className="match-game">
+      {bgLayer}
       <div className="mg-play-area">
         {/* HUD */}
         <div className="mg-hud">
@@ -251,12 +279,12 @@ export default function MatchGame() {
 
         {/* GAME BOARD — photo underneath with card grid on top */}
         <div className="mg-board-wrapper">
-          {/* Background photo/gradient that gets revealed */}
+          {/* Background photo that unblurs as matches are made */}
           <div className="mg-photo-layer" style={{
             background: LEVEL_IMAGES[currentLevel]?.src
               ? `url(${LEVEL_IMAGES[currentLevel].src}) center/cover`
               : LEVEL_IMAGES[currentLevel]?.placeholder,
-            opacity: revealProgress,
+            filter: `blur(${Math.round((1 - revealProgress) * 20)}px)`,
           }} />
 
           {/* Card grid */}
@@ -271,21 +299,25 @@ export default function MatchGame() {
               const isFlipped = flipped.includes(i);
               const isMatched = matched.has(card.pairId);
               return (
-                <button
+                <div
                   key={card.id}
-                  className={`mg-card ${isFlipped ? 'flipped' : ''} ${isMatched ? 'matched' : ''}`}
-                  onClick={() => handleCardClick(i)}
-                  disabled={isMatched}
+                  className={`mg-card-slot ${isMatched ? 'slot-cleared' : ''}`}
                 >
-                  <div className="mg-card-inner">
-                    <div className="mg-card-front">
-                      <span className="mg-card-back-icon">🪷</span>
+                  <button
+                    className={`mg-card ${isFlipped ? 'flipped' : ''} ${isMatched ? 'matched' : ''}`}
+                    onClick={() => handleCardClick(i)}
+                    disabled={isMatched}
+                  >
+                    <div className="mg-card-inner">
+                      <div className="mg-card-front">
+                        <span className="mg-card-back-icon">🪷</span>
+                      </div>
+                      <div className="mg-card-back">
+                        <span className="mg-card-symbol">{card.symbol}</span>
+                      </div>
                     </div>
-                    <div className="mg-card-back">
-                      <span className="mg-card-symbol">{card.symbol}</span>
-                    </div>
-                  </div>
-                </button>
+                  </button>
+                </div>
               );
             })}
           </div>
