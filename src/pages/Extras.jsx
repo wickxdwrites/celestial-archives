@@ -17,14 +17,15 @@ const extrasData = {
       tags: ['interactive fiction', 'chat simulation', 'EF007E', 'terminal interface']
     },
     {
-      id: 'constellation-match',
-      title: 'Constellation Matching',
-      description: 'Test your knowledge of star patterns and celestial mythology.',
-      status: 'concept',
-      icon: '✨',
-      difficulty: 'Easy',
-      estimatedTime: '5-10 min',
-      tags: ['astronomy', 'memory']
+      id: 'serenity-match',
+      title: 'Serenity Match',
+      description: 'A relaxing card matching game with 10 levels and a secret to unlock. Match the cards to reveal hidden images.',
+      status: 'active',
+      icon: '🪷',
+      path: '/extras/serenity-match',
+      difficulty: 'Easy → Hard',
+      estimatedTime: '10-20 min',
+      tags: ['matching', 'memory', 'relaxation', 'massage & therapy']
     }
   ],
   quizzes: [
@@ -71,7 +72,8 @@ const statusConfig = {
 const difficultyConfig = {
   Easy: { color: '#70ff9a', icon: '⭐' },
   Medium: { color: '#ffc864', icon: '⭐⭐' },
-  Hard: { color: '#ff9999', icon: '⭐⭐⭐' }
+  Hard: { color: '#ff9999', icon: '⭐⭐⭐' },
+  'Easy → Hard': { color: '#c9a0dc', icon: '⭐→⭐⭐⭐' }
 };
 
 export default function Extras() {
