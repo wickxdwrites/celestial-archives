@@ -25,7 +25,8 @@ const extrasData = {
       path: '/extras/serenity-match',
       difficulty: 'Easy → Hard',
       estimatedTime: '10-20 min',
-      tags: ['matching', 'memory', 'relaxation', 'massage & therapy']
+      tags: ['matching', 'memory', 'relaxation', 'massage & therapy'],
+      nsfw: true
     }
   ],
   quizzes: [
@@ -78,16 +79,44 @@ const difficultyConfig = {
 
 export default function Extras() {
   const [activeSection, setActiveSection] = useState('games');
+  const [showNsfw, setShowNsfw] = useState(() => {
+    try { return localStorage.getItem('celestial-nsfw') === 'true'; } catch { return false; }
+  });
+  const [nsfwModal, setNsfwModal] = useState(false);
+
+  const handleNsfwToggle = () => {
+    if (showNsfw) {
+      setShowNsfw(false);
+      try { localStorage.setItem('celestial-nsfw', 'false'); } catch {}
+    } else {
+      setNsfwModal(true);
+    }
+  };
+
+  const confirmNsfw = () => {
+    setShowNsfw(true);
+    setNsfwModal(false);
+    try { localStorage.setItem('celestial-nsfw', 'true'); } catch {}
+  };
+
+  const denyNsfw = () => {
+    setNsfwModal(false);
+  };
+
+  const filterNsfw = (items) => showNsfw ? items : items.filter(item => !item.nsfw);
   
   const renderGameCard = (game) => (
-    <div key={game.id} className={`extras-card extras-card--${game.status}`}>
+    <div key={game.id} className={`extras-card extras-card--${game.status} ${game.nsfw ? 'extras-card--nsfw' : ''}`}>
       <div className="card-icon-header">
         <span className="card-icon">{game.icon}</span>
-        <div className="card-status-badge" style={{ 
-          color: statusConfig[game.status].color,
-          background: statusConfig[game.status].bg
-        }}>
-          {statusConfig[game.status].label}
+        <div className="card-badges">
+          {game.nsfw && <span className="nsfw-badge">NSFW</span>}
+          <div className="card-status-badge" style={{ 
+            color: statusConfig[game.status].color,
+            background: statusConfig[game.status].bg
+          }}>
+            {statusConfig[game.status].label}
+          </div>
         </div>
       </div>
       
@@ -258,6 +287,14 @@ export default function Extras() {
               Games, quizzes, tools, and experimental experiences that expand the boundaries of storytelling
             </p>
           </div>
+          <div className="nsfw-toggle-row">
+            <label className="nsfw-toggle">
+              <span className="nsfw-toggle-label">Show NSFW Content</span>
+              <div className={`nsfw-switch ${showNsfw ? 'nsfw-switch--on' : ''}`} onClick={handleNsfwToggle}>
+                <div className="nsfw-switch-thumb" />
+              </div>
+            </label>
+          </div>
         </div>
         
         <div className="extras-navigation">
@@ -278,10 +315,10 @@ export default function Extras() {
         </div>
         
         <div className="extras-grid">
-          {activeSection === 'games' && extrasData.games.map(renderGameCard)}
-          {activeSection === 'quizzes' && extrasData.quizzes.map(renderQuizCard)}
-          {activeSection === 'tools' && extrasData.tools.map(renderToolCard)}
-          {activeSection === 'experiments' && extrasData.experiments.map(renderExperimentCard)}
+          {activeSection === 'games' && filterNsfw(extrasData.games).map(renderGameCard)}
+          {activeSection === 'quizzes' && filterNsfw(extrasData.quizzes).map(renderQuizCard)}
+          {activeSection === 'tools' && filterNsfw(extrasData.tools).map(renderToolCard)}
+          {activeSection === 'experiments' && filterNsfw(extrasData.experiments).map(renderExperimentCard)}
         </div>
         
         <div className="extras-footer">
@@ -295,6 +332,31 @@ export default function Extras() {
           </div>
         </div>
       </section>
+      {nsfwModal && (
+        <div className="nsfw-modal-overlay" onClick={denyNsfw}>
+          <div className="nsfw-modal" onClick={e => e.stopPropagation()}>
+            <div className="nsfw-modal-icon">🔞</div>
+            <h2 className="nsfw-modal-title">Age Verification Required</h2>
+            <p className="nsfw-modal-text">
+              Some content in the Celestial Archives is intended for mature audiences only. 
+              By enabling NSFW content, you confirm that:
+            </p>
+            <ul className="nsfw-modal-terms">
+              <li>You are at least <strong>18 years of age</strong> (or the age of majority in your jurisdiction)</li>
+              <li>You understand that NSFW content may contain adult themes</li>
+              <li>You accept responsibility for viewing this content</li>
+            </ul>
+            <div className="nsfw-modal-actions">
+              <button className="nsfw-modal-btn nsfw-modal-btn--confirm" onClick={confirmNsfw}>
+                I am 18+ — Show NSFW Content
+              </button>
+              <button className="nsfw-modal-btn nsfw-modal-btn--deny" onClick={denyNsfw}>
+                No, Keep It Hidden
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </ArchiveLayout>
   );
 }

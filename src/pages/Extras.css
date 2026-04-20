@@ -538,6 +538,228 @@
 }
 
 /* Responsive Design */
+
+/* ===== NSFW TOGGLE ===== */
+.nsfw-toggle-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.nsfw-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.nsfw-toggle-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: rgba(180, 200, 255, 0.6);
+  text-transform: uppercase;
+}
+
+.nsfw-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: rgba(100, 80, 140, 0.3);
+  border: 1px solid rgba(140, 170, 255, 0.2);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nsfw-switch:hover {
+  border-color: rgba(140, 170, 255, 0.4);
+}
+
+.nsfw-switch--on {
+  background: rgba(255, 100, 120, 0.3);
+  border-color: rgba(255, 100, 120, 0.5);
+}
+
+.nsfw-switch-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  background: rgba(180, 200, 255, 0.6);
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.nsfw-switch--on .nsfw-switch-thumb {
+  left: 22px;
+  background: #ff6478;
+  box-shadow: 0 0 8px rgba(255, 100, 120, 0.5);
+}
+
+/* ===== NSFW BADGE ===== */
+.card-badges {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nsfw-badge {
+  padding: 4px 8px;
+  background: rgba(255, 80, 100, 0.2);
+  color: #ff6478;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 80, 100, 0.4);
+}
+
+.extras-card--nsfw {
+  border-color: rgba(255, 100, 120, 0.25);
+}
+
+.extras-card--nsfw:hover {
+  border-color: rgba(255, 100, 120, 0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 15px 45px rgba(255, 100, 120, 0.15),
+    0 0 100px rgba(255, 80, 100, 0.1);
+}
+
+/* ===== NSFW AGE GATE MODAL ===== */
+.nsfw-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: nsfwFadeIn 0.25s ease;
+}
+
+@keyframes nsfwFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.nsfw-modal {
+  background: linear-gradient(135deg, #1a1030, #14102a);
+  border: 1px solid rgba(255, 100, 120, 0.3);
+  border-radius: 20px;
+  padding: 36px 32px;
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 80, 100, 0.1);
+  animation: nsfwSlideUp 0.3s ease;
+}
+
+@keyframes nsfwSlideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.nsfw-modal-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.nsfw-modal-title {
+  margin: 0 0 16px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #f2ecfb;
+}
+
+.nsfw-modal-text {
+  margin: 0 0 16px;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(210, 222, 247, 0.85);
+}
+
+.nsfw-modal-terms {
+  text-align: left;
+  margin: 0 0 24px;
+  padding: 16px 16px 16px 32px;
+  background: rgba(255, 100, 120, 0.06);
+  border: 1px solid rgba(255, 100, 120, 0.15);
+  border-radius: 12px;
+  list-style: none;
+}
+
+.nsfw-modal-terms li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: rgba(210, 222, 247, 0.8);
+}
+
+.nsfw-modal-terms li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #ff6478;
+  font-weight: bold;
+}
+
+.nsfw-modal-terms li strong {
+  color: #ff6478;
+}
+
+.nsfw-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nsfw-modal-btn {
+  padding: 14px 24px;
+  border: none;
+  border-radius: 12px;
+  font-family: "Inter", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.02em;
+}
+
+.nsfw-modal-btn--confirm {
+  background: rgba(255, 100, 120, 0.2);
+  color: #ff6478;
+  border: 1px solid rgba(255, 100, 120, 0.4);
+}
+
+.nsfw-modal-btn--confirm:hover {
+  background: rgba(255, 100, 120, 0.3);
+  border-color: rgba(255, 100, 120, 0.6);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 100, 120, 0.2);
+}
+
+.nsfw-modal-btn--deny {
+  background: rgba(140, 170, 255, 0.1);
+  color: rgba(180, 200, 255, 0.7);
+  border: 1px solid rgba(140, 170, 255, 0.2);
+}
+
+.nsfw-modal-btn--deny:hover {
+  background: rgba(140, 170, 255, 0.2);
+  color: #d2c4ff;
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
   .extras-section {
     padding: 0 16px;
