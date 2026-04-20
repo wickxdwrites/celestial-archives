@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ArchiveLayout from '../components/layout/ArchiveLayout';
 import './Extras.css';
 
@@ -8,8 +9,9 @@ const extrasData = {
       id: 'ef007e-terminal-chat',
       title: 'EF007E: Terminal Interface',
       description: 'Step into the Grid and engage in real-time conversations with the digital consciousnesses from EF007E. Experience the story through interactive dialogue.',
-      status: 'planned',
+      status: 'active',
       icon: '💬',
+      path: '/extras/ef007e-terminal',
       difficulty: 'Medium',
       estimatedTime: '15-30 min',
       tags: ['interactive fiction', 'chat simulation', 'EF007E', 'terminal interface']
@@ -110,12 +112,18 @@ export default function Extras() {
       </div>
       
       <div className="card-footer">
-        <button 
-          className={`card-action ${game.status === 'active' ? 'card-action--active' : 'card-action--disabled'}`}
-          disabled={game.status !== 'active'}
-        >
-          {game.status === 'active' ? 'Play Now' : 'Coming Soon'}
-        </button>
+        {game.status === 'active' && game.path ? (
+          <Link to={game.path} className="card-action card-action--active">
+            Play Now
+          </Link>
+        ) : (
+          <button 
+            className="card-action card-action--disabled"
+            disabled
+          >
+            Coming Soon
+          </button>
+        )}
       </div>
     </div>
   );
