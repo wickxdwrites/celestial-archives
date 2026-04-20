@@ -28,6 +28,65 @@
   box-sizing: border-box;
 }
 
+/* ===== ANIMATED BACKGROUND ===== */
+.match-game::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 600px 400px at 20% 30%, rgba(160, 100, 220, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 350px at 80% 70%, rgba(110, 207, 178, 0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 300px at 50% 10%, rgba(201, 160, 220, 0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 300px 300px at 70% 40%, rgba(255, 209, 102, 0.06) 0%, transparent 60%);
+  animation: mg-bgDrift 20s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.match-game::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%, rgba(201, 160, 220, 0.4), transparent),
+    radial-gradient(1px 1px at 30% 65%, rgba(110, 207, 178, 0.3), transparent),
+    radial-gradient(1.5px 1.5px at 55% 15%, rgba(255, 255, 255, 0.3), transparent),
+    radial-gradient(1px 1px at 70% 80%, rgba(201, 160, 220, 0.35), transparent),
+    radial-gradient(1px 1px at 85% 35%, rgba(110, 207, 178, 0.25), transparent),
+    radial-gradient(1.5px 1.5px at 15% 85%, rgba(255, 209, 102, 0.3), transparent),
+    radial-gradient(1px 1px at 40% 45%, rgba(255, 255, 255, 0.2), transparent),
+    radial-gradient(1px 1px at 90% 55%, rgba(201, 160, 220, 0.3), transparent),
+    radial-gradient(1.2px 1.2px at 25% 40%, rgba(110, 207, 178, 0.35), transparent),
+    radial-gradient(1px 1px at 60% 90%, rgba(255, 255, 255, 0.25), transparent),
+    radial-gradient(1px 1px at 5% 50%, rgba(201, 160, 220, 0.2), transparent),
+    radial-gradient(1.3px 1.3px at 75% 10%, rgba(255, 209, 102, 0.2), transparent),
+    radial-gradient(1px 1px at 45% 75%, rgba(110, 207, 178, 0.3), transparent),
+    radial-gradient(1px 1px at 95% 90%, rgba(201, 160, 220, 0.25), transparent),
+    radial-gradient(1.5px 1.5px at 35% 5%, rgba(255, 255, 255, 0.35), transparent);
+  animation: mg-sparkle 8s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes mg-bgDrift {
+  0% { transform: scale(1) translate(0, 0); }
+  33% { transform: scale(1.05) translate(-10px, 15px); }
+  66% { transform: scale(0.98) translate(15px, -10px); }
+  100% { transform: scale(1.03) translate(-5px, 5px); }
+}
+
+@keyframes mg-sparkle {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.7; }
+}
+
+/* Ensure all content sits above the background layers */
+.match-game > * {
+  position: relative;
+  z-index: 1;
+}
+
 .match-game *,
 .match-game *::before,
 .match-game *::after {
