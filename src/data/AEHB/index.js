@@ -10,6 +10,7 @@ import chapter8 from "./chapter8";
 import chapter9 from "./chapter9";
 import chapter10 from "./chapter10";
 import chapter11 from "./chapter11";
+import chapter12 from "./chapter12";
 
 const AEHBChapters = [
 	chapter1,
@@ -22,7 +23,8 @@ const AEHBChapters = [
 	chapter8,
 	chapter9,
 	chapter10,
-	chapter11
+	chapter11,
+	chapter12
 ];
 
 export default AEHBChapters;

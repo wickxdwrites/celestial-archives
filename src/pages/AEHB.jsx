@@ -4,6 +4,9 @@ import AEHBChapters from "../data/AEHB";
 import { saveComment, getComments, COMMENT_LIMITS } from "../utils/comments";
 import { getTheme } from "../themes/registry";
 import aehbMeta from "../works/aehb/meta";
+import honeyBreadImage from "../assets/honey.png";
+import milkBreadImage from "../assets/milk.png";
+import lemonPoppySeedBreadImage from "../assets/lemon.png";
 import "./AEHB.css";
 
 export default function AEHB() {
@@ -14,6 +17,7 @@ export default function AEHB() {
   const [submitError, setSubmitError] = useState("");
   const [flameFlicker, setFlameFlicker] = useState(false);
   const [comments, setComments] = useState([]);
+  const [selectedBreadId, setSelectedBreadId] = useState(null);
 
   const theme = getTheme("aehb");
   const activeChapter =
@@ -21,6 +25,31 @@ export default function AEHB() {
   const currentIndex = AEHBChapters.findIndex(ch => ch.id === selectedChapterId);
   const prevChapter = currentIndex > 0 ? AEHBChapters[currentIndex - 1] : null;
   const nextChapter = currentIndex < AEHBChapters.length - 1 ? AEHBChapters[currentIndex + 1] : null;
+
+  const breadChoices = [
+    { id: "honey", label: "Honey Bread", storyLabel: "honey bread", image: honeyBreadImage },
+    { id: "milk", label: "Milk Bread", storyLabel: "milk bread", image: milkBreadImage },
+    {
+      id: "lemon",
+      label: "Lemon Poppy Seed Bread",
+      storyLabel: "lemon poppy seed bread",
+      image: lemonPoppySeedBreadImage,
+    },
+  ];
+
+  const selectedBread = breadChoices.find((bread) => bread.id === selectedBreadId) || null;
+
+  const chapterHtml =
+    typeof activeChapter.content === "string"
+      ? activeChapter.content.replaceAll("{{selectedBread}}", selectedBread?.storyLabel || "")
+      : "";
+
+  const hasBreadSelector =
+    activeChapter.id === "chapter-12" && chapterHtml.includes("<!-- BREAD_SELECTOR -->");
+
+  const chapterParts = hasBreadSelector
+    ? chapterHtml.split("<!-- BREAD_SELECTOR -->")
+    : [chapterHtml, ""];
 
   useEffect(() => {
     let isMounted = true;
@@ -42,6 +71,12 @@ export default function AEHB() {
       isMounted = false;
     };
   }, [activeChapter.label]);
+
+  useEffect(() => {
+    if (activeChapter.id === "chapter-12") {
+      setSelectedBreadId(null);
+    }
+  }, [activeChapter.id]);
 
   // Flame flicker effect
   useEffect(() => {
@@ -198,7 +233,36 @@ export default function AEHB() {
               <div className="aehb-text-column">
                 <div className="aehb-story-content">
                   {typeof activeChapter.content === "string" ? (
-                    <div dangerouslySetInnerHTML={{ __html: activeChapter.content }} />
+                    hasBreadSelector ? (
+                      <>
+                        <div dangerouslySetInnerHTML={{ __html: chapterParts[0] }} />
+
+                        <section className="aehb-bread-selector" aria-label="Bread selection for Chapter 12">
+                          <p className="aehb-bread-selector-title">Pick the loaf Porsche points at:</p>
+                          <div className="aehb-bread-options">
+                            {breadChoices.map((bread) => (
+                              <button
+                                key={bread.id}
+                                type="button"
+                                className={`aehb-bread-option ${selectedBreadId === bread.id ? "active" : ""}`}
+                                onClick={() => setSelectedBreadId(bread.id)}
+                              >
+                                <img src={bread.image} alt={bread.label} className="aehb-bread-option-image" />
+                                <span className="aehb-bread-option-label">{bread.label}</span>
+                              </button>
+                            ))}
+                          </div>
+                        </section>
+
+                        {selectedBread ? (
+                          <div dangerouslySetInnerHTML={{ __html: chapterParts[1] }} />
+                        ) : (
+                          <p className="aehb-bread-selector-hint">Choose a bread to continue the chapter.</p>
+                        )}
+                      </>
+                    ) : (
+                      <div dangerouslySetInnerHTML={{ __html: chapterHtml }} />
+                    )
                   ) : (
                     activeChapter.content.map((paragraph, index) => (
                       <p key={`${activeChapter.id}-${index}`} className="aehb-manuscript-paragraph">

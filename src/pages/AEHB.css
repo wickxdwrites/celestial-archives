@@ -1602,3 +1602,84 @@
 .aehb-bottom-ember-21 { left: 91%; --drift:  14px; animation-duration: 3.0s; animation-delay: 1.5s; width: 4px; height: 4px; background: #ff6a00; }
 .aehb-bottom-ember-22 { left: 95%; --drift: -16px; animation-duration: 3.8s; animation-delay: 2.9s; width: 2px; height: 2px; }
 .aehb-bottom-ember-23 { left: 98%; --drift:  6px;  animation-duration: 4.2s; animation-delay: 0.1s; width: 3px; height: 3px; }
+
+/* ── Chapter 12 interactive bread selector ── */
+.aehb-bread-selector {
+  margin: 1.8em 0 2em;
+  padding: 14px;
+  border: 1px solid rgba(201, 162, 39, 0.28);
+  background: linear-gradient(160deg, rgba(35, 20, 12, 0.86) 0%, rgba(22, 12, 8, 0.92) 100%);
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.35);
+}
+
+.aehb-bread-selector-title {
+  margin: 0 0 10px;
+  font-family: 'Cinzel', Georgia, serif;
+  font-size: 0.82rem;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #c9a227;
+}
+
+.aehb-bread-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+}
+
+.aehb-bread-option {
+  border: none;
+  background: transparent;
+  padding: 4px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  color: #d4c4a8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.aehb-bread-option:hover {
+  transform: translateY(-2px);
+}
+
+.aehb-bread-option.active {
+  filter: drop-shadow(0 0 8px rgba(201, 162, 39, 0.5));
+}
+
+.aehb-bread-option-image {
+  width: 92px;
+  height: 92px;
+  object-fit: contain;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.aehb-bread-option-label {
+  display: block;
+  font-family: 'IM Fell English', Georgia, serif;
+  font-size: 0.92rem;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.aehb-bread-selector-hint {
+  margin: 0.9em 0 0;
+  text-align: center;
+  color: rgba(201, 162, 39, 0.8);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+@media (max-width: 720px) {
+  .aehb-bread-options {
+    gap: 12px;
+  }
+
+  .aehb-bread-option-image {
+    width: 82px;
+    height: 82px;
+  }
+}
