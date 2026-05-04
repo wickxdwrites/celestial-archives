@@ -16,8 +16,8 @@ const archiveUpdates = [
     id: 7,
     label: "SYSTEM ENHANCEMENT",
     text: "EF007E interface has been completely rebuilt with advanced cyberpunk aesthetics! Enhanced visual effects, improved terminal styling, and immersive Grid-like experience. The digital realm awaits.",
-    date: "2026-04-16", 
-    timestamp: "21:00 UTC",
+    date: "2026-05-04", 
+    timestamp: "13:55 UTC",
     priority: "high"
   },
   {

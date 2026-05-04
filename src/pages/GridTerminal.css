@@ -856,6 +856,28 @@
 }
 
 /* ===== BACK LINK ===== */
+.grid-terminal .home-link {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  z-index: 5;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: #3a6a7a;
+  text-decoration: none;
+  border: 1px solid #0ff2;
+  padding: 4px 10px;
+  border-radius: 2px;
+  transition: all 0.15s;
+}
+
+.grid-terminal .home-link:hover {
+  color: #a0d8f0;
+  border-color: #0ff5;
+  background: #0ff0a;
+}
+
 .grid-terminal .back-link {
   position: absolute;
   top: 10px;

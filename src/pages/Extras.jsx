@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import ArchiveLayout from '../components/layout/ArchiveLayout';
 import './Extras.css';
+
+const SUGGESTIONS_STORAGE_KEY = 'celestial-suggestions';
+const SUGGESTION_VOTES_STORAGE_KEY = 'celestial-suggestion-votes';
 
 const extrasData = {
   games: [
@@ -9,7 +12,7 @@ const extrasData = {
       id: 'ef007e-terminal-chat',
       title: 'EF007E: Terminal Interface',
       description: 'Step into the Grid and engage in real-time conversations with the digital consciousnesses from EF007E. Experience the story through interactive dialogue.',
-      status: 'active',
+      status: 'beta',
       icon: '💬',
       path: '/extras/ef007e-terminal',
       difficulty: 'Medium',
@@ -20,7 +23,7 @@ const extrasData = {
       id: 'serenity-match',
       title: 'Serenity Match',
       description: 'A relaxing card matching game with 10 levels and a secret to unlock. Match the cards to reveal hidden images.',
-      status: 'active',
+      status: 'in-development',
       icon: '🪷',
       path: '/extras/serenity-match',
       difficulty: 'Easy → Hard',
@@ -31,41 +34,24 @@ const extrasData = {
   ],
   quizzes: [
     {
-      id: 'character-archetype',
-      title: 'Character Archetype Analysis',
-      description: 'Discover which archetypal role you embody in the grand cosmic narrative.',
-      status: 'concept',
-      icon: '🎭',
-      questions: 12,
-      tags: ['personality', 'character analysis']
+      id: 'bread-quiz',
+      title: 'What Type of Bread Are You?',
+      description: 'A chaotic personality quiz to reveal your true baked identity. Soft loaf? Salty bagel? Dramatic croissant?',
+      status: 'active',
+      icon: '🍞',
+      questions: 15,
+      path: '/extras/bread-quiz',
+      tags: ['comedy', 'personality', 'bread lore']
     }
   ],
-  tools: [
-    {
-      id: 'name-generator',
-      title: 'Celestial Name Generator',
-      description: 'Generate mystical names for characters, places, and cosmic entities.',
-      status: 'concept',
-      icon: '🔮',
-      features: ['Character names', 'Planet names', 'Star system names'],
-      tags: ['generator', 'creative writing']
-    }
-  ],
-  experiments: [
-    {
-      id: 'infinite-scroll-story',
-      title: 'The Infinite Scroll',
-      description: 'An ever-expanding collaborative story that grows with each visitor contribution.',
-      status: 'concept',
-      icon: '📜',
-      participants: 0,
-      tags: ['collaborative', 'storytelling', 'experimental']
-    }
-  ]
+  tools: [],
+  experiments: []
 };
 
 const statusConfig = {
   active: { label: 'Live', color: '#64ffc8', bg: 'rgba(100, 255, 200, 0.15)' },
+  beta: { label: 'Beta', color: '#78c8ff', bg: 'rgba(120, 200, 255, 0.15)' },
+  'in-development': { label: 'In Development', color: '#ffc864', bg: 'rgba(255, 200, 100, 0.15)' },
   planned: { label: 'Coming Soon', color: '#78c8ff', bg: 'rgba(120, 200, 255, 0.15)' },
   concept: { label: 'In Development', color: '#ffc864', bg: 'rgba(255, 200, 100, 0.15)' }
 };
@@ -83,6 +69,36 @@ export default function Extras() {
     try { return localStorage.getItem('celestial-nsfw') === 'true'; } catch { return false; }
   });
   const [nsfwModal, setNsfwModal] = useState(false);
+  const [suggestionAlias, setSuggestionAlias] = useState('');
+  const [suggestionText, setSuggestionText] = useState('');
+  const [suggestions, setSuggestions] = useState(() => {
+    try {
+      const stored = localStorage.getItem(SUGGESTIONS_STORAGE_KEY);
+      return stored ? JSON.parse(stored) : [];
+    } catch {
+      return [];
+    }
+  });
+  const [voteMap, setVoteMap] = useState(() => {
+    try {
+      const stored = localStorage.getItem(SUGGESTION_VOTES_STORAGE_KEY);
+      return stored ? JSON.parse(stored) : {};
+    } catch {
+      return {};
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(SUGGESTIONS_STORAGE_KEY, JSON.stringify(suggestions));
+    } catch {}
+  }, [suggestions]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(SUGGESTION_VOTES_STORAGE_KEY, JSON.stringify(voteMap));
+    } catch {}
+  }, [voteMap]);
 
   const handleNsfwToggle = () => {
     if (showNsfw) {
@@ -101,6 +117,52 @@ export default function Extras() {
 
   const denyNsfw = () => {
     setNsfwModal(false);
+  };
+
+  const handleSuggestionSubmit = (event) => {
+    event.preventDefault();
+
+    const trimmedText = suggestionText.trim();
+    if (!trimmedText) return;
+
+    const trimmedAlias = suggestionAlias.trim();
+    const newSuggestion = {
+      id: Date.now().toString(),
+      alias: trimmedAlias || 'Anonymous',
+      text: trimmedText,
+      yay: 0,
+      nay: 0,
+      createdAt: new Date().toISOString(),
+    };
+
+    setSuggestions((prev) => [newSuggestion, ...prev]);
+    setSuggestionText('');
+    setSuggestionAlias('');
+  };
+
+  const handleVote = (suggestionId, voteType) => {
+    const previousVote = voteMap[suggestionId];
+    if (previousVote === voteType) return;
+
+    setSuggestions((prev) =>
+      prev.map((item) => {
+        if (item.id !== suggestionId) return item;
+
+        const yayDelta = (voteType === 'yay' ? 1 : 0) - (previousVote === 'yay' ? 1 : 0);
+        const nayDelta = (voteType === 'nay' ? 1 : 0) - (previousVote === 'nay' ? 1 : 0);
+
+        return {
+          ...item,
+          yay: Math.max(0, item.yay + yayDelta),
+          nay: Math.max(0, item.nay + nayDelta),
+        };
+      })
+    );
+
+    setVoteMap((prev) => ({
+      ...prev,
+      [suggestionId]: voteType,
+    }));
   };
 
   const filterNsfw = (items) => showNsfw ? items : items.filter(item => !item.nsfw);
@@ -143,16 +205,16 @@ export default function Extras() {
       </div>
       
       <div className="card-footer">
-        {game.status === 'active' && game.path ? (
+        {(game.status === 'active' || game.status === 'beta') && game.path ? (
           <Link to={game.path} className="card-action card-action--active">
-            Play Now
+            {game.status === 'beta' ? 'Play Beta' : 'Play Now'}
           </Link>
         ) : (
           <button 
             className="card-action card-action--disabled"
             disabled
           >
-            Coming Soon
+            In Development
           </button>
         )}
       </div>
@@ -186,12 +248,18 @@ export default function Extras() {
       </div>
       
       <div className="card-footer">
-        <button 
-          className={`card-action ${quiz.status === 'active' ? 'card-action--active' : 'card-action--disabled'}`}
-          disabled={quiz.status !== 'active'}
-        >
-          {quiz.status === 'active' ? 'Take Quiz' : 'Coming Soon'}
-        </button>
+        {quiz.status === 'active' && quiz.path ? (
+          <Link to={quiz.path} className="card-action card-action--active">
+            Take Quiz
+          </Link>
+        ) : (
+          <button 
+            className="card-action card-action--disabled"
+            disabled
+          >
+            Coming Soon
+          </button>
+        )}
       </div>
     </div>
   );
@@ -328,7 +396,62 @@ export default function Extras() {
               Suggestions for new games, quizzes, or interactive experiments are always welcome. 
               The cosmic archives are ever-expanding!
             </p>
-            <button className="callout-button">Suggest Something ✨</button>
+            <form className="suggestion-form" onSubmit={handleSuggestionSubmit}>
+              <input
+                type="text"
+                className="suggestion-input suggestion-input--alias"
+                placeholder="Your alias (optional)"
+                value={suggestionAlias}
+                onChange={(e) => setSuggestionAlias(e.target.value)}
+                maxLength={30}
+              />
+              <textarea
+                className="suggestion-input suggestion-input--text"
+                placeholder="Share your idea for a new game, quiz, tool, or experiment..."
+                value={suggestionText}
+                onChange={(e) => setSuggestionText(e.target.value)}
+                rows={3}
+                maxLength={300}
+              />
+              <button type="submit" className="callout-button">Suggest Something</button>
+            </form>
+          </div>
+
+          <div className="suggestions-board">
+            <h4 className="suggestions-title">Community Suggestion Board</h4>
+            {suggestions.length === 0 ? (
+              <p className="suggestions-empty">No suggestions yet. Be the first to add one.</p>
+            ) : (
+              <div className="suggestions-list">
+                {suggestions.map((item) => (
+                  <article key={item.id} className="suggestion-card">
+                    <div className="suggestion-card-header">
+                      <span className="suggestion-author">{item.alias}</span>
+                      <time className="suggestion-date">
+                        {new Date(item.createdAt).toLocaleDateString()}
+                      </time>
+                    </div>
+                    <p className="suggestion-body">{item.text}</p>
+                    <div className="suggestion-votes">
+                      <button
+                        type="button"
+                        className={`vote-btn vote-btn--yay ${voteMap[item.id] === 'yay' ? 'vote-btn--selected' : ''}`}
+                        onClick={() => handleVote(item.id, 'yay')}
+                      >
+                        Yay ({item.yay})
+                      </button>
+                      <button
+                        type="button"
+                        className={`vote-btn vote-btn--nay ${voteMap[item.id] === 'nay' ? 'vote-btn--selected' : ''}`}
+                        onClick={() => handleVote(item.id, 'nay')}
+                      >
+                        Nay ({item.nay})
+                      </button>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>

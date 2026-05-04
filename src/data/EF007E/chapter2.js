@@ -150,7 +150,7 @@ const chapter2 = {
 
             <!-- LEFT IMAGE -->
             <td class="scan-img-cell">
-              <img class="glitch-img" src="https://i.imgur.com/bdj5r6J.gif" alt="T rget Scan ▮▮">
+              <img class="glitch-img" src="https://i.imgur.com/bdj5r6J.gif" alt="T rget Scan ▮▮" style="width:100px;height:auto;display:block;">
             </td>
 
             <!-- RIGHT TEXT -->

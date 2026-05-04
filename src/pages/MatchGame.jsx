@@ -137,6 +137,7 @@ export default function MatchGame() {
     return (
       <div className="match-game">
         {bgLayer}
+        <Link to="/" className="mg-home-link">HOME</Link>
         <Link to="/extras" className="mg-back-link">&lt; RETURN TO EXTRAS</Link>
         <div className="mg-menu">
           <div className="mg-title-group">
@@ -190,6 +191,7 @@ export default function MatchGame() {
     return (
       <div className="match-game">
         {bgLayer}
+        <Link to="/" className="mg-home-link">HOME</Link>
         <div className="mg-complete">
           <div className="mg-complete-title">
             {isSecret ? '✨ Secret Level Complete! ✨' : `Level ${config.level} Complete!`}
@@ -232,6 +234,7 @@ export default function MatchGame() {
     return (
       <div className="match-game">
         {bgLayer}
+        <Link to="/" className="mg-home-link">HOME</Link>
         <div className="mg-complete">
           <div className="mg-complete-title">
             {secretUnlocked ? '🎉 All Levels Complete!' : '🎉 Congratulations!'}
@@ -257,6 +260,7 @@ export default function MatchGame() {
   return (
     <div className="match-game">
       {bgLayer}
+      <Link to="/" className="mg-home-link">HOME</Link>
       <div className="mg-play-area">
         {/* HUD */}
         <div className="mg-hud">

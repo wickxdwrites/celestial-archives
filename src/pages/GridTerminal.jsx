@@ -504,6 +504,9 @@ export default function GridTerminal() {
     return (
       <div className="grid-terminal">
         <div className="scanline" />
+        <Link to="/" className="home-link">
+          HOME
+        </Link>
         <div className="login-screen">
           <div className="login-logo">EF007E</div>
           <div className="login-sub">// GRID NET // SECURE CHANNEL ACCESS //</div>
@@ -547,6 +550,9 @@ export default function GridTerminal() {
   return (
     <div className="grid-terminal">
       <div className="scanline" />
+      <Link to="/" className="home-link">
+        HOME
+      </Link>
       <Link to="/extras" className="back-link">
         &lt; RETURN TO EXTRAS
       </Link>

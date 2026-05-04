@@ -157,6 +157,24 @@
   opacity: 1;
 }
 
+.match-game .mg-home-link {
+  position: fixed;
+  top: 12px;
+  right: 14px;
+  color: var(--mg-accent2);
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  z-index: 10;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.match-game .mg-home-link:hover {
+  opacity: 1;
+}
+
 /* ===== MENU ===== */
 .match-game .mg-menu {
   display: flex;

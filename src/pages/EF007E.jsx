@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import EF007EChapters from "../data/EF007E";
-import { saveComment } from "../utils/comments";
+import { getComments, saveComment, COMMENT_LIMITS } from "../utils/comments";
 import { getTheme } from "../themes/registry";
 import "../styles/ef007e-theme.css";
 
@@ -10,6 +10,8 @@ export default function TronFile() {
   const [alias, setAlias] = useState("");
   const [commentText, setCommentText] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [comments, setComments] = useState([]);
   const [glitchActive, setGlitchActive] = useState(false);
   
   const theme = getTheme("ef007e");
@@ -46,25 +48,51 @@ export default function TronFile() {
     };
   }, []);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadComments() {
+      const scopedComments = await getComments({
+        story: "EF007E",
+        chapter: activeChapter.label,
+      });
+
+      if (isMounted) {
+        setComments(scopedComments);
+      }
+    }
+
+    loadComments();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [activeChapter.label]);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!alias.trim() || !commentText.trim()) return;
+    try {
+      const updatedComments = await saveComment({
+        alias,
+        story: "EF007E",
+        chapter: activeChapter.label,
+        comment: commentText,
+      });
 
-    saveComment({
-      alias: alias.trim(),
-      story: "EF007E",
-      chapter: activeChapter.label,
-      comment: commentText.trim(),
-    });
+      setAlias("");
+      setCommentText("");
+      setComments(updatedComments);
+      setSubmitError("");
+      setSubmitted(true);
 
-    setAlias("");
-    setCommentText("");
-    setSubmitted(true);
-
-    setTimeout(() => {
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 2500);
+    } catch (error) {
       setSubmitted(false);
-    }, 2500);
+      setSubmitError(error?.message || "Signal rejected by the channel.");
+    }
   };
 
   return (
@@ -1582,14 +1610,6 @@ export default function TronFile() {
                   text-shadow: 0 0 8px rgba(255, 48, 48, 0.8);
                 }
               `}</style>
-
-              <div className="tron-callout">
-                <div className="tron-callout-title">SYSTEM NOTE</div>
-                <p>
-                  This space can hold in-universe notes, corrupted inserts,
-                  faux-terminal interruptions, or file fragments later.
-                </p>
-              </div>
             </section>
 
             <section 
@@ -1714,7 +1734,11 @@ export default function TronFile() {
                   type="text"
                   placeholder="Your alias"
                   value={alias}
-                  onChange={(e) => setAlias(e.target.value)}
+                  onChange={(e) => {
+                    setAlias(e.target.value);
+                    setSubmitError("");
+                  }}
+                  maxLength={COMMENT_LIMITS.aliasMax}
                   style={{
                     width: '100%',
                     background: 'rgba(0, 30, 60, 0.4)',
@@ -1744,7 +1768,11 @@ export default function TronFile() {
                   rows="4"
                   placeholder="Leave your comment here..."
                   value={commentText}
-                  onChange={(e) => setCommentText(e.target.value)}
+                  onChange={(e) => {
+                    setCommentText(e.target.value);
+                    setSubmitError("");
+                  }}
+                  maxLength={COMMENT_LIMITS.commentMax}
                   style={{
                     width: '100%',
                     minHeight: '80px',
@@ -1822,9 +1850,112 @@ export default function TronFile() {
                     textAlign: 'center'
                   }}
                 >
-                  Signal recorded. It should now appear on the homepage.
+                  Signal recorded. It now appears in this chapter feed.
                 </div>
               )}
+
+              {submitError && (
+                <div
+                  style={{
+                    color: '#ff9b9b',
+                    fontFamily: '"Orbitron", monospace',
+                    fontSize: '10px',
+                    letterSpacing: '0.08em',
+                    textTransform: 'uppercase',
+                    marginTop: '8px',
+                    padding: '8px 12px',
+                    border: '1px solid rgba(255, 120, 120, 0.3)',
+                    borderRadius: '6px',
+                    background: 'rgba(255, 120, 120, 0.08)',
+                    textAlign: 'center'
+                  }}
+                >
+                  {submitError}
+                </div>
+              )}
+
+              <div
+                style={{
+                  marginTop: '14px',
+                  borderTop: '1px solid rgba(0, 225, 255, 0.2)',
+                  paddingTop: '12px'
+                }}
+              >
+                <h4
+                  style={{
+                    margin: '0 0 10px',
+                    color: '#8fefff',
+                    fontFamily: '"Orbitron", monospace',
+                    fontSize: '10px',
+                    fontWeight: '700',
+                    letterSpacing: '0.1em',
+                    textTransform: 'uppercase'
+                  }}
+                >Signal Feed</h4>
+
+                {comments.length === 0 ? (
+                  <p
+                    style={{
+                      margin: 0,
+                      color: 'rgba(191, 243, 255, 0.7)',
+                      fontSize: '12px'
+                    }}
+                  >No signals logged for this chapter yet.</p>
+                ) : (
+                  <div style={{ display: 'grid', gap: '8px' }}>
+                    {comments.map((comment) => (
+                      <article
+                        key={comment.id}
+                        style={{
+                          border: '1px solid rgba(0, 225, 255, 0.25)',
+                          background: 'rgba(0, 20, 40, 0.35)',
+                          borderRadius: '8px',
+                          padding: '8px 10px'
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            gap: '8px',
+                            alignItems: 'baseline'
+                          }}
+                        >
+                          <strong
+                            style={{
+                              color: '#67f5c8',
+                              fontFamily: '"Orbitron", monospace',
+                              fontSize: '10px',
+                              letterSpacing: '0.06em',
+                              textTransform: 'uppercase'
+                            }}
+                          >
+                            {comment.alias}
+                          </strong>
+                          <time
+                            style={{
+                              color: 'rgba(191, 243, 255, 0.65)',
+                              fontSize: '11px'
+                            }}
+                          >
+                            {new Date(comment.createdAt).toLocaleDateString()}
+                          </time>
+                        </div>
+                        <p
+                          style={{
+                            margin: '6px 0 0',
+                            color: '#d7fbff',
+                            lineHeight: 1.5,
+                            fontSize: '13px'
+                          }}
+                        >
+                          {comment.comment}
+                        </p>
+                      </article>
+                    ))}
+                  </div>
+                )}
+              </div>
             </section>
           </main>
         </section>

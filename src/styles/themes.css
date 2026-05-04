@@ -36,6 +36,32 @@
   width: min(1680px, calc(100vw - 64px));
 }
 
+.archive-home-link {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 20;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(126, 179, 255, 0.45);
+  background: rgba(8, 16, 34, 0.82);
+  color: #d7e6ff;
+  font-family: "Inter", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 0 12px rgba(120, 160, 255, 0.14);
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.archive-home-link:hover {
+  border-color: rgba(170, 210, 255, 0.75);
+  background: rgba(15, 27, 52, 0.92);
+  color: #f0f6ff;
+}
+
 .archive-header {
   position: relative;
   padding: 28px 32px;
@@ -253,6 +279,13 @@
   .archive-shell--wide {
     width: min(100%, calc(100vw - 28px));
     padding: 18px 0 36px;
+  }
+
+  .archive-home-link {
+    top: 10px;
+    right: 10px;
+    padding: 7px 12px;
+    font-size: 0.7rem;
   }
 
   .archive-header {

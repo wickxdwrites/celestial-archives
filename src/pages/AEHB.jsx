@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AEHBChapters from "../data/AEHB";
-import { saveComment, getComments } from "../utils/comments";
+import { saveComment, getComments, COMMENT_LIMITS } from "../utils/comments";
 import { getTheme } from "../themes/registry";
 import aehbMeta from "../works/aehb/meta";
 import "./AEHB.css";
@@ -11,8 +11,9 @@ export default function AEHB() {
   const [alias, setAlias] = useState("");
   const [commentText, setCommentText] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [flameFlicker, setFlameFlicker] = useState(false);
-  const [comments, setComments] = useState(() => getComments());
+  const [comments, setComments] = useState([]);
 
   const theme = getTheme("aehb");
   const activeChapter =
@@ -20,6 +21,27 @@ export default function AEHB() {
   const currentIndex = AEHBChapters.findIndex(ch => ch.id === selectedChapterId);
   const prevChapter = currentIndex > 0 ? AEHBChapters[currentIndex - 1] : null;
   const nextChapter = currentIndex < AEHBChapters.length - 1 ? AEHBChapters[currentIndex + 1] : null;
+
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadComments() {
+      const scopedComments = await getComments({
+        story: aehbMeta.title,
+        chapter: activeChapter.label,
+      });
+
+      if (isMounted) {
+        setComments(scopedComments);
+      }
+    }
+
+    loadComments();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [activeChapter.label]);
 
   // Flame flicker effect
   useEffect(() => {
@@ -31,26 +53,30 @@ export default function AEHB() {
     return () => clearInterval(flickerInterval);
   }, []);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if (!alias.trim() || !commentText.trim()) return;
+    try {
+      const updatedComments = await saveComment({
+        alias,
+        story: aehbMeta.title,
+        chapter: activeChapter.label,
+        comment: commentText,
+      });
 
-    saveComment({
-      alias: alias.trim(),
-      story: aehbMeta.title,
-      chapter: activeChapter.label,
-      comment: commentText.trim(),
-    });
+      setAlias("");
+      setCommentText("");
+      setComments(updatedComments);
+      setSubmitError("");
+      setSubmitted(true);
 
-    setAlias("");
-    setCommentText("");
-    setComments(getComments());
-    setSubmitted(true);
-
-    window.setTimeout(() => {
+      window.setTimeout(() => {
+        setSubmitted(false);
+      }, 2500);
+    } catch (error) {
       setSubmitted(false);
-    }, 2500);
+      setSubmitError(error?.message || "Unable to send your raven right now.");
+    }
   };
 
   return (
@@ -239,8 +265,12 @@ export default function AEHB() {
                         className="aehb-parchment-input"
                         type="text"
                         value={alias}
-                        onChange={(event) => setAlias(event.target.value)}
+                        onChange={(event) => {
+                          setAlias(event.target.value);
+                          setSubmitError("");
+                        }}
                         placeholder="Lord, Lady, Ser, Maester..."
+                        maxLength={COMMENT_LIMITS.aliasMax}
                       />
                     </div>
 
@@ -252,8 +282,12 @@ export default function AEHB() {
                         id="aehb-comment"
                         className="aehb-parchment-textarea"
                         value={commentText}
-                        onChange={(event) => setCommentText(event.target.value)}
+                        onChange={(event) => {
+                          setCommentText(event.target.value);
+                          setSubmitError("");
+                        }}
                         placeholder="Send your words across the realm..."
+                        maxLength={COMMENT_LIMITS.commentMax}
                       />
                     </div>
 
@@ -261,6 +295,18 @@ export default function AEHB() {
                       <span className="aehb-seal-icon-btn">✦</span>
                       Send the Raven
                     </button>
+
+                    {submitted && (
+                      <p style={{ margin: "8px 0 0", color: "#6a4f2f", fontWeight: 600 }}>
+                        Raven delivered.
+                      </p>
+                    )}
+
+                    {submitError && (
+                      <p style={{ margin: "8px 0 0", color: "#8f2d2d", fontWeight: 600 }}>
+                        {submitError}
+                      </p>
+                    )}
                   </div>
                 </form>
 

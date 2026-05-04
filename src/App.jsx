@@ -7,6 +7,7 @@ import TronFile from "./pages/EF007E";
 import AEHB from "./pages/AEHB";
 import GridTerminal from "./pages/GridTerminal";
 import MatchGame from "./pages/MatchGame";
+import BreadQuiz from "./pages/BreadQuiz";
 import "./styles/themes.css";
 
 
@@ -21,6 +22,7 @@ export default function App() {
       <Route path="/fics/aehb" element={<AEHB />} />
       <Route path="/extras/ef007e-terminal" element={<GridTerminal />} />
       <Route path="/extras/serenity-match" element={<MatchGame />} />
+      <Route path="/extras/bread-quiz" element={<BreadQuiz />} />
     </Routes>
   );
 }
