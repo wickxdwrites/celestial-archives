@@ -7,14 +7,14 @@ const chapter13 = {
     "Injury",
     "Distress"
   ],
-  content: `<div class="chapter-warnings">
-    <strong>Content Warnings:</strong>
-    <ul>
-      <li>Violence against animals</li>
-      <li>Injury</li>
-      <li>Distress</li>
-    </ul>
+  content: `<div class="card-warnings">
+  <span class="warning-label">⚠️ Content Warnings:</span>
+  <div class="warning-tags">
+    <span class="warning-tag">Violence against animals</span>
+    <span class="warning-tag">Injury</span>
+    <span class="warning-tag">Distress</span>
   </div>
+</div>
 
 <p>Porsche felt something wasn't right.</p>
 
