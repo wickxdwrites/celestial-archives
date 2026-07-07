@@ -7,12 +7,12 @@ const chapter13 = {
     "Injury",
     "Distress"
   ],
-  content: `<div class="chapter-warning-box">
-  <span class="chapter-warning-title">Content Warnings:</span>
+  content: `<div class="aehb-chapter-warnings">
+  <strong>Content Warnings:</strong>
   <ul>
-    <li>† Violence against animals</li>
-    <li>† Injury</li>
-    <li>† Distress</li>
+    <li>Violence against animals</li>
+    <li>Injury</li>
+    <li>Distress</li>
   </ul>
 </div>
 
