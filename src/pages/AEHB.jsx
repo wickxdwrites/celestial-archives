@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AEHBChapters from "../data/AEHB";
 import { saveComment, getComments, COMMENT_LIMITS } from "../utils/comments";
@@ -10,7 +10,14 @@ import lemonPoppySeedBreadImage from "../assets/lemon.png";
 import "./AEHB.css";
 
 export default function AEHB() {
-  const [selectedChapterId, setSelectedChapterId] = useState(AEHBChapters[0].id);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const getValidChapterId = (chapterId) =>
+    AEHBChapters.some((chapter) => chapter.id === chapterId)
+      ? chapterId
+      : AEHBChapters[0].id;
+  const [selectedChapterId, setSelectedChapterId] = useState(() =>
+    getValidChapterId(searchParams.get("chapter"))
+  );
   const [alias, setAlias] = useState("");
   const [commentText, setCommentText] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -50,6 +57,25 @@ export default function AEHB() {
   const chapterParts = hasBreadSelector
     ? chapterHtml.split("<!-- BREAD_SELECTOR -->")
     : [chapterHtml, ""];
+
+  const updateSelectedChapter = (chapterId, shouldScroll = true) => {
+    const validChapterId = getValidChapterId(chapterId);
+
+    setSelectedChapterId(validChapterId);
+    setSearchParams((currentParams) => {
+      const nextParams = new URLSearchParams(currentParams);
+      nextParams.set("chapter", validChapterId);
+      return nextParams;
+    });
+
+    if (shouldScroll) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    setSelectedChapterId(getValidChapterId(searchParams.get("chapter")));
+  }, [searchParams]);
 
   useEffect(() => {
     let isMounted = true;
@@ -140,7 +166,7 @@ export default function AEHB() {
               <div 
                 key={chapter.id}
                 className={`aehb-bookmark-tab ${selectedChapterId === chapter.id ? 'active' : ''}`}
-                onClick={() => setSelectedChapterId(chapter.id)}
+                onClick={() => updateSelectedChapter(chapter.id)}
                 style={{ animationDelay: `${index * 0.5}s` }}
               >
                 <div className="aehb-bookmark-text">{index + 1}</div>
@@ -196,10 +222,7 @@ export default function AEHB() {
                 <select
                   className="aehb-chapter-select"
                   value={selectedChapterId}
-                  onChange={(e) => {
-                    setSelectedChapterId(e.target.value);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
+                  onChange={(e) => updateSelectedChapter(e.target.value)}
                 >
                   {AEHBChapters.map((ch, i) => (
                     <option key={ch.id} value={ch.id}>
@@ -284,10 +307,7 @@ export default function AEHB() {
               {prevChapter ? (
                 <button
                   className="aehb-chapter-nav-btn aehb-nav-prev"
-                  onClick={() => {
-                    setSelectedChapterId(prevChapter.id);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
+                  onClick={() => updateSelectedChapter(prevChapter.id)}
                 >
                   <span className="aehb-nav-arrow">◄</span>
                   <span className="aehb-nav-label">{prevChapter.label}</span>
@@ -296,10 +316,7 @@ export default function AEHB() {
               {nextChapter ? (
                 <button
                   className="aehb-chapter-nav-btn aehb-nav-next"
-                  onClick={() => {
-                    setSelectedChapterId(nextChapter.id);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                  }}
+                  onClick={() => updateSelectedChapter(nextChapter.id)}
                 >
                   <span className="aehb-nav-label">{nextChapter.label}</span>
                   <span className="aehb-nav-arrow">►</span>
